@@ -12,17 +12,18 @@
 <title>Révision Certification AMF</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div id="readbar"></div>
 <header class="top">
   <div class="ttl">Révision AMF</div>
   <button id="btn-search" aria-label="Recherche">🔍</button>
-  <button id="btn-reset" aria-label="Réinitialiser">Réinit.</button>
+  <button id="btn-reset" aria-label="Réglages">⚙️</button>
 </header>
 
-<main id="view"><div class="card">Chargement…</div></main>
+<main id="view"><div class="skel"></div><div class="skel"></div><div class="skel"></div></main>
 
 <nav class="tabs">
   <a href="#/accueil" data-tab="accueil"><span class="ic">🏠</span>Accueil</a>
@@ -30,6 +31,7 @@
   <a href="#/entrainement" data-tab="entrainement"><span class="ic">🎯</span>Entraînement</a>
 </nav>
 
+<canvas id="confetti"></canvas>
 <script src="app.js"></script>
 </body>
 </html>

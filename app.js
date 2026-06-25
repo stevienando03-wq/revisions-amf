@@ -1,62 +1,68 @@
 'use strict';
 /* ============================================================
-   Révision Certification AMF — application 100% front, hors-ligne
+   Révision Certification AMF — app v2 (100% front, hors-ligne)
    ============================================================ */
 
-/* ---------- Service worker ---------- */
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  });
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
 }
 
-/* ---------- Etat persistant ---------- */
+/* ---------- État persistant ---------- */
 const SKEY = 'amf_rev_v1';
 let S = loadState();
+function blank() {
+  return {
+    read: {}, pos: {}, q: {}, wrong: {}, flashKnown: {},
+    starQ: {}, starSec: {},
+    daily: { goal: 20, log: {}, streak: 0, best: 0, lastDay: '' },
+    examHistory: [], examInProgress: null, lastAction: null,
+    snap: null, theme: '', scale: 1, onboarded: false
+  };
+}
 function loadState() {
   try { return Object.assign(blank(), JSON.parse(localStorage.getItem(SKEY) || '{}')); }
   catch (e) { return blank(); }
 }
-function blank() { return { read: {}, pos: {}, q: {}, wrong: {}, flashKnown: {} }; }
 function save() { try { localStorage.setItem(SKEY, JSON.stringify(S)); } catch (e) {} }
 function resetAll() {
-  if (!confirm('Réinitialiser toute ta progression (cours lu, scores, erreurs) ?')) return;
-  S = blank(); save(); location.hash = '#/accueil'; render();
+  if (!confirm('Réinitialiser toute ta progression (cours lu, scores, série, favoris) ?')) return;
+  const theme = S.theme, scale = S.scale;
+  S = blank(); S.theme = theme; S.scale = scale; S.onboarded = true; save();
+  applyTheme(); location.hash = '#/accueil'; render();
+}
+
+/* ---------- Thème & lecture ---------- */
+function applyTheme() {
+  const dark = S.theme === 'dark' || (S.theme === '' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+  document.body.classList.toggle('dark', dark);
+  document.documentElement.style.setProperty('--reading-scale', S.scale || 1);
+  const meta = document.querySelector('meta[name=theme-color]');
+  if (meta) meta.setAttribute('content', dark ? '#0e1626' : '#14213D');
 }
 
 /* ---------- Contenu ---------- */
-let C = null;            // content.json
-let QBYID = {};          // qid -> question
-let QBYMOD = {};         // mid -> [questions]
-let MOD = {};            // mid -> module
-let FLASH = [];          // toutes les flashcards "à retenir"
-
+let C = null, QBYID = {}, QBYMOD = {}, MOD = {}, FLASH = [], READTIME = {};
 function boot() {
+  applyTheme();
   fetch('content.json', { cache: 'no-cache' })
-    .then(r => { if (!r.ok) throw new Error('content'); return r.json(); })
+    .then(r => { if (!r.ok) throw 0; return r.json(); })
     .then(data => { C = data; indexContent(); start(); })
-    .catch(() => {
-      document.getElementById('view').innerHTML =
-        '<div class="card"><b>Impossible de charger le contenu.</b><br>Vérifie que content.json est présent.</div>';
-    });
+    .catch(() => { $('#view').innerHTML = '<div class="card"><b>Impossible de charger le contenu.</b></div>'; });
 }
-
 function indexContent() {
-  QBYID = {}; QBYMOD = {}; MOD = {}; FLASH = [];
+  QBYID = {}; QBYMOD = {}; MOD = {}; FLASH = []; READTIME = {};
   C.modules.forEach(m => {
-    MOD[m.id] = m;
-    QBYMOD[m.id] = [];
+    MOD[m.id] = m; QBYMOD[m.id] = [];
     (m.qcm || []).forEach((q, i) => {
-      q.id = q.id || (m.id + '-q' + i);
-      q.module = m.id;
-      q.modnum = m.num;
+      q.id = q.id || (m.id + '-q' + i); q.module = m.id; q.modnum = m.num;
       q.correct = (q.options || []).findIndex(o => o.correcte);
-      QBYID[q.id] = q;
-      QBYMOD[m.id].push(q);
+      QBYID[q.id] = q; QBYMOD[m.id].push(q);
     });
-    (m.essentiel && m.essentiel.a_retenir || []).forEach((t, i) => {
-      FLASH.push({ id: m.id + '-r' + i, mid: m.id, modnum: m.num, modnom: m.nom, text: t });
-    });
+    (m.essentiel && m.essentiel.a_retenir || []).forEach((t, i) =>
+      FLASH.push({ id: m.id + '-r' + i, mid: m.id, modnum: m.num, text: t }));
+    let words = 0;
+    m.sections.forEach(s => { words += (s.titre + ' ' + (s.points || []).join(' ') + ' ' + (s.chiffres || []).join(' ') + ' ' + (s.pieges || []).join(' ')).split(/\s+/).length; });
+    READTIME[m.id] = Math.max(1, Math.round(words / 200));
   });
 }
 
@@ -65,186 +71,207 @@ function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '
 function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a; }
 function pct(n, d) { return d > 0 ? Math.round(100 * n / d) : 0; }
 function letters(i) { return ['A', 'B', 'C', 'D'][i]; }
-const $ = sel => document.querySelector(sel);
+const $ = s => document.querySelector(s);
+function haptic(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) {} }
+function dayStr(d) { d = d || new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function animateCount(el, to, suffix) {
+  let t0 = null; const dur = 700; suffix = suffix || '';
+  function step(t) { if (!t0) t0 = t; const k = Math.min(1, (t - t0) / dur); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))) + suffix; if (k < 1) requestAnimationFrame(step); }
+  requestAnimationFrame(step);
+}
 
 /* ---------- Progression ---------- */
-function pctRead(mid) {
-  const m = MOD[mid]; if (!m || !m.sections.length) return 0;
-  let n = 0; m.sections.forEach(s => { if (S.read[s.id]) n++; });
-  return pct(n, m.sections.length);
-}
-function moduleScore(mid) {
-  const qs = QBYMOD[mid] || [];
-  let att = 0, good = 0;
-  qs.forEach(q => { const st = S.q[q.id]; if (st) { att += st.ok + st.ko; good += st.ok; } });
-  return { vues: countSeen(mid), total: qs.length, taux: pct(good, att), att };
-}
+function pctRead(mid) { const m = MOD[mid]; if (!m || !m.sections.length) return 0; let n = 0; m.sections.forEach(s => { if (S.read[s.id]) n++; }); return pct(n, m.sections.length); }
+function moduleScore(mid) { const qs = QBYMOD[mid] || []; let att = 0, good = 0; qs.forEach(q => { const st = S.q[q.id]; if (st) { att += st.ok + st.ko; good += st.ok; } }); return { taux: pct(good, att), att, vues: countSeen(mid), total: qs.length }; }
 function countSeen(mid) { let n = 0; (QBYMOD[mid] || []).forEach(q => { const st = S.q[q.id]; if (st && (st.ok + st.ko) > 0) n++; }); return n; }
-function catEstimate(cat) {
-  let att = 0, ok = 0;
-  Object.keys(S.q).forEach(qid => {
-    const q = QBYID[qid]; if (!q || q.cat !== cat) return;
-    const st = S.q[qid]; att += st.ok + st.ko; ok += st.ok;
-  });
-  return { att, taux: pct(ok, att) };
-}
+function catEstimate(cat) { let att = 0, ok = 0; Object.keys(S.q).forEach(qid => { const q = QBYID[qid]; if (!q || q.cat !== cat) return; const st = S.q[qid]; att += st.ok + st.ko; ok += st.ok; }); return { att, taux: pct(ok, att) }; }
+function masteryClass(mid) { const sc = moduleScore(mid); if (sc.att < Math.max(4, (QBYMOD[mid] || []).length * .3)) return 'todo'; return sc.taux >= 80 ? 'ok' : 'wip'; }
 function recordAnswer(qid, correct) {
   const st = S.q[qid] || { ok: 0, ko: 0, streak: 0 };
-  if (correct) { st.ok++; st.streak = (st.streak || 0) + 1; }
-  else { st.ko++; st.streak = 0; }
+  if (correct) { st.ok++; st.streak = (st.streak || 0) + 1; } else { st.ko++; st.streak = 0; }
   S.q[qid] = st;
-  if (!correct) { S.wrong[qid] = 1; }
-  else if (st.streak >= 2 && S.wrong[qid]) { delete S.wrong[qid]; } // 2 bonnes de suite -> sort de la file
+  if (!correct) S.wrong[qid] = 1; else if (st.streak >= 2 && S.wrong[qid]) delete S.wrong[qid];
+  touchDaily();
   save();
 }
-function toggleMark(qid) { if (S.wrong[qid]) delete S.wrong[qid]; else S.wrong[qid] = 1; save(); }
+function touchDaily() {
+  const t = dayStr(); const d = S.daily;
+  if (d.lastDay !== t) {
+    const y = dayStr(new Date(Date.now() - 86400000));
+    d.streak = (d.lastDay === y) ? (d.streak || 0) + 1 : 1;
+    d.lastDay = t; d.best = Math.max(d.best || 0, d.streak);
+  }
+  d.log[t] = (d.log[t] || 0) + 1;
+}
+function dailyDone() { return S.daily.log[dayStr()] || 0; }
+function toggleMark(qid) { if (S.starQ[qid]) delete S.starQ[qid]; else S.starQ[qid] = 1; save(); }
 
-/* ============================================================
-   ROUTER
-   ============================================================ */
-function start() { window.addEventListener('hashchange', render); render(); bindChrome(); }
-function bindChrome() {
-  $('#btn-reset').onclick = resetAll;
-  $('#btn-search').onclick = () => { location.hash = '#/recherche'; };
+/* ============================================================ ROUTER */
+let keyBound = false;
+function start() {
+  window.addEventListener('hashchange', render);
+  $('#btn-reset').onclick = () => go('#/reglages');
+  $('#btn-search').onclick = () => go('#/recherche');
+  if (!keyBound) { document.addEventListener('keydown', onKey); keyBound = true; }
+  if (!S.onboarded) { showOnboard(); }
+  render();
 }
-function parseHash() {
-  const h = (location.hash || '#/accueil').replace(/^#\//, '');
-  return h.split('/').filter(x => x !== '');
-}
-function setTab(name) {
-  document.querySelectorAll('nav.tabs a').forEach(a => a.classList.toggle('on', a.dataset.tab === name));
-}
+function parseHash() { return (location.hash || '#/accueil').replace(/^#\//, '').split('/').filter(x => x !== ''); }
+function setTab(n) { document.querySelectorAll('nav.tabs a').forEach(a => a.classList.toggle('on', a.dataset.tab === n)); }
 function go(h) { location.hash = h; }
 window.go = go;
-
-let sess = null; // session QCM en cours
+let sess = null, fsess = null;
 
 function render() {
   if (!C) return;
-  const p = parseHash();
-  const v = $('#view'); window.scrollTo(0, 0);
-  const screen = p[0] || 'accueil';
-  if (screen === 'accueil') { setTab('accueil'); v.innerHTML = vAccueil(); bindAccueil(); }
-  else if (screen === 'cours' && !p[1]) { setTab('cours'); v.innerHTML = vCoursList(); }
-  else if (screen === 'module') { setTab('cours'); v.innerHTML = vModule(p[1], p[2] || 'essentiel'); bindModule(p[1], p[2] || 'essentiel'); }
-  else if (screen === 'lire') { setTab('cours'); v.innerHTML = vModule(p[1], 'complet'); bindModule(p[1], 'complet', p[2]); }
-  else if (screen === 'entrainement') { setTab('entrainement'); v.innerHTML = vEntrainement(); }
-  else if (screen === 'drill') { setTab('entrainement'); startSession('drill', p[1]); }
-  else if (screen === 'examen') { setTab('entrainement'); v.innerHTML = vExamenIntro(); }
-  else if (screen === 'examen-run') { setTab('entrainement'); renderSession(); }
-  else if (screen === 'erreurs') { setTab('entrainement'); startSession('erreurs'); }
-  else if (screen === 'flash') { setTab('entrainement'); startFlash(); }
-  else if (screen === 'resultat') { setTab('entrainement'); v.innerHTML = vResultat(); }
-  else if (screen === 'recherche') { v.innerHTML = vRecherche(); bindRecherche(); }
-  else { v.innerHTML = vAccueil(); bindAccueil(); }
+  const p = parseHash(), v = $('#view'), s = p[0] || 'accueil';
+  $('#readbar').style.display = 'none';
+  if (s !== 'examen-run') window.scrollTo(0, 0);
+  if (s === 'accueil') { setTab('accueil'); v.innerHTML = vAccueil(); afterAccueil(); }
+  else if (s === 'cours' && !p[1]) { setTab('cours'); v.innerHTML = vCoursList(); }
+  else if (s === 'module') { setTab('cours'); v.innerHTML = vModule(p[1], p[2] || 'essentiel'); bindModule(p[1], p[2] || 'essentiel'); }
+  else if (s === 'lire') { setTab('cours'); v.innerHTML = vModule(p[1], 'complet'); bindModule(p[1], 'complet', p[2]); }
+  else if (s === 'entrainement') { setTab('entrainement'); v.innerHTML = vEntrainement(); }
+  else if (s === 'drill') { setTab('entrainement'); startSession('drill', p[1]); }
+  else if (s === 'echauffement') { setTab('entrainement'); startSession('echauffement'); }
+  else if (s === 'esg') { setTab('entrainement'); startSession('esg'); }
+  else if (s === 'favoris') { setTab('entrainement'); startSession('favoris'); }
+  else if (s === 'examen') { setTab('entrainement'); v.innerHTML = vExamenIntro(); }
+  else if (s === 'examen-run') { setTab('entrainement'); renderSession(); }
+  else if (s === 'erreurs') { setTab('entrainement'); startSession('erreurs'); }
+  else if (s === 'flash') { setTab('entrainement'); startFlash(); }
+  else if (s === 'resultat') { setTab('entrainement'); v.innerHTML = vResultat(); afterResultat(); }
+  else if (s === 'stats') { setTab('entrainement'); v.innerHTML = vStats(); }
+  else if (s === 'reglages') { v.innerHTML = vReglages(); bindReglages(); }
+  else if (s === 'recherche') { v.innerHTML = vRecherche(); bindRecherche(); }
+  else { v.innerHTML = vAccueil(); afterAccueil(); }
 }
 
-/* ============================================================
-   ACCUEIL / TABLEAU DE BORD
-   ============================================================ */
-function gauge(label, taux, att, withSeuil) {
+/* ============================================================ ACCUEIL */
+function gauge(label, taux, att, delta) {
   const cls = att === 0 ? '' : (taux >= 80 ? 'ok' : (taux < 60 ? 'ko' : ''));
-  return `<div class="gauge"><div class="lab"><span>${esc(label)}</span><span>${att ? taux + '%' : '—'}</span></div>
-    <div class="bar"><div class="fill ${cls}" style="width:${att ? taux : 0}%"></div>${withSeuil ? '<div class="seuil" style="left:80%"></div>' : ''}</div></div>`;
+  let d = '';
+  if (delta != null && att) d = `<span class="delta ${delta >= 0 ? 'up' : 'down'}">${delta >= 0 ? '▲ +' : '▼ '}${Math.abs(delta)} pts</span>`;
+  return `<div class="gauge"><div class="lab"><span>${esc(label)}</span><span>${att ? taux + '%' : '—'} ${d}</span></div>
+    <div class="bar"><div class="fill ${cls}" style="width:${att ? taux : 0}%"></div><div class="seuil" style="left:80%"></div></div></div>`;
+}
+function coachMessage(A, Cc) {
+  if (!A.att && !Cc.att) return `Commence par <b>lire un module</b> puis enchaîne quelques questions. La régularité fait tout.`;
+  if (A.att && A.taux < 80 && A.taux <= Cc.taux) return `Ta priorité : la <b>catégorie A</b> (déontologie, conformité…). C'est du par-cœur qui se sécurise vite.`;
+  if (Cc.att && Cc.taux < 80) return `Pousse la <b>catégorie C</b> (technique). Le module <b>ESG</b> pèse 15 questions : ne le néglige pas.`;
+  if (A.taux >= 80 && Cc.taux >= 80) return `🎯 Les deux catégories sont au-dessus de 80 %. Continue à t'entraîner pour stabiliser.`;
+  return `Bon rythme. Vise <b>80 % en A et en C</b> — sans compensation.`;
+}
+function recommendedModule() {
+  let best = null, bestScore = -1;
+  C.modules.forEach(m => {
+    const sc = moduleScore(m.id), w = m.catA + m.catC;
+    const lack = sc.att < 4 ? 1 : (1 - sc.taux / 100);
+    const score = w * (0.4 + lack);
+    if (score > bestScore) { bestScore = score; best = m; }
+  });
+  return best;
 }
 function vAccueil() {
   const A = catEstimate('A'), Cc = catEstimate('C');
+  let dA = null, dC = null;
+  if (S.snap) { if (A.att) dA = A.taux - S.snap.A; if (Cc.att) dC = Cc.taux - S.snap.C; }
   const admis = A.att && Cc.att && A.taux >= 80 && Cc.taux >= 80;
-  const enoughCov = A.att >= 20 && Cc.att >= 40;
-  let html = `<h2 class="page">Tableau de bord</h2>`;
-  html += `<div class="card"><div class="serif" style="font-size:1.1rem;margin-bottom:6px">Prêt à passer&nbsp;?</div>`;
-  html += `<div class="dual">
-      <div>${gauge('Catégorie A', A.taux, A.att, true)}<div class="small muted center">indispensables · seuil 27/33</div></div>
-      <div>${gauge('Catégorie C', Cc.taux, Cc.att, true)}<div class="small muted center">culture fin. · seuil 70/87</div></div>
-    </div>`;
-  if (!enoughCov) html += `<div class="verdict ko">Continue de t'entraîner pour estimer ta réussite</div>`;
-  else html += `<div class="verdict ${admis ? 'ok' : 'ko'}">${admis ? '✅ Sur cette base, tu serais ADMIS' : '⏳ Pas encore : il faut ≥ 80 % en A ET en C'}</div>`;
-  html += `<div class="small muted center" style="margin-top:6px">Réussite = 80 % en A <b>et</b> 80 % en C, sans compensation.</div></div>`;
+  let html = `<div class="row-between"><h2 class="page" style="margin-bottom:2px">Bonjour 👋</h2></div>`;
 
+  // Continuer
+  if (S.lastAction && Date.now() - S.lastAction.ts < 5 * 86400000) {
+    html += `<button class="btn or" style="margin-bottom:12px" onclick="go('${S.lastAction.href}')">↩︎ Continuer : ${esc(S.lastAction.label)}</button>`;
+  }
+
+  // streak + objectif
+  const done = dailyDone(), goal = S.daily.goal || 20, p = Math.min(100, pct(done, goal));
+  html += `<div class="statline">
+    <div class="stat"><div class="big">${S.daily.streak || 0} 🔥</div><div class="lbl">jours d'affilée${S.daily.best ? ' · record ' + S.daily.best : ''}</div></div>
+    <div class="stat"><div class="ring" style="--p:${p}"><i>${done}/${goal}</i></div><div class="lbl">objectif du jour</div></div>
+  </div>`;
+
+  // erreurs dues
   const nbWrong = Object.keys(S.wrong).length;
-  html += `<div class="btn-row">
-    <button class="btn" onclick="go('#/examen')">🧪 Examen blanc</button>
-    <button class="btn sec" onclick="go('#/erreurs')">🔁 Réviser mes erreurs${nbWrong ? ' (' + nbWrong + ')' : ''}</button>
-  </div><div class="sp"></div>`;
+  if (nbWrong) html += `<button class="btn" style="margin-bottom:12px" onclick="go('#/erreurs')">🔁 Réviser mes erreurs (${nbWrong})</button>`;
+  else html += `<button class="btn" style="margin-bottom:12px" onclick="go('#/echauffement')">⚡ Échauffement du jour (10 questions)</button>`;
+
+  // coach
+  html += `<div class="coach">${coachMessage(A, Cc)}</div>`;
+
+  // jauges
+  html += `<div class="card"><div class="serif" style="font-size:1.1rem;margin-bottom:6px">Prêt à passer&nbsp;?</div>
+    <div class="dual">
+      <div>${gauge('Catégorie A', A.taux, A.att, dA)}<div class="small muted center">indispensables · 27/33</div></div>
+      <div>${gauge('Catégorie C', Cc.taux, Cc.att, dC)}<div class="small muted center">culture fin. · 70/87</div></div>
+    </div>
+    <div class="verdict ${admis ? 'ok' : 'ko'}">${admis ? '✅ Sur cette base, tu serais ADMIS' : '⏳ Vise 80 % en A ET en C'}</div></div>`;
+
+  // module recommandé
+  const rec = recommendedModule();
+  if (rec) html += `<div class="card tap" onclick="go('#/module/${rec.id}')"><div class="small muted">▸ À travailler en priorité</div>
+    <div class="row-between"><div><b>Module ${rec.num} — ${esc(rec.nom)}</b></div><span>›</span></div></div>`;
+
+  html += `<div class="btn-row"><button class="btn sec" onclick="go('#/examen')">🧪 Examen blanc</button><button class="btn sec" onclick="go('#/cours')">📖 Cours</button></div><div class="sp"></div>`;
 
   html += `<h3 class="sec">Progression par module</h3>`;
   C.modules.forEach(m => {
-    const r = pctRead(m.id), sc = moduleScore(m.id);
-    const isEsg = m.num === 8;
-    html += `<a class="mod card ${isEsg ? 'esg' : ''}" onclick="go('#/module/${m.id}')">
-      <div class="row"><div class="num">${m.num}</div>
-        <div class="nom">${esc(m.nom)}${isEsg ? ' <span class="tag esg">ESG · priorité</span>' : ''}</div></div>
+    const r = pctRead(m.id), sc = moduleScore(m.id), mc = masteryClass(m.id);
+    html += `<a class="mod card tap ${m.num === 8 ? 'esg' : ''}" onclick="go('#/module/${m.id}')">
+      <div class="top"><div class="num">${m.num}</div><div class="nom">${esc(m.nom)}</div>
+      <span class="mastery ${mc}">${mc === 'ok' ? 'maîtrisé' : mc === 'wip' ? 'en cours' : 'à voir'}</span></div>
       <div class="mini">
-        <div class="g"><div class="lab"><span>📖 Cours lu</span><span>${r}%</span></div><div class="bar"><i style="width:${r}%"></i></div></div>
-        <div class="g"><div class="lab"><span>🎯 Réussite</span><span>${sc.att ? sc.taux + '%' : '—'}</span></div><div class="bar"><i style="width:${sc.att ? sc.taux : 0}%"></i></div></div>
+        <div class="g"><div class="lab"><span>📖 Lu</span><span>${r}%</span></div><div class="bar"><i class="${r === 100 ? 'full' : ''}" style="width:${r}%"></i></div></div>
+        <div class="g"><div class="lab"><span>🎯 Réussite</span><span>${sc.att ? sc.taux + '%' : '—'}</span></div><div class="bar"><i class="${sc.att && sc.taux >= 80 ? 'full' : ''}" style="width:${sc.att ? sc.taux : 0}%"></i></div></div>
       </div></a>`;
   });
   return html;
 }
-function bindAccueil() {}
+function afterAccueil() { document.querySelectorAll('.ring').forEach(r => { const p = +r.style.getPropertyValue('--p') || 0; r.style.setProperty('--p', 0); requestAnimationFrame(() => requestAnimationFrame(() => { r.style.transition = 'none'; r.style.setProperty('--p', p); })); }); }
 
-/* ============================================================
-   ESPACE COURS
-   ============================================================ */
+/* ============================================================ COURS */
 function vCoursList() {
-  let html = `<h2 class="page">Cours</h2><div class="note">Lis le cours par module, puis entraîne-toi. Chaque module a une couche « Essentiel » (à retenir) et une couche « Cours complet ».</div><div class="sp"></div>`;
+  let html = `<h2 class="page">Cours</h2><div class="note">Lis le cours par module (couche « Essentiel » pour réviser vite, « Cours complet » pour le détail), puis entraîne-toi.</div><div class="sp"></div>`;
   C.modules.forEach(m => {
     const r = pctRead(m.id);
-    html += `<a class="mod card ${m.num === 8 ? 'esg' : ''}" onclick="go('#/module/${m.id}')">
-      <div class="row"><div class="num">${m.num}</div>
-      <div class="nom">${esc(m.nom)}</div>
-      <div class="small muted">${m.sections.length} sect.</div></div>
-      <div class="mini"><div class="g"><div class="lab"><span>Cours lu</span><span>${r}%</span></div><div class="bar"><i style="width:${r}%"></i></div></div></div>
-    </a>`;
+    html += `<a class="mod card tap ${m.num === 8 ? 'esg' : ''}" onclick="go('#/module/${m.id}')">
+      <div class="top"><div class="num">${m.num}</div><div class="nom">${esc(m.nom)}</div><div class="small muted">${READTIME[m.id]} min</div></div>
+      <div class="mini"><div class="g"><div class="lab"><span>Cours lu</span><span>${r}%</span></div><div class="bar"><i class="${r === 100 ? 'full' : ''}" style="width:${r}%"></i></div></div></div></a>`;
   });
   return html;
 }
-
 function vModule(mid, tab) {
   const m = MOD[mid]; if (!m) return `<div class="card">Module introuvable.</div>`;
-  let html = `<div class="qhead"><a onclick="go('#/cours')" style="cursor:pointer">‹ Cours</a><span>Module ${m.num}</span></div>`;
+  let html = `<div class="qhead"><a onclick="go('#/cours')">‹ Cours</a><span class="mid">Module ${m.num}</span><span></span></div>`;
   html += `<h2 class="page">${esc(m.nom)}</h2>`;
-  html += `<div class="subtabs">
-    <button data-st="essentiel" class="${tab === 'essentiel' ? 'on' : ''}">📌 Essentiel</button>
-    <button data-st="complet" class="${tab === 'complet' ? 'on' : ''}">📚 Cours complet</button></div>`;
-  if (tab === 'essentiel') html += vEssentiel(m);
-  else html += vComplet(m);
-  html += `<div class="sp"></div><button class="btn" onclick="go('#/drill/${m.id}')">🎯 S'entraîner sur ce module (${(QBYMOD[m.id] || []).length} QCM)</button>`;
-  return html;
-}
-
-function vEssentiel(m) {
-  const e = m.essentiel || {};
-  let html = '';
-  if ((e.a_retenir || []).length) {
-    html += `<h3 class="sec">À retenir absolument</h3>`;
-    e.a_retenir.forEach((t) => {
-      html += `<div class="flash recto" data-cue="${esc(cue(t))}" data-full="${esc(t)}" onclick="this.classList.toggle('open');var c=this.querySelector('.ct');c.textContent=this.classList.contains('open')?this.dataset.full:this.dataset.cue;this.querySelector('.side').textContent=this.classList.contains('open')?'à retenir':'à retenir · clique pour tout voir'">
-        <span class="side">à retenir · clique pour tout voir</span><div class="ct">${esc(cue(t))}</div></div>`;
-    });
-  }
-  if ((e.chiffres || []).length) {
-    html += `<div class="bloc chiffres"><div class="h">🔢 Chiffres-clés</div><ul>${e.chiffres.map(c => '<li>' + esc(c) + '</li>').join('')}</ul></div>`;
-  }
-  if ((e.pieges || []).length) {
-    html += `<div class="bloc pieges"><div class="h">⚠️ Pièges fréquents</div><ul>${e.pieges.map(c => '<li>' + esc(c) + '</li>').join('')}</ul></div>`;
-  }
-  if (!html) html = `<div class="note">Pas d'essentiel pour ce module — voir le cours complet.</div>`;
+  html += `<div class="subtabs"><button data-st="essentiel" class="${tab === 'essentiel' ? 'on' : ''}">📌 Essentiel</button><button data-st="complet" class="${tab === 'complet' ? 'on' : ''}">📚 Cours complet</button></div>`;
+  html += tab === 'essentiel' ? vEssentiel(m) : vComplet(m);
+  html += `<div class="qbar"><button class="btn" onclick="go('#/drill/${m.id}')">🎯 S'entraîner sur ce module (${(QBYMOD[m.id] || []).length} QCM)</button></div>`;
   return html;
 }
 function cue(t) { const s = String(t); return s.length > 70 ? s.slice(0, 68).replace(/\s+\S*$/, '') + ' …' : s; }
-
-function vComplet(m) {
-  let html = `<div class="lecture">`;
-  const pos = S.pos[m.id];
-  if (pos && MOD[m.id].sections.some(s => s.id === pos)) {
-    html += `<button class="btn ghost sm" style="margin-bottom:10px" onclick="document.getElementById('${pos}').scrollIntoView({behavior:'smooth'})">↩︎ Reprendre où je m'étais arrêté</button>`;
+function vEssentiel(m) {
+  const e = m.essentiel || {}; let html = '';
+  if ((e.a_retenir || []).length) {
+    html += `<h3 class="sec">À retenir absolument</h3>`;
+    e.a_retenir.forEach(t => {
+      html += `<div class="flash" data-cue="${esc(cue(t))}" data-full="${esc(t)}" onclick="this.classList.toggle('open');var c=this.querySelector('.ct');c.textContent=this.classList.contains('open')?this.dataset.full:this.dataset.cue;this.querySelector('.side').textContent=this.classList.contains('open')?'à retenir':'touche pour révéler'">
+        <span class="side">touche pour révéler</span><div class="ct">${esc(cue(t))}</div></div>`;
+    });
   }
-  html += `<div class="toc"><b>Sommaire du module</b>${m.sections.map(s => `<a onclick="document.getElementById('${s.id}').scrollIntoView({behavior:'smooth'})">${esc(s.titre)}</a>`).join('')}</div>`;
-  m.sections.forEach(s => {
-    html += `<section id="${s.id}" data-sid="${s.id}">`;
-    html += `<h3>${esc(s.titre)} ${S.read[s.id] ? '<span class="readmark">✓ lu</span>' : ''}</h3>`;
-    (s.points || []).forEach(p => { html += `<p>${esc(p)}</p>`; });
+  if ((e.chiffres || []).length) html += `<div class="bloc chiffres"><div class="h">🔢 Chiffres-clés</div><ul>${e.chiffres.map(c => '<li>' + esc(c) + '</li>').join('')}</ul></div>`;
+  if ((e.pieges || []).length) html += `<div class="bloc pieges"><div class="h">⚠️ Pièges fréquents</div><ul>${e.pieges.map(c => '<li>' + esc(c) + '</li>').join('')}</ul></div>`;
+  return html || `<div class="note">Voir le cours complet.</div>`;
+}
+function vComplet(m) {
+  let html = `<div class="readtime">⏱️ ~${READTIME[m.id]} min de lecture · ${m.sections.length} sections</div>`;
+  html += `<div class="lecture">`;
+  const pos = S.pos[m.id];
+  if (pos && m.sections.some(s => s.id === pos)) html += `<button class="btn ghost sm" style="margin-bottom:10px" onclick="document.getElementById('${pos}').scrollIntoView({behavior:'smooth'})">↩︎ Reprendre la lecture</button>`;
+  html += `<div class="toc"><b>Sommaire</b>${m.sections.map(s => `<a onclick="document.getElementById('${s.id}').scrollIntoView({behavior:'smooth'})"><span>${esc(s.titre)}</span>${S.read[s.id] ? '<span class="ck">✓</span>' : ''}</a>`).join('')}</div>`;
+  m.sections.forEach((s, i) => {
+    html += `<section id="${s.id}" data-sid="${s.id}"><div class="row-between"><h3>${esc(s.titre)}</h3><button class="starsec" onclick="starSec('${s.id}',this)">${S.starSec[s.id] ? '★' : '☆'}</button></div>`;
+    (s.points || []).forEach(p => html += `<p>${esc(p)}</p>`);
     if ((s.chiffres || []).length) html += `<div class="bloc chiffres"><div class="h">🔢 Chiffres-clés</div><ul>${s.chiffres.map(c => '<li>' + esc(c) + '</li>').join('')}</ul></div>`;
     if ((s.pieges || []).length) html += `<div class="bloc pieges"><div class="h">⚠️ Pièges</div><ul>${s.pieges.map(c => '<li>' + esc(c) + '</li>').join('')}</ul></div>`;
     html += `</section>`;
@@ -252,332 +279,359 @@ function vComplet(m) {
   html += `</div>`;
   return html;
 }
-
+window.starSec = function (sid, btn) { if (S.starSec[sid]) delete S.starSec[sid]; else S.starSec[sid] = 1; save(); btn.textContent = S.starSec[sid] ? '★' : '☆'; haptic(10); };
 function bindModule(mid, tab, anchor) {
-  document.querySelectorAll('.subtabs button').forEach(b => {
-    b.onclick = () => go('#/module/' + mid + '/' + b.dataset.st);
-  });
+  document.querySelectorAll('.subtabs button').forEach(b => b.onclick = () => go('#/module/' + mid + '/' + b.dataset.st));
   if (tab === 'complet') {
-    // marquer lu + position via IntersectionObserver
-    const m = MOD[mid];
-    const io = new IntersectionObserver((ents) => {
-      ents.forEach(en => {
-        if (en.isIntersecting) {
-          const sid = en.target.dataset.sid;
-          if (sid) { if (!S.read[sid]) { S.read[sid] = 1; } S.pos[mid] = sid; save(); }
-        }
-      });
-    }, { threshold: 0.5 });
+    S.lastAction = { type: 'lire', href: '#/module/' + mid + '/complet', label: 'lecture ' + MOD[mid].nom, ts: Date.now() }; save();
+    const rb = $('#readbar'); rb.style.display = 'block';
+    const onScroll = () => { const h = document.documentElement; const m = h.scrollHeight - h.clientHeight; rb.style.width = (m > 0 ? Math.min(100, 100 * h.scrollTop / m) : 0) + '%'; };
+    window.removeEventListener('scroll', window._rs || (() => {})); window._rs = onScroll; window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { const sid = en.target.dataset.sid; if (sid) { S.read[sid] = 1; S.pos[mid] = sid; save(); } } }), { threshold: .5 });
     document.querySelectorAll('section[data-sid]').forEach(s => io.observe(s));
-    if (anchor) { const el = document.getElementById(anchor); if (el) setTimeout(() => el.scrollIntoView(), 60); }
+    if (anchor) { const el = document.getElementById(anchor); if (el) setTimeout(() => el.scrollIntoView(), 80); }
   }
 }
 
-/* ============================================================
-   ESPACE ENTRAÎNEMENT (menu)
-   ============================================================ */
+/* ============================================================ ENTRAÎNEMENT */
+function shortNom(n) { return n.length > 24 ? n.slice(0, 23) + '…' : n; }
 function vEntrainement() {
-  const nbWrong = Object.keys(S.wrong).length;
+  const nbWrong = Object.keys(S.wrong).length, nbFav = Object.keys(S.starQ).length;
   const totalQ = Object.values(QBYMOD).reduce((s, a) => s + a.length, 0);
   let html = `<h2 class="page">Entraînement</h2>`;
-  html += `<div class="card"><div class="serif" style="font-size:1.05rem">🧪 Examen blanc</div>
-    <p class="small muted">120 questions tirées selon la pondération officielle, chronométré 2 h. Correction et verdict A/C à la fin.</p>
-    <button class="btn" onclick="go('#/examen')">Démarrer l'examen blanc</button></div>`;
-  html += `<div class="card"><div class="serif" style="font-size:1.05rem">🎯 Drill par module</div>
-    <p class="small muted">Questions d'un module, correction immédiate avec explication.</p>`;
-  C.modules.forEach(m => {
-    html += `<button class="btn ghost sm" style="margin:3px 4px 3px 0;width:auto" onclick="go('#/drill/${m.id}')">${m.num}. ${esc(shortNom(m.nom))} (${(QBYMOD[m.id] || []).length})</button>`;
-  });
-  html += `</div>`;
-  html += `<div class="btn-row">
-    <button class="btn sec" onclick="go('#/erreurs')">🔁 Réviser mes erreurs${nbWrong ? ' (' + nbWrong + ')' : ''}</button>
-    <button class="btn sec" onclick="go('#/flash')">🃏 Flashcards</button></div>`;
-  html += `<div class="note" style="margin-top:10px">Banque : <b>${totalQ}</b> questions. L'examen réel pioche dans 2 000+ questions renouvelées : entraîne ta COMPRÉHENSION, pas le par-cœur.</div>`;
+  html += `<div class="card"><div class="serif" style="font-size:1.05rem">🧪 Examen blanc</div><p class="small muted">120 questions selon la pondération officielle, 2 h, verdict A/C à la fin.</p><button class="btn" onclick="go('#/examen')">Démarrer</button></div>`;
+  html += `<div class="btn-row"><button class="btn sec" onclick="go('#/echauffement')">⚡ Échauffement (10 Q)</button><button class="btn sec esgbtn" onclick="go('#/esg')">🌱 Drill ESG</button></div><div class="sp"></div>`;
+  html += `<div class="btn-row"><button class="btn sec" onclick="go('#/erreurs')">🔁 Erreurs${nbWrong ? ' (' + nbWrong + ')' : ''}</button><button class="btn sec" onclick="go('#/flash')">🃏 Flashcards</button></div><div class="sp"></div>`;
+  html += `<div class="btn-row"><button class="btn ghost sm" onclick="go('#/favoris')">⭐ Favoris${nbFav ? ' (' + nbFav + ')' : ''}</button><button class="btn ghost sm" onclick="go('#/stats')">📊 Mes stats</button></div>`;
+  html += `<h3 class="sec">Drill par module</h3>`;
+  C.modules.forEach(m => { const mc = masteryClass(m.id); html += `<a class="mod card tap" onclick="go('#/drill/${m.id}')"><div class="top"><div class="num">${m.num}</div><div class="nom">${esc(m.nom)}</div><span class="mastery ${mc}">${(QBYMOD[m.id] || []).length} Q</span></div></a>`; });
+  html += `<div class="note" style="margin-top:6px">Banque : <b>${totalQ}</b> questions. À l'examen réel, elles changent : entraîne ta <b>compréhension</b>.</div>`;
   return html;
 }
-function shortNom(n) { return n.length > 26 ? n.slice(0, 25) + '…' : n; }
 
-/* ============================================================
-   MOTEUR DE SESSION QCM
-   ============================================================ */
+/* ============================================================ SESSION QCM */
+function buildQueue(mode, mid) {
+  if (mode === 'drill') return shuffle((QBYMOD[mid] || []).map(q => q.id));
+  if (mode === 'esg') return shuffle((QBYMOD['m8'] || []).map(q => q.id)).slice(0, 15);
+  if (mode === 'echauffement') return shuffle(Object.keys(QBYID)).slice(0, 10);
+  if (mode === 'erreurs') return shuffle(Object.keys(S.wrong).filter(id => QBYID[id]));
+  if (mode === 'favoris') return shuffle(Object.keys(S.starQ).filter(id => QBYID[id]));
+  return [];
+}
 function startSession(mode, mid) {
-  let queue = [];
-  if (mode === 'drill') {
-    queue = shuffle((QBYMOD[mid] || []).map(q => q.id));
-    if (!queue.length) { $('#view').innerHTML = `<div class="card">Aucune question pour ce module.</div>`; return; }
-    sess = { mode, mid, queue, i: 0, answered: {}, results: [] };
-  } else if (mode === 'erreurs') {
-    queue = shuffle(Object.keys(S.wrong).filter(id => QBYID[id]));
-    if (!queue.length) { $('#view').innerHTML = `<div class="card"><h2 class="page">Révision des erreurs</h2><div class="note">Aucune erreur à revoir. Fais des QCM, les questions ratées arriveront ici.</div><button class="btn" onclick="go('#/entrainement')">Retour</button></div>`; return; }
-    sess = { mode, queue, i: 0, answered: {}, results: [] };
-  }
+  const queue = buildQueue(mode, mid);
+  if (!queue.length) { $('#view').innerHTML = emptyState(mode); return; }
+  sess = { mode, mid, queue, i: 0, answered: {}, results: [], streak: 0 };
+  if (mode === 'drill') { S.lastAction = { type: 'drill', href: '#/drill/' + mid, label: 'drill ' + MOD[mid].nom, ts: Date.now() }; save(); }
   renderSession();
 }
-
+function emptyState(mode) {
+  const map = {
+    erreurs: ['✅', 'Rien à revoir, tout est maîtrisé !', 'Fais des QCM, les questions ratées arriveront ici.'],
+    favoris: ['⭐', 'Aucun favori pour l’instant', 'Touche l’étoile sous une question pour la garder ici.'],
+    esg: ['🌱', 'Module ESG indisponible', ''], echauffement: ['⚡', 'Pas de questions', '']
+  };
+  const m = map[mode] || ['🙂', 'Rien ici', ''];
+  return `<div class="empty"><div class="em">${m[0]}</div><h2 class="page">${esc(m[1])}</h2><p class="muted">${esc(m[2])}</p>
+    <div class="btn-row"><button class="btn" onclick="go('#/examen')">Examen blanc</button><button class="btn sec" onclick="go('#/entrainement')">Retour</button></div></div>`;
+}
+function sessTitle() { const s = sess.mode; return s === 'drill' ? 'Module ' + MOD[sess.mid].num : s === 'esg' ? 'Drill ESG' : s === 'echauffement' ? 'Échauffement' : s === 'erreurs' ? 'Révision erreurs' : s === 'favoris' ? 'Favoris' : 'Examen'; }
 function renderSession() {
   if (!sess) { go('#/entrainement'); return; }
-  const v = $('#view');
-  if (sess.i >= sess.queue.length) { v.innerHTML = vSessionEnd(); return; }
-  const q = QBYID[sess.queue[sess.i]];
-  const answered = sess.answered[q.id] != null;
-  const total = sess.queue.length;
-  const titre = sess.mode === 'drill' ? ('Module ' + MOD[sess.mid].num) : (sess.mode === 'erreurs' ? 'Révision des erreurs' : 'Examen blanc');
-  let html = `<div class="qhead"><a onclick="quitSession()" style="cursor:pointer">‹ Quitter</a><span>${esc(titre)}</span><span>${sess.i + 1}/${total}</span></div>`;
-  html += `<div class="qprog"><i style="width:${pct(sess.i + (answered ? 1 : 0), total)}%"></i></div>`;
-  html += renderQuestion(q, sess.answered[q.id], sess.mode !== 'exam');
-  v.innerHTML = html;
-  bindQuestion(q);
+  if (sess.mode === 'exam') { renderExamQ(); return; }
+  if (sess.i >= sess.queue.length) { $('#view').innerHTML = vSessionEnd(); afterSessionEnd(); return; }
+  const q = QBYID[sess.queue[sess.i]], total = sess.queue.length;
+  let html = `<div class="qhead"><a onclick="quitSession()">‹ Quitter</a><span class="mid">${esc(sessTitle())}</span><span>${sess.i + 1}/${total}</span></div>`;
+  html += `<div class="qprog"><i style="width:${pct(sess.i, total)}%"></i></div>`;
+  html += `<div class="sessbar"><span>Question ${sess.i + 1}</span><span class="streakmini">${sess.streak >= 2 ? '🔥 série ' + sess.streak : ''}</span></div>`;
+  html += `<div id="qbody">${qBody(q)}</div><div id="qfoot"></div>`;
+  $('#view').innerHTML = html;
+  bindQuestion(q, true);
 }
-
-function renderQuestion(q, chosen, immediate) {
-  const answered = chosen != null;
-  let html = `<div class="enonce">${esc(q.enonce)}</div>`;
-  q.options.forEach((o, idx) => {
-    let cls = 'opt';
-    if (answered && immediate) {
-      if (idx === q.correct) cls += ' good';
-      else if (idx === chosen) cls += ' bad';
-    } else if (answered && idx === chosen) cls += ' sel';
-    html += `<button class="${cls}" data-idx="${idx}" ${answered ? 'disabled' : ''}>
-      <span class="let">${letters(idx)}</span>${esc(o.texte)}</button>`;
+function qBody(q) {
+  let h = `<div class="enonce">${esc(q.enonce)}</div>`;
+  q.options.forEach((o, i) => h += `<button class="opt" data-idx="${i}"><span class="let">${letters(i)}</span><span>${esc(o.texte)}</span></button>`);
+  return h;
+}
+function bindQuestion(q, immediate) {
+  document.querySelectorAll('.opt').forEach(btn => btn.onclick = () => answer(q, +btn.dataset.idx, immediate));
+  attachSwipe();
+}
+function answer(q, idx, immediate) {
+  if (sess.answered[q.id] != null) return;
+  sess.answered[q.id] = idx;
+  const correct = idx === q.correct;
+  sess.results.push({ id: q.id, correct });
+  sess.streak = correct ? sess.streak + 1 : 0;
+  recordAnswer(q.id, correct);
+  haptic(correct ? 18 : [10, 40, 10]);
+  if (sess.mode === 'erreurs' && !correct) sess.queue.splice(Math.min(sess.queue.length, sess.i + 3), 0, q.id);
+  // révéler en place
+  document.querySelectorAll('.opt').forEach((b, i) => {
+    b.setAttribute('disabled', '');
+    if (i === q.correct) { b.classList.add('good'); b.insertAdjacentHTML('beforeend', '<span class="mark">✓</span>'); }
+    else if (i === idx) { b.classList.add('bad'); b.insertAdjacentHTML('beforeend', '<span class="mark">✗</span>'); }
   });
-  if (answered && immediate) {
-    const ok = chosen === q.correct;
-    html += `<div class="expl"><div class="v ${ok ? 'ok' : 'ko'}">${ok ? '✅ Bonne réponse' : '✗ Mauvaise réponse'}</div>`;
-    html += `<ul>`;
-    q.options.forEach((o, idx) => {
-      html += `<li class="${idx === q.correct ? 'good' : 'bad'}"><span class="l">${letters(idx)} ${idx === q.correct ? '(juste)' : '(faux)'} :</span> ${esc(o.justif)}</li>`;
-    });
-    html += `</ul>`;
-    if (q.a_verifier) html += `<div class="averif">⚠︎ Réponse à vérifier dans ton cours officiel.</div>`;
-    html += `<div class="btn-row" style="margin-top:8px">
-      <button class="btn sec sm" onclick="go('#/lire/${q.ancre.split('-')[0]}/${q.ancre}')">📖 Revoir dans le cours</button>
-      <button class="btn ghost sm" onclick="toggleMarkUI('${q.id}')">${S.wrong[q.id] ? '★ Marquée' : '☆ Marquer'}</button>
-    </div></div>`;
-    html += `<button class="btn" onclick="nextQ()">${sess.i + 1 >= sess.queue.length ? 'Terminer' : 'Question suivante ›'}</button>`;
-  } else if (answered && !immediate) {
-    html += `<button class="btn" onclick="nextQ()">${sess.i + 1 >= sess.queue.length ? 'Terminer l’examen' : 'Suivant ›'}</button>`;
-  }
-  return html;
+  let e = `<div class="expl"><div class="v ${correct ? 'ok' : 'ko'}">${correct ? '✅ Bonne réponse' : '✗ Mauvaise réponse'}</div><ul>`;
+  q.options.forEach((o, i) => e += `<li class="${i === q.correct ? 'good' : 'bad'}"><span class="l">${letters(i)} ${i === q.correct ? '(juste)' : '(faux)'} :</span> ${esc(o.justif)}</li>`);
+  e += `</ul>`;
+  if (q.a_verifier) e += `<div class="averif">⚠︎ À revérifier dans ton cours officiel.</div>`;
+  e += `<div class="btn-row" style="margin-top:8px"><button class="btn sec sm" onclick="go('#/lire/${q.ancre.split('-')[0]}/${q.ancre}')">📖 Revoir dans le cours</button>
+    <button class="btn ghost sm" onclick="toggleMarkUI('${q.id}',this)">${S.starQ[q.id] ? '★ Favori' : '☆ Favori'}</button></div></div>`;
+  const last = sess.i + 1 >= sess.queue.length;
+  e += `<div class="qbar"><button class="btn" onclick="nextQ()">${last ? 'Voir le bilan' : 'Question suivante ›'}</button></div>`;
+  $('#qfoot').innerHTML = e;
+  setTimeout(() => { const b = $('#qfoot .expl'); if (b) b.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 60);
 }
-
-function bindQuestion(q) {
-  document.querySelectorAll('.opt').forEach(btn => {
-    btn.onclick = () => {
-      if (sess.answered[q.id] != null) return;
-      const idx = +btn.dataset.idx;
-      sess.answered[q.id] = idx;
-      const correct = idx === q.correct;
-      sess.results.push({ id: q.id, correct });
-      if (sess.mode !== 'exam') recordAnswer(q.id, correct);
-      else recordAnswer(q.id, correct); // l'examen compte aussi dans les stats
-      // répétition espacée : en mode erreurs, si raté on réinsère plus loin
-      if (sess.mode === 'erreurs' && !correct) {
-        const insertAt = Math.min(sess.queue.length, sess.i + 3);
-        sess.queue.splice(insertAt, 0, q.id);
-      }
-      renderSession();
-    };
-  });
-}
-window.nextQ = function () { sess.i++; renderSession(); };
-window.quitSession = function () { if (sess && sess.mode === 'exam' && sess.i < sess.queue.length && !confirm('Quitter l\'examen en cours ?')) return; stopTimer(); sess = null; go('#/entrainement'); };
-window.toggleMarkUI = function (qid) { toggleMark(qid); renderSession(); };
+window.nextQ = function () { if (!sess) return; sess.i++; if (sess.mode === 'exam') { persistExam(); renderExamQ(); } else renderSession(); };
+window.quitSession = function () { if (sess && sess.mode === 'exam' && sess.i < sess.queue.length && !confirm('Quitter l’examen en cours ?')) return; stopTimer(); if (sess && sess.mode === 'exam') { S.examInProgress = null; save(); } sess = null; go('#/entrainement'); };
+window.toggleMarkUI = function (qid, btn) { toggleMark(qid); btn.textContent = S.starQ[qid] ? '★ Favori' : '☆ Favori'; haptic(10); };
 
 function vSessionEnd() {
-  const r = sess.results; const ok = r.filter(x => x.correct).length;
-  const mode = sess.mode;
-  let html = `<h2 class="page">Terminé</h2><div class="card center">
-    <div class="serif" style="font-size:2rem">${pct(ok, r.length)}%</div>
-    <div class="muted">${ok} / ${r.length} bonnes réponses</div></div>`;
-  if (mode === 'drill') {
-    html += `<div class="btn-row"><button class="btn" onclick="go('#/drill/${sess.mid}')">↻ Recommencer</button>
-      <button class="btn sec" onclick="go('#/module/${sess.mid}/complet')">📖 Revoir le cours</button></div>`;
-  } else {
-    html += `<button class="btn" onclick="go('#/entrainement')">Retour à l'entraînement</button>`;
-  }
+  const r = sess.results, ok = r.filter(x => x.correct).length, score = pct(ok, r.length);
+  const done = dailyDone(), goal = S.daily.goal || 20;
+  let html = `<h2 class="page">Terminé 🎉</h2><div class="card center"><div class="bigscore" id="endscore">0%</div><div class="muted">${ok} / ${r.length} bonnes réponses</div></div>`;
+  if (done < goal) html += `<div class="coach">Plus que <b>${goal - done}</b> question(s) pour boucler ton objectif du jour.</div>`;
+  else html += `<div class="coach">✅ Objectif du jour atteint — série de <b>${S.daily.streak} jour(s)</b> !</div>`;
+  if (sess.mode === 'drill') html += `<div class="btn-row"><button class="btn" onclick="go('#/drill/${sess.mid}')">↻ Recommencer</button><button class="btn sec" onclick="go('#/module/${sess.mid}/complet')">📖 Revoir le cours</button></div>`;
+  else html += `<button class="btn" onclick="go('#/entrainement')">Retour</button>`;
+  snapshot();
   sess = null;
+  window._endscore = score;
   return html;
 }
+function afterSessionEnd() { const el = $('#endscore'); if (el) animateCount(el, window._endscore || 0, '%'); }
 
-/* ============================================================
-   EXAMEN BLANC
-   ============================================================ */
+/* ============================================================ EXAMEN */
 function vExamenIntro() {
-  const ready = examReady();
-  let html = `<div class="qhead"><a onclick="go('#/entrainement')" style="cursor:pointer">‹ Entraînement</a><span>Examen blanc</span></div>`;
-  html += `<h2 class="page">🧪 Examen blanc</h2>`;
-  html += `<div class="card"><ul class="small">
-    <li><b>120 questions</b> à choix unique, tirées selon la pondération officielle des 12 modules.</li>
-    <li><b>Chrono 2 h</b> · pas de points négatifs · aucune correction avant la fin.</li>
-    <li>Résultat <b>séparé</b> : catégorie A et catégorie C. Admis seulement si <b>≥ 80 % dans chacune</b>.</li>
-  </ul>`;
-  if (!ready.ok) html += `<div class="bloc pieges"><div class="h">⚠️ Banque incomplète</div><div class="small">${esc(ready.msg)}</div></div>`;
-  html += `<button class="btn" onclick="startExam()">Démarrer (2 h)</button></div>`;
+  let html = `<div class="qhead"><a onclick="go('#/entrainement')">‹ Entraînement</a><span class="mid">Examen blanc</span><span></span></div><h2 class="page">🧪 Examen blanc</h2>`;
+  if (S.examInProgress && (S.examInProgress.startTs + S.examInProgress.durationMs - Date.now()) > 0) {
+    const left = Math.round((S.examInProgress.startTs + S.examInProgress.durationMs - Date.now()) / 60000);
+    html += `<div class="card"><b>Examen en cours</b><div class="small muted">Question ${S.examInProgress.i + 1}/120 · ~${left} min restantes</div><button class="btn" style="margin-top:8px" onclick="resumeExam()">↩︎ Reprendre</button></div>`;
+  }
+  html += `<div class="card"><ul class="small"><li><b>120 questions</b>, pondération officielle.</li><li><b>2 h</b>, pas de points négatifs, correction à la fin.</li><li>Admis si <b>≥ 80 % en A ET en C</b>.</li></ul><button class="btn" onclick="startExam()">Démarrer (2 h)</button></div>`;
+  if (S.examHistory && S.examHistory.length) {
+    html += `<h3 class="sec">Tes examens blancs</h3><div class="card">${sparkline(S.examHistory)}<div class="small muted center">A (or) et C (bleu) — ligne = seuil 80 %</div></div>`;
+  }
   return html;
 }
-function examReady() {
-  let miss = [];
-  C.modules.forEach(m => {
-    const bank = QBYMOD[m.id] || [];
-    const nA = bank.filter(q => q.cat === 'A').length, nC = bank.filter(q => q.cat === 'C').length;
-    if (nA < m.catA) miss.push(`M${m.num}: ${nA}/${m.catA} A`);
-    if (nC < m.catC) miss.push(`M${m.num}: ${nC}/${m.catC} C`);
-  });
-  return { ok: miss.length === 0, msg: 'Manque : ' + miss.join(', ') + '. L\'examen sera ajusté.' };
-}
-function examDraw() {
-  const picked = [];
-  C.modules.forEach(m => {
-    const bank = QBYMOD[m.id] || [];
-    const A = shuffle(bank.filter(q => q.cat === 'A'));
-    const Cc = shuffle(bank.filter(q => q.cat === 'C'));
-    take(A, m.catA, picked, bank);
-    take(Cc, m.catC, picked, bank);
-  });
-  return shuffle(picked).map(q => q.id);
-}
-function take(arr, n, out, fallback) {
-  for (let i = 0; i < n; i++) {
-    if (arr.length) out.push(arr.shift());
-    else { const f = (fallback || []).filter(q => out.indexOf(q) < 0); if (f.length) out.push(shuffle(f)[0]); }
-  }
+function sparkline(hist) {
+  const h = hist.slice(-12), W = 320, H = 40, n = h.length; if (!n) return '';
+  const x = i => n === 1 ? W / 2 : (i / (n - 1)) * W;
+  const yA = v => H - (v / 100) * H, line = (arr) => arr.map((p, i) => (i ? 'L' : 'M') + x(i).toFixed(0) + ' ' + yA(p).toFixed(0)).join(' ');
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+    <line x1="0" y1="${yA(80)}" x2="${W}" y2="${yA(80)}" stroke="var(--ink-soft)" stroke-dasharray="3 3" stroke-width="1" opacity=".6"/>
+    <path d="${line(h.map(e => e.pctA))}" fill="none" stroke="var(--or)" stroke-width="2"/>
+    <path d="${line(h.map(e => e.pctC))}" fill="none" stroke="var(--brand)" stroke-width="2"/>
+    ${h.map((e, i) => `<circle cx="${x(i).toFixed(0)}" cy="${yA(e.pctA).toFixed(0)}" r="2.2" fill="var(--or)"/><circle cx="${x(i).toFixed(0)}" cy="${yA(e.pctC).toFixed(0)}" r="2.2" fill="var(--brand)"/>`).join('')}
+  </svg>`;
 }
 window.startExam = function () {
-  const queue = examDraw();
-  sess = { mode: 'exam', queue, i: 0, answered: {}, results: [], startTs: Date.now(), durationMs: 120 * 60000 };
-  startTimer();
-  go('#/examen-run');
-  if (location.hash !== '#/examen-run') renderSession();
+  sess = { mode: 'exam', queue: examDraw(), i: 0, answered: {}, results: [], startTs: Date.now(), durationMs: 120 * 60000 };
+  persistExam(); startTimer(); go('#/examen-run'); renderExamQ();
 };
+window.resumeExam = function () {
+  const e = S.examInProgress; if (!e) return;
+  sess = { mode: 'exam', queue: e.queue, i: e.i, answered: e.answered, results: [], startTs: e.startTs, durationMs: e.durationMs };
+  startTimer(); go('#/examen-run'); renderExamQ();
+};
+function persistExam() { if (sess && sess.mode === 'exam') { S.examInProgress = { queue: sess.queue, i: sess.i, answered: sess.answered, startTs: sess.startTs, durationMs: sess.durationMs }; save(); } }
+function examDraw() { const picked = []; C.modules.forEach(m => { const bank = QBYMOD[m.id] || []; const A = shuffle(bank.filter(q => q.cat === 'A')), Cc = shuffle(bank.filter(q => q.cat === 'C')); take(A, m.catA, picked, bank); take(Cc, m.catC, picked, bank); }); return shuffle(picked).map(q => q.id); }
+function take(arr, n, out, fb) { for (let i = 0; i < n; i++) { if (arr.length) out.push(arr.shift()); else { const f = (fb || []).filter(q => out.indexOf(q) < 0); if (f.length) out.push(shuffle(f)[0]); } } }
 let timerId = null;
 function startTimer() { stopTimer(); timerId = setInterval(tick, 1000); }
 function stopTimer() { if (timerId) clearInterval(timerId); timerId = null; }
-function tick() {
-  if (!sess || sess.mode !== 'exam') { stopTimer(); return; }
-  const left = sess.durationMs - (Date.now() - sess.startTs);
-  const el = document.getElementById('chrono');
-  if (left <= 0) { stopTimer(); finishExam(); return; }
-  if (el) {
-    const mm = Math.floor(left / 60000), ss = Math.floor((left % 60000) / 1000);
-    el.textContent = mm + ':' + String(ss).padStart(2, '0');
-    el.classList.toggle('warn', left < 5 * 60000);
-  }
-}
-// surcharge renderSession header pour l'examen (chrono + terminer)
-const _renderSession = renderSession;
-renderSession = function () {
-  if (sess && sess.mode === 'exam') {
-    const v = $('#view');
-    if (sess.i >= sess.queue.length) { finishExam(); return; }
-    const q = QBYID[sess.queue[sess.i]];
-    const answered = sess.answered[q.id] != null;
-    let html = `<div class="qhead"><a onclick="quitSession()" style="cursor:pointer">‹ Quitter</a><span class="chrono" id="chrono">…</span><span>${sess.i + 1}/120</span></div>`;
-    html += `<div class="qprog"><i style="width:${pct(sess.i, 120)}%"></i></div>`;
-    html += renderQuestion(q, sess.answered[q.id], false);
-    html += `<div class="sp"></div><button class="btn ghost sm" onclick="finishExam()">Terminer l'examen maintenant</button>`;
-    v.innerHTML = html; bindQuestion(q); tick();
-  } else { _renderSession(); }
-};
-function finishExam() {
-  stopTimer();
-  if (!sess) return;
-  // calcul scores A/C
-  let aT = 0, aOk = 0, cT = 0, cOk = 0; const perMod = {};
-  sess.queue.forEach(qid => {
-    const q = QBYID[qid]; const ch = sess.answered[qid]; const ok = ch === q.correct;
-    if (q.cat === 'A') { aT++; if (ok) aOk++; } else { cT++; if (ok) cOk++; }
-    const pm = perMod[q.module] || { t: 0, ok: 0, num: q.modnum, nom: MOD[q.module].nom }; pm.t++; if (ok) pm.ok++; perMod[q.module] = pm;
+function tick() { if (!sess || sess.mode !== 'exam') { stopTimer(); return; } const left = sess.durationMs - (Date.now() - sess.startTs); const el = $('#chrono'); if (left <= 0) { stopTimer(); finishExam(); return; } if (el) { const mm = Math.floor(left / 60000), ss = Math.floor((left % 60000) / 1000); el.textContent = mm + ':' + String(ss).padStart(2, '0'); el.classList.toggle('warn', left < 5 * 60000); } }
+function renderExamQ() {
+  if (!sess || sess.mode !== 'exam') return;
+  if (sess.i >= sess.queue.length) { finishExam(); return; }
+  const q = QBYID[sess.queue[sess.i]];
+  let html = `<div class="qhead"><a onclick="quitSession()">‹ Quitter</a><span class="chrono mid" id="chrono">…</span><span>${sess.i + 1}/120</span></div>`;
+  html += `<div class="qprog"><i style="width:${pct(sess.i, 120)}%"></i></div><div id="qbody">${qBody(q)}</div><div id="qfoot"></div>`;
+  $('#view').innerHTML = html;
+  const chosen = sess.answered[q.id];
+  document.querySelectorAll('.opt').forEach(btn => {
+    if (chosen != null && +btn.dataset.idx === chosen) btn.style.borderColor = 'var(--brand)';
+    btn.onclick = () => {
+      sess.answered[q.id] = +btn.dataset.idx; persistExam(); haptic(10);
+      document.querySelectorAll('.opt').forEach(b => b.style.borderColor = ''); btn.style.borderColor = 'var(--brand)';
+      showExamFoot(q);
+    };
   });
-  lastExam = {
-    aT, aOk, cT, cOk, pctA: pct(aOk, aT), pctC: pct(cOk, cT),
-    admis: pct(aOk, aT) >= 80 && pct(cOk, cT) >= 80,
-    perMod, total: sess.queue.length, ok: aOk + cOk
-  };
-  sess = null;
-  go('#/resultat');
+  if (chosen != null) showExamFoot(q);
+  attachSwipe(); tick();
 }
+function showExamFoot(q) {
+  const last = sess.i + 1 >= sess.queue.length;
+  $('#qfoot').innerHTML = `<div class="qbar"><button class="btn" onclick="nextQ()">${last ? 'Terminer l’examen' : 'Suivant ›'}</button>
+    <button class="btn ghost sm" style="width:100%;margin-top:6px" onclick="finishExam()">Terminer maintenant</button></div>`;
+}
+window.finishExam = function () {
+  stopTimer(); if (!sess) return;
+  let aT = 0, aOk = 0, cT = 0, cOk = 0; const perMod = {};
+  sess.queue.forEach(qid => { const q = QBYID[qid], ok = sess.answered[qid] === q.correct; if (q.cat === 'A') { aT++; if (ok) aOk++; } else { cT++; if (ok) cOk++; } const pm = perMod[q.module] || { t: 0, ok: 0, num: q.modnum, nom: MOD[q.module].nom }; pm.t++; if (ok) pm.ok++; perMod[q.module] = pm; recordAnswer(qid, ok); });
+  const pa = pct(aOk, aT), pc = pct(cOk, cT);
+  lastExam = { pctA: pa, pctC: pc, aOk, aT, cOk, cT, admis: pa >= 80 && pc >= 80, perMod, total: sess.queue.length, ok: aOk + cOk };
+  S.examHistory = (S.examHistory || []).concat([{ ts: Date.now(), pctA: pa, pctC: pc, admis: lastExam.admis }]).slice(-20);
+  S.examInProgress = null; snapshot(); save();
+  sess = null; go('#/resultat');
+};
 let lastExam = null;
+function snapshot() { const A = catEstimate('A'), Cc = catEstimate('C'); S.snap = { A: A.taux, C: Cc.taux, ts: Date.now() }; save(); }
 function vResultat() {
   if (!lastExam) return `<div class="card">Aucun résultat. <button class="btn" onclick="go('#/examen')">Faire un examen</button></div>`;
   const r = lastExam;
-  let html = `<h2 class="page">Résultat de l'examen</h2>`;
-  html += `<div class="card center"><div class="serif" style="font-size:1.9rem">${pct(r.ok, r.total)}%</div><div class="muted">${r.ok}/${r.total} au total</div></div>`;
+  let html = `<h2 class="page">Résultat</h2><div class="card center"><div class="bigscore" id="rscore">0%</div><div class="muted">${r.ok}/${r.total}</div>${r.admis ? '<div class="record">🏆 ADMIS</div>' : ''}</div>`;
   html += `<div class="card"><div class="dual">
-    <div>${gauge('Catégorie A', r.pctA, 1, true)}<div class="small muted center">${r.aOk}/${r.aT} · seuil 80 %</div></div>
-    <div>${gauge('Catégorie C', r.pctC, 1, true)}<div class="small muted center">${r.cOk}/${r.cT} · seuil 80 %</div></div>
-  </div><div class="verdict ${r.admis ? 'ok' : 'ko'}">${r.admis ? '✅ ADMIS — ≥ 80 % en A et en C' : '✗ RECALÉ — il faut ≥ 80 % dans CHAQUE catégorie'}</div></div>`;
-  // top 3 modules faibles
+    <div>${gauge('Catégorie A', r.pctA, 1)}<div class="small muted center">${r.aOk}/${r.aT}</div></div>
+    <div>${gauge('Catégorie C', r.pctC, 1)}<div class="small muted center">${r.cOk}/${r.cT}</div></div></div>
+    <div class="verdict ${r.admis ? 'ok' : 'ko'}">${r.admis ? '✅ ADMIS — ≥ 80 % en A et en C' : '✗ Pas encore — il faut 80 % dans CHAQUE catégorie'}</div></div>`;
   const arr = Object.keys(r.perMod).map(mid => ({ mid, ...r.perMod[mid], taux: pct(r.perMod[mid].ok, r.perMod[mid].t) })).sort((a, b) => a.taux - b.taux).slice(0, 3);
   html += `<h3 class="sec">À retravailler en priorité</h3>`;
-  arr.forEach(m => {
-    html += `<div class="card"><div class="row" style="display:flex;justify-content:space-between;align-items:center">
-      <div><b>M${m.num}. ${esc(shortNom(m.nom))}</b><div class="small muted">${m.ok}/${m.t} · ${m.taux}%</div></div></div>
-      <div class="btn-row" style="margin-top:8px"><button class="btn sec sm" onclick="go('#/module/${m.mid}/complet')">📖 Cours</button>
-      <button class="btn sm" onclick="go('#/drill/${m.mid}')">🎯 Drill</button></div></div>`;
+  arr.forEach(m => html += `<div class="card"><div class="row-between"><div><b>M${m.num}. ${esc(shortNom(m.nom))}</b><div class="small muted">${m.ok}/${m.t} · ${m.taux}%</div></div></div><div class="btn-row" style="margin-top:8px"><button class="btn sec sm" onclick="go('#/module/${m.mid}/complet')">📖 Cours</button><button class="btn sm" onclick="go('#/drill/${m.mid}')">🎯 Drill</button></div></div>`);
+  html += `<button class="btn" onclick="go('#/examen')">↻ Nouvel examen</button>`;
+  window._rscore = pct(r.ok, r.total); window._radmis = r.admis;
+  return html;
+}
+function afterResultat() { const el = $('#rscore'); if (el) animateCount(el, window._rscore || 0, '%'); if (window._radmis) { haptic([20, 60, 20, 60, 40]); confetti(); } }
+
+/* ============================================================ FLASHCARDS */
+function startFlash() { if (!FLASH.length) { $('#view').innerHTML = `<div class="card">Pas de flashcards.</div>`; return; } fsess = { queue: shuffle(FLASH.map((_, i) => i)), i: 0, known: 0 }; renderFlash(); }
+function renderFlash() {
+  const v = $('#view');
+  if (fsess.i >= fsess.queue.length) { v.innerHTML = `<h2 class="page">Flashcards finies 🎉</h2><div class="card center"><div class="bigscore">${fsess.known}/${fsess.queue.length}</div><div class="muted">cartes sues</div></div><button class="btn" onclick="go('#/flash')">↻ Recommencer</button><div class="sp"></div><button class="btn sec" onclick="go('#/entrainement')">Retour</button>`; return; }
+  const f = FLASH[fsess.queue[fsess.i]];
+  v.innerHTML = `<div class="qhead"><a onclick="go('#/entrainement')">‹ Quitter</a><span class="mid">Flashcards</span><span>${fsess.i + 1}/${fsess.queue.length}</span></div>
+    <div class="flash" id="fcard"><span class="side">Module ${f.modnum} · touche pour révéler</span><div class="ct">${esc(cue(f.text))}</div></div>
+    <div class="btn-row" style="margin-top:12px"><button class="btn sec" onclick="flashRate(false)">Je ne savais pas</button><button class="btn" onclick="flashRate(true)">Je savais ✓</button></div>`;
+  $('#fcard').onclick = function () { this.querySelector('.ct').textContent = f.text; this.querySelector('.side').textContent = 'Module ' + f.modnum; };
+}
+window.flashRate = function (known) { const f = FLASH[fsess.queue[fsess.i]]; if (known) { fsess.known++; S.flashKnown[f.id] = 1; } else delete S.flashKnown[f.id]; touchDaily(); save(); haptic(12); fsess.i++; renderFlash(); };
+
+/* ============================================================ STATS */
+function vStats() {
+  let html = `<div class="qhead"><a onclick="go('#/entrainement')">‹ Entraînement</a><span class="mid">Mes stats</span><span></span></div><h2 class="page">📊 Mes stats</h2>`;
+  const A = catEstimate('A'), Cc = catEstimate('C');
+  html += `<div class="card"><div class="dual"><div>${gauge('Cat. A', A.taux, A.att)}</div><div>${gauge('Cat. C', Cc.taux, Cc.att)}</div></div></div>`;
+  html += `<h3 class="sec">Par module</h3>`;
+  C.modules.map(m => ({ m, sc: moduleScore(m.id) })).sort((a, b) => (a.sc.att ? a.sc.taux : 999) - (b.sc.att ? b.sc.taux : 999)).forEach(({ m, sc }) => {
+    html += `<a class="mod card tap" onclick="go('#/drill/${m.id}')"><div class="top"><div class="num">${m.num}</div><div class="nom">${esc(shortNom(m.nom))}</div><span class="small muted">${sc.vues}/${sc.total} vues · ${sc.att ? sc.taux + '%' : '—'}</span></div>
+      <div class="mini"><div class="g"><div class="bar"><i class="${sc.att && sc.taux >= 80 ? 'full' : ''}" style="width:${sc.att ? sc.taux : 0}%"></i></div></div></div></a>`;
   });
-  html += `<button class="btn" onclick="go('#/examen')">↻ Nouvel examen blanc</button>`;
   return html;
 }
 
-/* ============================================================
-   FLASHCARDS
-   ============================================================ */
-let fsess = null;
-function startFlash() {
-  if (!FLASH.length) { $('#view').innerHTML = `<div class="card">Pas de flashcards.</div>`; return; }
-  fsess = { queue: shuffle(FLASH.map((_, i) => i)), i: 0, known: 0 };
-  renderFlash();
+/* ============================================================ RÉGLAGES */
+function vReglages() {
+  const dark = document.body.classList.contains('dark');
+  let html = `<div class="qhead"><a onclick="history.back()">‹ Retour</a><span class="mid">Réglages</span><span></span></div><h2 class="page">Réglages</h2>`;
+  html += `<div class="card">
+    <div class="setrow"><div><div class="k">Mode sombre</div><div class="d">Confort de lecture le soir</div></div><div class="switch ${dark ? 'on' : ''}" id="sw-dark"><i></i></div></div>
+    <div class="setrow"><div class="k">Taille du texte du cours</div></div>
+    <div class="seg" id="seg-scale">
+      <button data-s="0.9" class="${S.scale == 0.9 ? 'on' : ''}">A-</button>
+      <button data-s="1" class="${(S.scale == 1 || !S.scale) ? 'on' : ''}">A</button>
+      <button data-s="1.15" class="${S.scale == 1.15 ? 'on' : ''}">A+</button>
+      <button data-s="1.3" class="${S.scale == 1.3 ? 'on' : ''}">A++</button>
+    </div>
+    <div class="setrow"><div><div class="k">Objectif quotidien</div><div class="d">Questions par jour</div></div>
+      <div class="seg" style="max-width:170px" id="seg-goal">
+        <button data-g="10" class="${S.daily.goal == 10 ? 'on' : ''}">10</button>
+        <button data-g="20" class="${S.daily.goal == 20 ? 'on' : ''}">20</button>
+        <button data-g="40" class="${S.daily.goal == 40 ? 'on' : ''}">40</button>
+      </div></div>
+  </div>`;
+  html += `<div class="card"><div class="setrow"><div><div class="k">Exporter ma progression</div><div class="d">Sauvegarde (fichier JSON)</div></div><button class="iconbtn" onclick="exportProgress()">Exporter</button></div>
+    <div class="setrow"><div><div class="k">Importer</div><div class="d">Restaurer une sauvegarde</div></div><label class="iconbtn">Importer<input type="file" id="imp" accept="application/json" style="display:none"></label></div></div>`;
+  html += `<button class="btn ghost" onclick="resetAll()" style="color:var(--rouge);border-color:var(--rouge)">🗑️ Réinitialiser ma progression</button>`;
+  html += `<div class="note" style="margin-top:12px">App de révision AMF · 100 % hors-ligne · tes données restent sur cet appareil.</div>`;
+  return html;
 }
-function renderFlash() {
-  const v = $('#view');
-  if (fsess.i >= fsess.queue.length) {
-    v.innerHTML = `<h2 class="page">Flashcards terminées</h2><div class="card center"><div class="serif" style="font-size:1.6rem">${fsess.known}/${fsess.queue.length}</div><div class="muted">cartes sues</div></div><button class="btn" onclick="go('#/flash')">↻ Recommencer</button> <div class="sp"></div><button class="btn sec" onclick="go('#/entrainement')">Retour</button>`;
-    return;
-  }
-  const f = FLASH[fsess.queue[fsess.i]];
-  let html = `<div class="qhead"><a onclick="go('#/entrainement')" style="cursor:pointer">‹ Quitter</a><span>Flashcards</span><span>${fsess.i + 1}/${fsess.queue.length}</span></div>`;
-  html += `<div class="flash recto" id="fcard"><span class="side">Module ${f.modnum} · clique pour révéler</span><div class="ct serif">${esc(cue(f.text))}</div></div>`;
-  html += `<div class="btn-row" style="margin-top:12px"><button class="btn sec" onclick="flashRate(false)">Je ne savais pas</button><button class="btn" onclick="flashRate(true)">Je savais ✓</button></div>`;
-  v.innerHTML = html;
-  $('#fcard').onclick = function () { this.classList.add('verso'); this.querySelector('.ct').textContent = f.text; this.querySelector('.side').textContent = 'Module ' + f.modnum; };
+function bindReglages() {
+  $('#sw-dark').onclick = function () { S.theme = document.body.classList.contains('dark') ? 'light' : 'dark'; save(); applyTheme(); this.classList.toggle('on'); haptic(10); };
+  document.querySelectorAll('#seg-scale button').forEach(b => b.onclick = () => { S.scale = +b.dataset.s; save(); applyTheme(); document.querySelectorAll('#seg-scale button').forEach(x => x.classList.toggle('on', x === b)); });
+  document.querySelectorAll('#seg-goal button').forEach(b => b.onclick = () => { S.daily.goal = +b.dataset.g; save(); document.querySelectorAll('#seg-goal button').forEach(x => x.classList.toggle('on', x === b)); });
+  const imp = $('#imp'); if (imp) imp.onchange = e => { const f = e.target.files[0]; if (!f) return; const rd = new FileReader(); rd.onload = () => { try { const d = JSON.parse(rd.result); S = Object.assign(blank(), d); save(); applyTheme(); alert('Progression importée ✓'); go('#/accueil'); } catch (x) { alert('Fichier invalide'); } }; rd.readAsText(f); };
 }
-window.flashRate = function (known) {
-  const f = FLASH[fsess.queue[fsess.i]];
-  if (known) { fsess.known++; S.flashKnown[f.id] = 1; } else { delete S.flashKnown[f.id]; }
-  save(); fsess.i++; renderFlash();
+window.exportProgress = function () {
+  const blob = new Blob([JSON.stringify(S)], { type: 'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'progression-amf.json'; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 };
 
-/* ============================================================
-   RECHERCHE PLEIN TEXTE
-   ============================================================ */
-function vRecherche() {
-  return `<h2 class="page">Recherche</h2><div class="search card"><input id="q" placeholder="Chercher dans le cours et les questions…" autocomplete="off"></div><div id="results"></div>`;
-}
-function bindRecherche() {
-  const inp = $('#q'); inp.focus();
-  inp.oninput = () => doSearch(inp.value.trim());
-}
+/* ============================================================ RECHERCHE */
+function vRecherche() { return `<div class="qhead"><a onclick="history.back()">‹ Retour</a><span class="mid">Recherche</span><span></span></div><div class="search card"><input id="q" placeholder="Chercher dans le cours et les questions…" enterkeyhint="search" autocapitalize="off" autocorrect="off" spellcheck="false"></div><div id="results"></div>`; }
+function bindRecherche() { const i = $('#q'); i.focus(); i.oninput = () => doSearch(i.value.trim()); }
 function doSearch(term) {
   const box = $('#results'); if (term.length < 2) { box.innerHTML = ''; return; }
-  const t = term.toLowerCase(); const hits = []; const rx = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+  const t = term.toLowerCase(), hits = [], rx = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
   C.modules.forEach(m => {
-    m.sections.forEach(s => {
-      const hay = [s.titre].concat(s.points || [], s.chiffres || [], s.pieges || []).join(' · ');
-      if (hay.toLowerCase().includes(t)) {
-        const i = hay.toLowerCase().indexOf(t); const ctx = hay.slice(Math.max(0, i - 40), i + 80);
-        hits.push({ type: 'cours', link: `#/lire/${m.id}/${s.id}`, titre: `M${m.num} · ${s.titre}`, ctx });
-      }
-    });
-    (QBYMOD[m.id] || []).forEach(q => {
-      if (q.enonce.toLowerCase().includes(t)) hits.push({ type: 'qcm', link: `#/drill/${m.id}`, titre: `M${m.num} · Question`, ctx: q.enonce });
-    });
+    m.sections.forEach(s => { const hay = [s.titre].concat(s.points || [], s.chiffres || [], s.pieges || []).join(' · '); if (hay.toLowerCase().includes(t)) { const i = hay.toLowerCase().indexOf(t); hits.push({ link: `#/lire/${m.id}/${s.id}`, ic: '📖', titre: `M${m.num} · ${s.titre}`, ctx: hay.slice(Math.max(0, i - 40), i + 80) }); } });
+    (QBYMOD[m.id] || []).forEach(q => { if (q.enonce.toLowerCase().includes(t)) hits.push({ link: `#/drill/${m.id}`, ic: '🎯', titre: `M${m.num} · Question`, ctx: q.enonce }); });
   });
-  if (!hits.length) { box.innerHTML = `<div class="note">Aucun résultat pour « ${esc(term)} ».</div>`; return; }
-  box.innerHTML = hits.slice(0, 40).map(h =>
-    `<div class="hit"><a onclick="go('${h.link}')">${h.type === 'cours' ? '📖' : '🎯'} ${esc(h.titre)}</a><div class="ctx">${esc(h.ctx).replace(rx, '<mark>$1</mark>')}</div></div>`
-  ).join('');
+  box.innerHTML = hits.length ? hits.slice(0, 40).map(h => `<div class="hit"><a onclick="go('${h.link}')">${h.ic} ${esc(h.titre)}</a><div class="ctx">${esc(h.ctx).replace(rx, '<mark>$1</mark>')}</div></div>`).join('') : `<div class="note">Aucun résultat pour « ${esc(term)} ».</div>`;
 }
 
-/* ---------- go ---------- */
+/* ============================================================ ONBOARDING */
+function showOnboard() {
+  const slides = [
+    ['📖', 'Lis le cours dans l’app', 'Chaque module a une couche « Essentiel » pour réviser vite et un « Cours complet » fidèle à tes fiches.'],
+    ['🎯', 'Entraîne ta compréhension', 'L’examen pioche dans 2000+ questions renouvelées : on s’entraîne à comprendre, pas à apprendre par cœur.'],
+    ['✅', 'La règle qui compte', 'Réussite = 80 % en catégorie A ET 80 % en catégorie C, sans compensation. L’app suit les deux séparément.']
+  ];
+  let i = 0;
+  const ov = document.createElement('div'); ov.className = 'onboard'; document.body.appendChild(ov);
+  function draw() {
+    const s = slides[i];
+    ov.innerHTML = `<div class="slide"><div class="em">${s[0]}</div><h2 class="serif">${s[1]}</h2><p>${s[2]}</p></div>
+      <div class="dots">${slides.map((_, k) => `<span class="${k === i ? 'on' : ''}"></span>`).join('')}</div>
+      <button class="btn or" id="ob-next">${i < slides.length - 1 ? 'Suivant' : 'Commencer'}</button>
+      ${i === 0 ? '<button class="btn ghost" id="ob-skip" style="margin-top:8px;color:#cdd6e6;border-color:rgba(245,241,232,.25)">Passer</button>' : ''}`;
+    $('#ob-next').onclick = () => { if (i < slides.length - 1) { i++; draw(); } else done(); };
+    const sk = $('#ob-skip'); if (sk) sk.onclick = done;
+  }
+  function done() { S.onboarded = true; save(); ov.remove(); go('#/cours'); }
+  draw();
+}
+
+/* ============================================================ Confetti */
+function confetti() {
+  const cv = $('#confetti'); if (!cv) return; cv.style.display = 'block';
+  const ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+  const cols = ['#B0862B', '#2F6B43', '#14213D', '#F5F1E8', '#d2a64a'];
+  const P = Array.from({ length: 120 }, () => ({ x: innerWidth / 2, y: innerHeight / 3, vx: (Math.random() - .5) * 9, vy: Math.random() * -9 - 3, g: .28, s: 5 + Math.random() * 6, c: cols[Math.floor(Math.random() * cols.length)], a: Math.random() * 6.28, va: (Math.random() - .5) * .3 }));
+  let t = 0;
+  (function loop() {
+    ctx.clearRect(0, 0, cv.width, cv.height); t++;
+    P.forEach(p => { p.vy += p.g; p.x += p.vx; p.y += p.vy; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * .6); ctx.restore(); });
+    if (t < 110) requestAnimationFrame(loop); else { cv.style.display = 'none'; ctx.clearRect(0, 0, cv.width, cv.height); }
+  })();
+}
+
+/* ============================================================ Clavier & swipe */
+function onKey(e) {
+  if (!sess) return;
+  const SESSION_SCREENS = ['drill', 'erreurs', 'echauffement', 'esg', 'favoris', 'examen-run'];
+  if (!SESSION_SCREENS.includes(parseHash()[0])) return;
+  const q = QBYID[sess.queue[sess.i]]; if (!q) return;
+  const answered = sess.answered[q.id] != null;
+  if (!answered && ['1', '2', '3', 'a', 'b', 'c'].includes(e.key.toLowerCase())) {
+    const idx = { '1': 0, '2': 1, '3': 2, 'a': 0, 'b': 1, 'c': 2 }[e.key.toLowerCase()];
+    const btn = document.querySelector('.opt[data-idx="' + idx + '"]'); if (btn) btn.click();
+  } else if (answered && (e.key === 'Enter' || e.key === 'ArrowRight' || e.key === ' ')) { e.preventDefault(); nextQ(); }
+  else if (e.key === 'Escape') quitSession();
+}
+let _tx = 0, _ty = 0;
+function attachSwipe() {
+  const v = $('#view'); if (!v) return;
+  v.ontouchstart = e => { _tx = e.changedTouches[0].clientX; _ty = e.changedTouches[0].clientY; };
+  v.ontouchend = e => {
+    const dx = e.changedTouches[0].clientX - _tx, dy = e.changedTouches[0].clientY - _ty;
+    if (Math.abs(dx) > 70 && Math.abs(dy) < 45 && sess) {
+      const q = QBYID[sess.queue[sess.i]];
+      if (q && sess.answered[q.id] != null && dx < 0) nextQ();
+    }
+  };
+}
+
 boot();
