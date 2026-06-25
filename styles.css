@@ -260,4 +260,69 @@ mark{background:#fcefb4;color:#1c1407;padding:0 2px;border-radius:3px}
 .empty .em{font-size:2.4rem}
 .skel{height:90px;border-radius:var(--r);margin-bottom:12px;background:linear-gradient(90deg,var(--surface-2) 25%,var(--line) 37%,var(--surface-2) 63%);background-size:400% 100%;animation:sh 1.3s infinite}
 @keyframes sh{0%{background-position:100% 0}100%{background-position:0 0}}
+/* ============================================================
+   Visuels de cours (tableaux, schémas, chiffres, mini-quiz)
+   ============================================================ */
+.vis{margin:16px 0;font-family:var(--sans)}
+.vtitle{font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--ink);margin:0 0 8px;display:flex;align-items:center;gap:7px}
+.vtitle .ic{font-size:1.05rem}
+.vintro{font-size:.86rem;color:var(--ink-soft);margin:-4px 0 8px}
+
+/* tableau comparatif */
+.ctable-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--line)}
+table.ctable{border-collapse:collapse;width:100%;min-width:320px;font-size:.9rem;background:var(--surface)}
+table.ctable th{background:var(--brand);color:var(--on-brand);font-weight:600;text-align:left;padding:10px 12px;font-family:var(--serif)}
+table.ctable th:first-child{border-top-left-radius:11px}
+table.ctable th:last-child{border-top-right-radius:11px}
+table.ctable td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top;line-height:1.4}
+table.ctable td:first-child{font-weight:600;color:var(--ink);background:var(--surface-2)}
+table.ctable tr:nth-child(even) td{background:var(--surface-2)}
+table.ctable tr:nth-child(even) td:first-child{filter:brightness(.97)}
+
+/* flow / timeline (étapes) */
+.vflow{position:relative;padding-left:6px}
+.vstep{position:relative;padding:0 0 12px 40px;cursor:pointer}
+.vstep:before{content:'';position:absolute;left:15px;top:26px;bottom:-2px;width:2px;background:var(--line)}
+.vstep:last-child:before{display:none}
+.vstep .n{position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--brand);color:var(--on-brand);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem}
+.vflow.tl .vstep .n{background:var(--or);color:#1c1407}
+.vstep .st{font-weight:600;padding-top:4px}
+.vstep .sd{font-size:.86rem;color:var(--ink-soft);margin-top:3px;max-height:0;overflow:hidden;transition:max-height .25s}
+.vstep.open .sd{max-height:200px}
+.vstep .more{font-size:.72rem;color:var(--or);font-weight:700}
+
+/* pyramide / niveaux */
+.vpyr{display:flex;flex-direction:column;gap:6px;align-items:center}
+.vlevel{background:var(--brand);color:var(--on-brand);border-radius:10px;padding:10px 14px;text-align:center;cursor:pointer;width:100%}
+.vpyr .vlevel:nth-child(1){width:72%;background:var(--or);color:#1c1407}
+.vpyr .vlevel:nth-child(2){width:86%}
+.vpyr .vlevel:nth-child(3){width:100%}
+.vpyr.up .vlevel:nth-child(1){width:100%} .vpyr.up .vlevel:nth-child(2){width:86%} .vpyr.up .vlevel:nth-child(3){width:72%}
+.vlevel .lt{font-weight:700;font-size:.95rem}
+.vlevel .ld{font-size:.8rem;opacity:.85;margin-top:2px;max-height:0;overflow:hidden;transition:max-height .25s}
+.vlevel.open .ld{max-height:160px}
+
+/* cycle (svg) */
+.vcycle{width:100%;max-width:340px;margin:0 auto;display:block}
+.vcycle text{font-family:var(--sans)}
+
+/* bignum */
+.vbig{display:flex;align-items:center;gap:14px;background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.vbig .num{font-family:var(--serif);font-size:2.2rem;font-weight:700;color:var(--or);line-height:1;min-width:auto}
+.vbig .nl{font-size:.92rem;color:var(--ink)}
+
+/* mini-quiz teste-toi */
+.selftest{background:var(--surface);border:1.5px dashed var(--or);border-radius:14px;padding:13px 14px;margin:16px 0}
+.selftest .stq{font-weight:600;margin-bottom:10px;display:flex;gap:7px}
+.selftest .stq .ic{color:var(--or)}
+.selftest .sopt{display:flex;gap:8px;width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:11px;margin-bottom:7px;cursor:pointer;font-size:.92rem;line-height:1.35;align-items:flex-start}
+.selftest .sopt .let{font-weight:700;color:var(--ink-soft)}
+.selftest .sopt.good{border-color:var(--vert);background:var(--vert-bg)}
+.selftest .sopt.bad{border-color:var(--rouge);background:var(--rouge-bg)}
+.selftest .sopt[disabled]{cursor:default}
+.selftest .sexpl{font-size:.86rem;line-height:1.45;margin-top:6px}
+.selftest .sexpl .ok{color:var(--vert);font-weight:700}
+.selftest .sexpl .ko{color:var(--rouge);font-weight:700}
+.selftest .sfoot{display:flex;gap:8px;margin-top:8px}
+
 @media (min-width:620px){ main#view{padding-bottom:80px} }

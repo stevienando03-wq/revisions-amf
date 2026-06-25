@@ -41,7 +41,7 @@ function applyTheme() {
 }
 
 /* ---------- Contenu ---------- */
-let C = null, QBYID = {}, QBYMOD = {}, MOD = {}, FLASH = [], READTIME = {};
+let C = null, QBYID = {}, QBYMOD = {}, MOD = {}, FLASH = [], READTIME = {}, VIS_BY_SEC = {}, QCM_BY_SEC = {};
 function boot() {
   applyTheme();
   fetch('content.json', { cache: 'no-cache' })
@@ -50,14 +50,16 @@ function boot() {
     .catch(() => { $('#view').innerHTML = '<div class="card"><b>Impossible de charger le contenu.</b></div>'; });
 }
 function indexContent() {
-  QBYID = {}; QBYMOD = {}; MOD = {}; FLASH = []; READTIME = {};
+  QBYID = {}; QBYMOD = {}; MOD = {}; FLASH = []; READTIME = {}; VIS_BY_SEC = {}; QCM_BY_SEC = {};
   C.modules.forEach(m => {
     MOD[m.id] = m; QBYMOD[m.id] = [];
     (m.qcm || []).forEach((q, i) => {
       q.id = q.id || (m.id + '-q' + i); q.module = m.id; q.modnum = m.num;
       q.correct = (q.options || []).findIndex(o => o.correcte);
       QBYID[q.id] = q; QBYMOD[m.id].push(q);
+      if (q.ancre) (QCM_BY_SEC[q.ancre] = QCM_BY_SEC[q.ancre] || []).push(q);
     });
+    (m.visuals || []).forEach(b => { if (b.ancre) (VIS_BY_SEC[b.ancre] = VIS_BY_SEC[b.ancre] || []).push(b); });
     (m.essentiel && m.essentiel.a_retenir || []).forEach((t, i) =>
       FLASH.push({ id: m.id + '-r' + i, mid: m.id, modnum: m.num, text: t }));
     let words = 0;
@@ -274,6 +276,8 @@ function vComplet(m) {
     (s.points || []).forEach(p => html += `<p>${esc(p)}</p>`);
     if ((s.chiffres || []).length) html += `<div class="bloc chiffres"><div class="h">🔢 Chiffres-clés</div><ul>${s.chiffres.map(c => '<li>' + esc(c) + '</li>').join('')}</ul></div>`;
     if ((s.pieges || []).length) html += `<div class="bloc pieges"><div class="h">⚠️ Pièges</div><ul>${s.pieges.map(c => '<li>' + esc(c) + '</li>').join('')}</ul></div>`;
+    (VIS_BY_SEC[s.id] || []).forEach(b => html += renderVisual(b));
+    html += sectionQuiz(s.id);
     html += `</section>`;
   });
   html += `</div>`;
@@ -289,9 +293,81 @@ function bindModule(mid, tab, anchor) {
     window.removeEventListener('scroll', window._rs || (() => {})); window._rs = onScroll; window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
     const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { const sid = en.target.dataset.sid; if (sid) { S.read[sid] = 1; S.pos[mid] = sid; save(); } } }), { threshold: .5 });
     document.querySelectorAll('section[data-sid]').forEach(s => io.observe(s));
+    enhanceVisuals();
     if (anchor) { const el = document.getElementById(anchor); if (el) setTimeout(() => el.scrollIntoView(), 80); }
   }
 }
+
+/* ============================================================ VISUELS DE COURS */
+function renderVisual(b) {
+  let inner = '';
+  if (b.type === 'compare') inner = visCompare(b);
+  else if (b.type === 'flow' || b.type === 'timeline') inner = visFlow(b, b.type === 'timeline');
+  else if (b.type === 'pyramid') inner = visPyramid(b);
+  else if (b.type === 'cycle') inner = visCycle(b);
+  else if (b.type === 'bignum') inner = visBig(b);
+  else return '';
+  if (!inner) return '';
+  const icon = { compare: '⚖️', flow: '🔀', timeline: '🧭', pyramid: '🔺', cycle: '🔄', bignum: '🔢' }[b.type] || '▦';
+  return `<div class="vis"><div class="vtitle"><span class="ic">${icon}</span>${esc(b.titre || '')}</div>${b.intro ? `<div class="vintro">${esc(b.intro)}</div>` : ''}${inner}</div>`;
+}
+function visCompare(b) {
+  const heads = b.headers || [], rows = b.rows || [];
+  if (heads.length < 2 || !rows.length) return '';
+  let h = `<div class="ctable-wrap"><table class="ctable"><thead><tr>${heads.map(x => `<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>`;
+  rows.forEach(r => { const c = r.cells || []; h += `<tr>${heads.map((_, i) => `<td>${esc(c[i] || '')}</td>`).join('')}</tr>`; });
+  return h + `</tbody></table></div>`;
+}
+function visFlow(b, isTL) {
+  const steps = b.steps || []; if (!steps.length) return '';
+  return `<div class="vflow ${isTL ? 'tl' : ''}">${steps.map((s, i) => `<div class="vstep" onclick="this.classList.toggle('open')"><div class="n">${i + 1}</div><div class="st">${esc(s.t)}${s.d ? ' <span class="more">détail ›</span>' : ''}</div>${s.d ? `<div class="sd">${esc(s.d)}</div>` : ''}</div>`).join('')}</div>`;
+}
+function visPyramid(b) {
+  const lv = b.levels || []; if (!lv.length) return '';
+  return `<div class="vpyr">${lv.map(l => `<div class="vlevel" onclick="this.classList.toggle('open')"><div class="lt">${esc(l.t)}</div>${l.d ? `<div class="ld">${esc(l.d)}</div>` : ''}</div>`).join('')}</div>`;
+}
+function visBig(b) {
+  if (!b.value) return '';
+  return `<div class="vbig"><div class="num" data-to="${esc(b.value)}">${esc(b.value)}</div><div class="nl">${esc(b.note || '')}</div></div>`;
+}
+function visCycle(b) {
+  const steps = b.steps || [], n = steps.length; if (!n) return '';
+  if (n > 6) return visFlow(b, false);
+  const cx = 70, cy = 70, r = 50, pts = [];
+  for (let i = 0; i < n; i++) { const a = -Math.PI / 2 + i * 2 * Math.PI / n; pts.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]); }
+  let path = '', nodes = '';
+  pts.forEach((p, i) => { const q = pts[(i + 1) % n]; path += `<line x1="${p[0].toFixed(0)}" y1="${p[1].toFixed(0)}" x2="${q[0].toFixed(0)}" y2="${q[1].toFixed(0)}" stroke="var(--line)" stroke-width="2"/>`; });
+  pts.forEach((p, i) => { nodes += `<circle cx="${p[0].toFixed(0)}" cy="${p[1].toFixed(0)}" r="14" fill="var(--or)"/><text x="${p[0].toFixed(0)}" y="${(p[1] + 4).toFixed(0)}" text-anchor="middle" font-size="13" font-weight="700" fill="#1c1407">${i + 1}</text>`; });
+  const legend = steps.map((s, i) => `<div style="display:flex;gap:7px;margin:3px 0"><b>${i + 1}.</b><span>${esc(s.t)}${s.d ? ' — ' + esc(s.d) : ''}</span></div>`).join('');
+  return `<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><svg class="vcycle" style="max-width:150px" viewBox="0 0 140 140">${path}${nodes}</svg><div style="flex:1;min-width:170px;font-size:.88rem">${legend}</div></div>`;
+}
+function enhanceVisuals() {
+  // chiffres-clés animés (les blocs sont visibles par défaut via CSS)
+  document.querySelectorAll('.vbig .num').forEach(num => {
+    if (num._done) return; const m = String(num.dataset.to || '').match(/^(\d[\d  ]*)/);
+    if (m) { num._done = 1; const n = parseInt(m[1].replace(/\s/g, ''), 10); if (!isNaN(n) && n > 0) animateCount(num, n, num.dataset.to.slice(m[1].length)); }
+  });
+}
+/* mini-quiz "teste-toi" intégré au cours */
+let stIdx = {};
+function sectionQuiz(sid) {
+  const pool = QCM_BY_SEC[sid] || []; if (!pool.length) return '';
+  const q = pool[(stIdx[sid] || 0) % pool.length];
+  let h = `<div class="selftest" id="st-${sid}"><div class="stq"><span class="ic">🧠</span><span>Teste-toi : ${esc(q.enonce)}</span></div>`;
+  q.options.forEach((o, i) => h += `<button class="sopt" onclick="stAns('${sid}','${q.id}',${i},this)"><span class="let">${letters(i)}</span><span>${esc(o.texte)}</span></button>`);
+  h += `<div class="sfoot"></div></div>`;
+  return h;
+}
+window.stAns = function (sid, qid, idx, btn) {
+  const q = QBYID[qid], card = document.getElementById('st-' + sid); if (!card) return;
+  card.querySelectorAll('.sopt').forEach((b, i) => { b.setAttribute('disabled', ''); if (i === q.correct) b.classList.add('good'); else if (i === idx) b.classList.add('bad'); });
+  const correct = idx === q.correct; recordAnswer(qid, correct); haptic(correct ? 16 : [10, 30, 10]);
+  const pool = QCM_BY_SEC[sid] || [];
+  card.querySelector('.sfoot').innerHTML =
+    `<div class="sexpl"><span class="${correct ? 'ok' : 'ko'}">${correct ? 'Juste !' : 'Raté.'}</span> ${esc(q.options[q.correct].justif)}</div>` +
+    (pool.length > 1 ? `<div style="margin-top:8px"><button class="btn ghost sm" style="width:auto" onclick="stNext('${sid}')">Autre question ›</button></div>` : '');
+};
+window.stNext = function (sid) { stIdx[sid] = (stIdx[sid] || 0) + 1; const c = document.getElementById('st-' + sid); if (c) c.outerHTML = sectionQuiz(sid); };
 
 /* ============================================================ ENTRAÎNEMENT */
 function shortNom(n) { return n.length > 24 ? n.slice(0, 23) + '…' : n; }
