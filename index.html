@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14213D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Révision AMF">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.json">
+<title>Révision Certification AMF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="ttl">Révision AMF</div>
+  <button id="btn-search" aria-label="Recherche">🔍</button>
+  <button id="btn-reset" aria-label="Réinitialiser">Réinit.</button>
+</header>
+
+<main id="view"><div class="card">Chargement…</div></main>
+
+<nav class="tabs">
+  <a href="#/accueil" data-tab="accueil"><span class="ic">🏠</span>Accueil</a>
+  <a href="#/cours" data-tab="cours"><span class="ic">📖</span>Cours</a>
+  <a href="#/entrainement" data-tab="entrainement"><span class="ic">🎯</span>Entraînement</a>
+</nav>
+
+<script src="app.js"></script>
+</body>
+</html>
