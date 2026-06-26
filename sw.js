@@ -1,5 +1,5 @@
 /* Service worker — AMF Révision. Offline-first après 1er chargement. */
-const CACHE = 'amf-rev-v3';
+const CACHE = 'amf-rev-v4';
 const CORE = [
   './',
   './index.html',

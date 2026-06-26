@@ -55,7 +55,8 @@ function indexContent() {
     MOD[m.id] = m; QBYMOD[m.id] = [];
     (m.qcm || []).forEach((q, i) => {
       q.id = q.id || (m.id + '-q' + i); q.module = m.id; q.modnum = m.num;
-      q.correct = (q.options || []).findIndex(o => o.correcte);
+      q.options = shuffle(q.options || []); // mélange les positions à chaque session (anti-biais "toujours A")
+      q.correct = q.options.findIndex(o => o.correcte);
       QBYID[q.id] = q; QBYMOD[m.id].push(q);
       if (q.ancre) (QCM_BY_SEC[q.ancre] = QCM_BY_SEC[q.ancre] || []).push(q);
     });
