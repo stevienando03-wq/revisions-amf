@@ -1,0 +1,408 @@
+{
+ "id": "m12",
+ "fiches": [
+  {
+   "id": "m12-f1",
+   "theme": "Bilan — la photographie",
+   "recto": "Bilan vs compte de résultat : photo ou film ?",
+   "verso": [
+    "Bilan = PHOTOGRAPHIE du patrimoine à une date (cumul depuis la création)",
+    "Compte de résultat = FILM/baromètre d'un exercice (souvent 12 mois, ignore les exercices passés)",
+    "Patrimoine = ce qu'on POSSÈDE − ce qu'on DOIT"
+   ],
+   "chiffres": ["Exercice = souvent 12 mois", "TOTAL actif = TOTAL passif"],
+   "visuel": {
+    "type": "compare",
+    "titre": "Les 2 états de synthèse",
+    "headers": ["", "BILAN", "CPTE RÉSULTAT"],
+    "rows": [
+     {"cells": ["Image", "Photo (instant)", "Film (exercice)"]},
+     {"cells": ["Période", "Depuis création", "Exercice seul"]},
+     {"cells": ["Contenu", "Actif / Passif", "Produits / Charges"]}
+    ]
+   }
+  },
+  {
+   "id": "m12-f2",
+   "theme": "Bilan — structure",
+   "recto": "Actif et passif : c'est quoi, et de quel côté ?",
+   "verso": [
+    "ACTIF (gauche) = ce qu'on possède = valeur économique POSITIVE",
+    "PASSIF (droite) = ce qu'on doit = valeur économique NÉGATIVE",
+    "Actif : immobilisé puis circulant (stocks, créances, dispo)",
+    "Passif : capitaux propres puis provisions puis dettes"
+   ],
+   "chiffres": ["Actif = positif", "Passif = négatif", "TOTAL actif = TOTAL passif"]
+  },
+  {
+   "id": "m12-f3",
+   "theme": "Bilan — classement (PIÈGE)",
+   "recto": "Dans quel ordre classe-t-on actif et passif ?",
+   "verso": [
+    "ACTIF → par LIQUIDITÉ croissante (la trésorerie/dispo tout en bas)",
+    "PASSIF → par EXIGIBILITÉ croissante (capitaux propres en haut, dettes en bas)",
+    "Piège QCM n°1 : on inverse les deux mots !"
+   ],
+   "visuel": {
+    "type": "compare",
+    "titre": "Mémo anti-inversion",
+    "headers": ["Côté", "Critère", "Définition"],
+    "rows": [
+     {"cells": ["ACTIF", "Liquidité ↑", "vitesse à devenir cash"]},
+     {"cells": ["PASSIF", "Exigibilité ↑", "proximité de l'échéance"]}
+    ]
+   }
+  },
+  {
+   "id": "m12-f4",
+   "theme": "Compte de résultat — produits & charges",
+   "recto": "Produits vs charges : qui crée la richesse ?",
+   "verso": [
+    "PRODUITS = ressources DÉFINITIVEMENT acquises (CA, ventes) → CRÉENT la richesse",
+    "CHARGES = biens/services CONSOMMÉS (achats, salaires, dotations) → la DÉTRUISENT",
+    "3 niveaux : exploitation, financier, exceptionnel"
+   ]
+  },
+  {
+   "id": "m12-f5",
+   "theme": "Compte de résultat — le résultat net",
+   "recto": "Formule du résultat net (à connaître par cœur)",
+   "verso": [
+    "= R. exploitation + R. financier + R. exceptionnel − IS − participation salariés",
+    "= Total produits − Total charges",
+    "Positif = bénéfice / négatif = perte",
+    "Figure À LA FOIS au bilan (capitaux propres) ET au compte de résultat"
+   ],
+   "visuel": {
+    "type": "flow",
+    "titre": "Du résultat brut au net",
+    "steps": [
+     {"t": "Σ des 3 résultats", "d": "exploit. + fin. + except."},
+     {"t": "− IS", "d": "impôt sur les bénéfices"},
+     {"t": "− participation", "d": "des salariés"},
+     {"t": "= Résultat net", "d": "bénéfice ou perte"}
+    ]
+   }
+  },
+  {
+   "id": "m12-f6",
+   "theme": "Comptabilité — partie double",
+   "recto": "Le principe fondateur de la comptabilité",
+   "verso": [
+    "PARTIE DOUBLE : tout flux a un débit ET un crédit (sa contrepartie)",
+    "Total DÉBIT = Total CRÉDIT, toujours (jamais un hasard)",
+    "« Tout emploi suppose une ressource »"
+   ],
+   "chiffres": ["Ex : machine 7 000 € + voiture 3 000 € = 10 000 € (crédit banque)"]
+  },
+  {
+   "id": "m12-f7",
+   "theme": "Comptabilité — vocabulaire (PIÈGE)",
+   "recto": "Solvabilité ≠ Rentabilité",
+   "verso": [
+    "SOLVABILITÉ = capacité à PAYER ses dettes",
+    "RENTABILITÉ = capacité à DÉGAGER du bénéfice",
+    "Confusion classique en QCM : ne pas les mélanger"
+   ]
+  },
+  {
+   "id": "m12-f8",
+   "theme": "Documents de synthèse",
+   "recto": "Que contiennent les COMPTES ANNUELS ?",
+   "verso": [
+    "Bilan + Compte de résultat + Annexes = un TOUT indissociable",
+    "L'annexe est OBLIGATOIRE et inséparable",
+    "PIÈGE : la balance générale n'en fait PAS partie"
+   ],
+   "visuel": {
+    "type": "bignum",
+    "titre": "Comptes annuels",
+    "value": "3",
+    "note": "éléments : bilan + compte de résultat + annexes (PAS la balance)"
+   }
+  },
+  {
+   "id": "m12-f9",
+   "theme": "Documents — comptabilité de trésorerie",
+   "recto": "Seuils de la comptabilité de trésorerie (encaissements/dépenses)",
+   "verso": [
+    "BIENS : CA entre 76 300 € et 763 000 €",
+    "SERVICES : CA entre 27 000 € et 230 000 €",
+    "PIÈGE : ne pas inverser biens / services"
+   ],
+   "chiffres": ["Biens : 76 300 – 763 000 €", "Services : 27 000 – 230 000 €"]
+  },
+  {
+   "id": "m12-f10",
+   "theme": "Les 8 principes comptables",
+   "recto": "Cite les 8 principes comptables",
+   "verso": [
+    "Régularité, Sincérité, Permanence des méthodes, Non-compensation",
+    "Prudence, Coûts historiques, Continuité d'exploitation, Indépendance des exercices"
+   ],
+   "chiffres": ["8 principes au total"],
+   "visuel": {
+    "type": "pyramid",
+    "titre": "Pièges classiques sur les principes",
+    "levels": [
+     {"t": "PRUDENCE", "d": "moins-values latentes OUI, plus-values latentes NON"},
+     {"t": "Régularité ≠ Sincérité", "d": "règles (objectif) vs bonne foi"},
+     {"t": "Continuité non respectée", "d": "→ valeur LIQUIDATIVE"},
+     {"t": "Non-compensation", "d": "créance ne masque jamais une dette"}
+    ]
+   }
+  },
+  {
+   "id": "m12-f11",
+   "theme": "Analyse financière — soldes (SIG)",
+   "recto": "Marge commerciale, VA, EBE : les formules",
+   "verso": [
+    "Marge commerciale = Ventes HT − coût d'achat HT des marchandises vendues",
+    "VA = Production − Consommation (richesse BRUTE)",
+    "EBE = VA − charges de personnel − impôts − taxes"
+   ],
+   "visuel": {
+    "type": "flow",
+    "titre": "Cascade des soldes",
+    "steps": [
+     {"t": "Marge commerciale", "d": "Ventes HT − coût d'achat"},
+     {"t": "VA", "d": "Production − Consommation"},
+     {"t": "EBE", "d": "VA − personnel − impôts − taxes"}
+    ]
+   }
+  },
+  {
+   "id": "m12-f12",
+   "theme": "Analyse financière — ratios",
+   "recto": "ROE et autonomie financière",
+   "verso": [
+    "ROE = Résultat net / Capitaux propres (= rentabilité FINANCIÈRE)",
+    "Autonomie financière = Capitaux propres / Dettes",
+    "CAF = ressources internes pour s'autofinancer",
+    "PIÈGE : profit warning obligatoire à la HAUSSE comme à la BAISSE"
+   ],
+   "chiffres": ["ROE = RN / CP", "Autonomie = CP / Dettes"]
+  },
+  {
+   "id": "m12-f13",
+   "theme": "Obligations des sociétés cotées",
+   "recto": "Délais de publication et conservation des documents",
+   "verso": [
+    "Rapport SEMESTRIEL : sous 3 mois",
+    "Rapport ANNUEL : sous 4 mois",
+    "Conservation des documents : au moins 10 ANS après clôture",
+    "Document de référence = FACULTATIF",
+    "Comptes des sociétés cotées certifiés par commissaire aux comptes"
+   ],
+   "chiffres": ["Semestriel = 3 mois", "Annuel = 4 mois", "Conservation = 10 ans"],
+   "visuel": {
+    "type": "compare",
+    "titre": "Ne pas inverser les délais",
+    "headers": ["Rapport", "Délai"],
+    "rows": [
+     {"cells": ["Semestriel", "3 mois"]},
+     {"cells": ["Annuel", "4 mois"]}
+    ]
+   }
+  },
+  {
+   "id": "m12-f14",
+   "theme": "Visa AMF & catégories d'activité",
+   "recto": "Que garantit le VISA de l'AMF ? Et BIC/BNC/BA ?",
+   "verso": [
+    "Visa AMF = atteste la MISE À DISPOSITION des infos au public",
+    "PIÈGE : il ne juge PAS l'opportunité/la qualité de l'investissement",
+    "BIC / BNC / BA = critère NATURE de l'activité",
+    "Micro / PME / Grande entreprise = critère TAILLE"
+   ]
+  },
+  {
+   "id": "m12-f15",
+   "theme": "Franchissements de seuils",
+   "recto": "Seuils, délai et déclaration d'intention",
+   "verso": [
+    "Seuils : 5 %, 10 %, 15 %, 20 %, 25 %, 30 %... (capital OU droits de vote)",
+    "Déclaration à l'AMF au plus tard le 4e JOUR DE NÉGOCIATION",
+    "Déclaration d'INTENTION dès 10 % (objectifs sur 6 mois)",
+    "Joue à la HAUSSE comme à la BAISSE"
+   ],
+   "chiffres": ["1er seuil = 5 %", "Délai = 4e jour de négociation", "Intention = dès 10 %"],
+   "visuel": {
+    "type": "bignum",
+    "titre": "Sanction non-déclaration (hausse)",
+    "value": "2 ans",
+    "note": "privation de droit de vote, après la régularisation"
+   }
+  },
+  {
+   "id": "m12-f16",
+   "theme": "Fiscalité — recettes & impôt vs taxe",
+   "recto": "Top 3 des recettes de l'État + impôt ≠ taxe",
+   "verso": [
+    "Ordre des recettes : 1) TVA, 2) IR (=IRPP), 3) IS",
+    "PIÈGE : la 1re recette est la TVA, PAS l'IR",
+    "Donation/héritage : ni IR, mais droits de mutation et de succession"
+   ],
+   "chiffres": ["1) TVA  2) IR  3) IS"],
+   "visuel": {
+    "type": "pyramid",
+    "titre": "Recettes budgétaires de l'État",
+    "levels": [
+     {"t": "1. TVA", "d": "1re source"},
+     {"t": "2. IR / IRPP", "d": "2e source"},
+     {"t": "3. IS", "d": "3e source"}
+    ]
+   }
+  },
+  {
+   "id": "m12-f17",
+   "theme": "Impôt sur le revenu (IR)",
+   "recto": "Barème progressif, taux marginal, abattement",
+   "verso": [
+    "IR = barème PROGRESSIF par tranches (le taux marginal ne frappe que la DERNIÈRE tranche)",
+    "Taux marginal MAXIMAL = 45 %",
+    "Abattement forfaitaire salaires = 10 % (à défaut de frais réels)"
+   ],
+   "chiffres": ["Tranches : 0 % / 11 % / 30 % / 41 % / 45 %", "Marginal max = 45 %", "Abattement = 10 %"],
+   "verif": "✓ Vérifié — barème IR : taux marginal max 45 % (impots.gouv 2025)"
+  },
+  {
+   "id": "m12-f18",
+   "theme": "Foyer fiscal & quotient familial",
+   "recto": "Quotient familial : formule et parts",
+   "verso": [
+    "QF = revenu net imposable du foyer ÷ nombre de PARTS",
+    "Couple marié/pacsé = 2 parts ; + 3 enfants = 4 parts",
+    "Plus de parts → QF plus bas → taux marginal plus bas → moins d'impôt"
+   ],
+   "chiffres": ["Couple = 2 parts", "Couple + 3 enfants = 4 parts", "Ex : 100 000 € / 4 = QF 25 000 €"]
+  },
+  {
+   "id": "m12-f19",
+   "theme": "Plafonds fiscaux (PIÈGE double)",
+   "recto": "Niches fiscales vs plafonnement global : ne pas confondre",
+   "verso": [
+    "Niches fiscales (avantages) : plafond 10 000 € / foyer (depuis 2013)",
+    "Pression fiscale totale : ≤ 75 % des revenus nets imposables",
+    "L'un est un MONTANT (€), l'autre un POURCENTAGE"
+   ],
+   "chiffres": ["Niches = 10 000 €", "Plafond global = 75 %"],
+   "verif": "✓ Vérifié — plafond niches 10 000 € maintenu (economie.gouv 2025-2026)"
+  },
+  {
+   "id": "m12-f20",
+   "theme": "Prélèvements sociaux",
+   "recto": "CSG, CRDS : assiette et exonérations",
+   "verso": [
+    "CSG = Contribution Sociale Généralisée ; CRDS = remboursement de la dette sociale",
+    "CSG sur le BRUT (activité/financiers), sur le NET (revenus fonciers)",
+    "Exonérés : Livret A et assimilés, PEL"
+   ]
+  },
+  {
+   "id": "m12-f21",
+   "theme": "IFI (ex-ISF)",
+   "recto": "Impôt sur la Fortune Immobilière : seuils et assiette",
+   "verso": [
+    "Remplace l'ISF depuis JANVIER 2018 ; porte UNIQUEMENT sur l'immobilier net au 1er janvier",
+    "Assujetti si patrimoine > 1 300 000 € ; barème calculé dès 800 000 € (double seuil)",
+    "EXCLUES : assurance-vie, comptes-titres, PEA (valeurs mobilières)"
+   ],
+   "chiffres": ["Assujetti > 1 300 000 €", "Barème dès 800 000 €", "Depuis janvier 2018"],
+   "visuel": {
+    "type": "compare",
+    "titre": "Le double seuil (piège)",
+    "headers": ["Seuil", "Rôle"],
+    "rows": [
+     {"cells": ["1 300 000 €", "déclenche l'assujettissement"]},
+     {"cells": ["800 000 €", "début du calcul du barème"]}
+    ]
+   },
+   "verif": "✓ Vérifié — seuil 1 300 000 € / barème dès 800 000 € (service-public 2025-2026)"
+  },
+  {
+   "id": "m12-f22",
+   "theme": "PFU / Flat tax (30 %)",
+   "recto": "Imposition des valeurs mobilières : le PFU",
+   "verso": [
+    "PFU = 30 % = 12,8 % (IR) + 17,2 % (prélèvements sociaux)",
+    "Prélevé À LA SOURCE, NON libératoire (simple avance d'IR)",
+    "Option possible pour le barème progressif de l'IR"
+   ],
+   "chiffres": ["30 % = 12,8 % + 17,2 %", "Part IR = 12,8 %"],
+   "visuel": {
+    "type": "bignum",
+    "titre": "Flat tax",
+    "value": "30 %",
+    "note": "12,8 % IR + 17,2 % prélèv. sociaux — non libératoire"
+   },
+   "verif": "✓ Vérifié — cadre AMF 30 % (12,8 + 17,2). NB hors-programme : depuis 01/2026 la CSG +1,2 pt porte les prélèv. sociaux à 18,6 % → PFU réel 31,4 %. Pour l'exam, retenir 30 % / 17,2 %."
+  },
+  {
+   "id": "m12-f23",
+   "theme": "Assurance-vie",
+   "recto": "Assurance-vie : dates et abattements clés",
+   "verso": [
+    "Prime pivot : 27 septembre 2017 ; taux forfaitaire 12,8 % (contrat de 5 ans)",
+    "Contrat ≥ 8 ans : abattement ANNUEL de 4 600 € (seul) / 9 200 € (couple)",
+    "Rente viagère : seule une FRACTION est imposée (selon l'âge au 1er versement)"
+   ],
+   "chiffres": ["Pivot = 27/09/2017", "≥ 8 ans : 4 600 € seul / 9 200 € couple", "Taux 12,8 % (5 ans)"]
+  },
+  {
+   "id": "m12-f24",
+   "theme": "PEA",
+   "recto": "Plan d'Épargne en Actions : la règle des 5 ans",
+   "verso": [
+    "Exonération d'IR acquise après AU MOINS 5 ans de détention",
+    "Avant 5 ans : régime des plus-values mobilières",
+    "PIÈGE : 5 ans (PEA) ≠ 8 ans (abattement majoré assurance-vie)"
+   ],
+   "chiffres": ["Exonération IR = 5 ans", "Plafond versements = 150 000 €"],
+   "verif": "✓ Vérifié — exonération IR après 5 ans ; plafond 150 000 € (PEA-PME 225 000 €) ; prélèvements sociaux toujours dus (service-public 2025-2026)"
+  },
+  {
+   "id": "m12-f25",
+   "theme": "TTF & moins-values",
+   "recto": "Taxe sur les transactions financières + report des moins-values",
+   "verso": [
+    "TTF : titres de CAPITAL cotés, société FRANÇAISE, capitalisation > 1 milliard € (cumulatif)",
+    "Moins-values : imputables seulement sur plus-values de MÊME nature, report 10 ans (art. 150-0 CGI)"
+   ],
+   "chiffres": ["TTF : capitalisation > 1 Md €", "Report moins-values = 10 ans"],
+   "verif": "✓ Vérifié — ATTENTION : taux TTF relevé de 0,3 % à 0,4 % depuis le 1er avril 2025 (legifiscal). Le cours AMF dit encore 0,3 % : si l'énoncé date d'avant 2025 → 0,3 %, sinon → 0,4 %. Seuil 1 Md € inchangé."
+  },
+  {
+   "id": "m12-f26",
+   "theme": "IS — sociétés de capitaux",
+   "recto": "Qui paie l'IS et comment ?",
+   "verso": [
+    "Sociétés de CAPITAUX : SA, SAS, SARL, SCA, SEL → IS de droit",
+    "La SA = IS de PLEIN DROIT, sans option",
+    "Bénéfice imposable = résultat comptable APRÈS réintégrations/déductions",
+    "Acomptes TRIMESTRIELS (4/an) au comptable public, sur le dernier exercice clos"
+   ],
+   "chiffres": ["3 impôts sociétés : CET, TVA, bénéfices", "IS = 4 acomptes trimestriels"]
+  },
+  {
+   "id": "m12-f27",
+   "theme": "IR/IS — option (PIÈGE)",
+   "recto": "Sociétés de personnes : IR par défaut, et les options",
+   "verso": [
+    "EIRL, EURL (associé pers. physique), SNC = IR par défaut, OPTION possible vers l'IS",
+    "SASU = société à l'IS qui peut OPTER vers l'IR (sens inverse)",
+    "SA = AUCUNE option (IS forcé)"
+   ],
+   "visuel": {
+    "type": "compare",
+    "titre": "Sens des options fiscales",
+    "headers": ["Structure", "Défaut", "Option"],
+    "rows": [
+     {"cells": ["EURL / SNC / EIRL", "IR", "→ IS"]},
+     {"cells": ["SASU", "IS", "→ IR"]},
+     {"cells": ["SA", "IS", "aucune"]}
+    ]
+   }
+  }
+ ]
+}

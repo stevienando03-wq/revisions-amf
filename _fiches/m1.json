@@ -1,0 +1,439 @@
+{
+  "id": "m1",
+  "fiches": [
+    {
+      "id": "m1-f1",
+      "theme": "AMF — statut & fondement",
+      "recto": "L'AMF, c'est quel statut et quel texte la fonde ?",
+      "verso": [
+        "Statut : autorité PUBLIQUE et indépendante",
+        "Fondement : le CMF (Code Monétaire et Financier)",
+        "Le RG (Règlement Général) est ce qu'elle ÉDICTE, pas son fondement"
+      ],
+      "chiffres": ["2e autorité de référence (avec l'ACPR)"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Statuts : ne JAMAIS inverser",
+        "headers": ["", "AMF", "ACPR"],
+        "rows": [
+          { "cells": ["Statut", "PUBLIQUE indépendante", "ADMINISTRATIVE indép."] },
+          { "cells": ["Adossée à BdF ?", "Non", "Oui"] },
+          { "cells": ["Rôle", "Marchés / épargne / info", "Prudentiel banque-assurance"] }
+        ]
+      },
+      "verif": "✓ Vérifié — modèle 'twin peaks' AMF/ACPR (amf-france.org, acpr.banque-france.fr)"
+    },
+    {
+      "id": "m1-f2",
+      "theme": "AMF — statut & fondement",
+      "recto": "Le triptyque des missions de l'AMF ?",
+      "verso": [
+        "Bon FONCTIONNEMENT des marchés financiers",
+        "Protection de l'ÉPARGNE investie",
+        "Qualité de l'INFORMATION aux investisseurs"
+      ],
+      "chiffres": ["3 mots-clés : marchés / épargne / information"]
+    },
+    {
+      "id": "m1-f3",
+      "theme": "AMF — agréments OPC & CIF",
+      "recto": "AGRÉER ou APPROUVER ? (gestion pour compte de tiers)",
+      "verso": [
+        "SGP gérant OPCVM/FIA → AGRÉMENT",
+        "Autre PSI gérant à titre ACCESSOIRE → APPROBATION du programme d'activité",
+        "L'AMF AUTORISE la création des OPCVM/FIA et les surveille à vie"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Agréer vs approuver",
+        "headers": ["Acteur", "Acte AMF"],
+        "rows": [
+          { "cells": ["SGP (OPCVM/FIA)", "AGRÉMENT"] },
+          { "cells": ["PSI gestion accessoire", "APPROBATION programme"] },
+          { "cells": ["CIF", "AGRÉMENT (mais PAS un PSI)"] }
+        ]
+      }
+    },
+    {
+      "id": "m1-f4",
+      "theme": "AMF — agréments OPC & CIF",
+      "recto": "Le CIF est-il un PSI ? Qui le régule ?",
+      "verso": [
+        "NON, le CIF n'est PAS un PSI (piège ultra-fréquent)",
+        "Son activité = conseil en investissement",
+        "Mais il est AGRÉÉ, surveillé, contrôlé et sanctionné par l'AMF"
+      ]
+    },
+    {
+      "id": "m1-f5",
+      "theme": "AMF — agréments OPC & CIF",
+      "recto": "DICI : qu'est-ce que c'est, à ne pas confondre avec quoi ?",
+      "verso": [
+        "DICI = Document d'Information Clé pour l'Investisseur",
+        "Document clé d'un OPC",
+        "DICI ≠ prospectus (deux documents distincts)"
+      ]
+    },
+    {
+      "id": "m1-f6",
+      "theme": "AMF — surveillance des marchés",
+      "recto": "L'AMF surveille-t-elle le gré à gré (OTC) ?",
+      "verso": [
+        "OUI — quand le sous-jacent est admis sur un marché réglementé ou un SMN organisé",
+        "Ne pas répondre « seulement les marchés réglementés »",
+        "Surveillance quotidienne : titres ET dérivés, indices"
+      ],
+      "chiffres": ["3 plateformes distinctes : marché réglementé / SMN / OTF"]
+    },
+    {
+      "id": "m1-f7",
+      "theme": "AMF — contrôle, enquête, sanction",
+      "recto": "QUI fait QUOI dans la procédure de sanction AMF ?",
+      "verso": [
+        "Secrétaire général → OUVRE l'enquête",
+        "Collège → décide de SAISIR",
+        "Commission des sanctions → SANCTIONNE (sanction publique sauf exceptions)"
+      ],
+      "visuel": {
+        "type": "flow",
+        "titre": "3 organes = 3 rôles",
+        "steps": [
+          { "t": "Secrétaire général", "d": "ouvre l'enquête" },
+          { "t": "Collège", "d": "saisit" },
+          { "t": "Commission des sanctions", "d": "sanctionne" }
+        ]
+      }
+    },
+    {
+      "id": "m1-f8",
+      "theme": "AMF — contrôle, enquête, sanction",
+      "recto": "Délit vs impact limité : que fait l'AMF ?",
+      "verso": [
+        "DÉLIT → transmission au PROCUREUR DE LA RÉPUBLIQUE",
+        "Impact LIMITÉ → composition administrative (transaction)",
+        "Ne pas inverser les deux"
+      ]
+    },
+    {
+      "id": "m1-f9",
+      "theme": "AMF — contrôle, enquête, sanction",
+      "recto": "La médiation de l'AMF : 4 caractéristiques + effet sur la prescription",
+      "verso": [
+        "Gratuite, confidentielle, contradictoire, NON contraignante",
+        "Ouverte à tout intéressé (pro ou non)",
+        "Sa saisine SUSPEND la prescription (ne l'interrompt pas, ne la supprime pas)"
+      ]
+    },
+    {
+      "id": "m1-f10",
+      "theme": "Autorités françaises — ACPR & BdF",
+      "recto": "Partage AMF / ACPR : qui contrôle quoi ?",
+      "verso": [
+        "AMF → marchés + produits/services d'investissement + SOCIÉTÉS DE GESTION (même prudentiel !)",
+        "ACPR → banque + assurance + établissements de crédit + entreprises d'investissement (prudentiel)",
+        "Exception centrale : les SGP relèvent de l'AMF, JAMAIS de l'ACPR"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Prudentiel : qui supervise ?",
+        "headers": ["Entité", "Superviseur"],
+        "rows": [
+          { "cells": ["Banques, ent. d'investissement", "ACPR"] },
+          { "cells": ["Assurances, mutuelles", "ACPR"] },
+          { "cells": ["Sociétés de gestion (SGP)", "AMF (exception)"] }
+        ]
+      },
+      "verif": "✓ Vérifié — répartition AMF/ACPR (acpr.banque-france.fr 2024)"
+    },
+    {
+      "id": "m1-f11",
+      "theme": "Autorités françaises — ACPR & BdF",
+      "recto": "Prudentiel vs conduite des affaires : la différence",
+      "verso": [
+        "PRUDENTIEL = solidité / stabilité des établissements",
+        "CONDUITE DES AFFAIRES = protection du CLIENT (organisation, bonne conduite)",
+        "ACPR = administrative indépendante, ADOSSÉE à la Banque de France"
+      ]
+    },
+    {
+      "id": "m1-f12",
+      "theme": "Autorités françaises — ACPR & BdF",
+      "recto": "Qu'est-ce que la RÉSOLUTION ? (et le FGDR)",
+      "verso": [
+        "Intervention publique AVANT la défaillance (restructurer/liquider de façon ordonnée)",
+        "PAS après faillite = piège",
+        "FGDR = Fonds de Garantie des Dépôts et de Résolution (loi du 25 juin 1999)"
+      ],
+      "chiffres": ["Loi du 25 juin 1999 → création du FGDR"]
+    },
+    {
+      "id": "m1-f13",
+      "theme": "Autorités françaises — Minefi, CCLRF, CCSF",
+      "recto": "CCLRF vs CCSF : qui fait quoi ?",
+      "verso": [
+        "CCLRF = avis sur les TEXTES (bancaire/financier/assurance) SAUF textes de l'AMF",
+        "CCSF = relations établissements ↔ CLIENTÈLE",
+        "Pouvoir réglementaire = le MINISTRE ; le CCLRF est seulement CONSULTATIF"
+      ],
+      "chiffres": ["CCLRF : présidé par le ministre des Finances + 18 AUTRES membres"]
+    },
+    {
+      "id": "m1-f14",
+      "theme": "Autorités françaises — Minefi, CCLRF, CCSF",
+      "recto": "Minefi & Trésor : qui gère la dette de la France ?",
+      "verso": [
+        "L'Agence France Trésor (AFT), au sein du Minefi",
+        "Le Ministre siège au Conseil ECOFIN (vote des lois européennes)",
+        "DGTPE/Trésor conduit la politique économique"
+      ]
+    },
+    {
+      "id": "m1-f15",
+      "theme": "Europe — Lamfalussy & directive/règlement",
+      "recto": "DIRECTIVE vs RÈGLEMENT européen (question quasi certaine)",
+      "verso": [
+        "DIRECTIVE → doit être TRANSPOSÉE en droit national (ex. AMF dans le CMF)",
+        "RÈGLEMENT → s'applique DIRECTEMENT et uniformément, SANS transposition"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Directive vs Règlement",
+        "headers": ["", "Directive", "Règlement"],
+        "rows": [
+          { "cells": ["Transposition", "Obligatoire", "AUCUNE"] },
+          { "cells": ["Application", "Via droit national", "Directe & uniforme"] }
+        ]
+      }
+    },
+    {
+      "id": "m1-f16",
+      "theme": "Europe — Lamfalussy & directive/règlement",
+      "recto": "Les 4 niveaux du processus de Lamfalussy",
+      "verso": [
+        "N1 = législatif : Commission PROPOSE, Parlement + Conseil ADOPTENT",
+        "N2 = mesures d'exécution (comités)",
+        "N3 = application / lignes directrices",
+        "N4 = CONTRÔLE de transposition + procédure d'infraction (la COMMISSION)"
+      ],
+      "visuel": {
+        "type": "pyramid",
+        "titre": "Lamfalussy — 4 niveaux",
+        "levels": [
+          { "t": "Niveau 1", "d": "Législatif : Commission propose, Parlement+Conseil adoptent" },
+          { "t": "Niveau 2", "d": "Mesures d'exécution (comités, ESMA rédige)" },
+          { "t": "Niveau 3", "d": "Application & harmonisation" },
+          { "t": "Niveau 4", "d": "Contrôle transposition + infraction (Commission)" }
+        ]
+      }
+    },
+    {
+      "id": "m1-f17",
+      "theme": "Europe — AES, SESF & CERS",
+      "recto": "Les 3 AES du SESF (qui surveille quoi ?)",
+      "verso": [
+        "ABE / EBA → bancaire",
+        "AEAPP / EIOPA → assurances & pensions",
+        "AEMF / ESMA → marchés financiers",
+        "Elles ont des compétences RÉGLEMENTAIRES (≠ anciens comités N3)"
+      ],
+      "chiffres": ["3 AES, créées en 2011 ; collaborent via le Comité Joint"],
+      "verif": "✓ Vérifié — SESF = EBA + EIOPA + ESMA (fr.wikipedia / esma.europa.eu)"
+    },
+    {
+      "id": "m1-f18",
+      "theme": "Europe — AES, SESF & CERS",
+      "recto": "CERS / ESRB : quel niveau, sous quelle direction ?",
+      "verso": [
+        "MACRO-prudentiel au niveau européen",
+        "Sous la DIRECTION DE LA BCE",
+        "Ce n'est PAS une AES (les AES sont micro/sectorielles)",
+        "Équivalent français = HCSF"
+      ]
+    },
+    {
+      "id": "m1-f19",
+      "theme": "Europe — ESMA & EIOPA",
+      "recto": "ESMA : siège, qui y siège pour la France, pouvoir-choc ?",
+      "verso": [
+        "Siège à PARIS (créée le 01/01/2011)",
+        "Pour la France : le PRÉSIDENT DE L'AMF y siège (pas l'ACPR)",
+        "Intervient aux niveaux 2, 3 et 4",
+        "Peut INTERDIRE un produit pour 3 MOIS"
+      ],
+      "chiffres": ["Paris ; interdiction produit = 3 MOIS"],
+      "verif": "✓ Vérifié — siège Paris, créée 2011, niveaux 2-3-4 (fr.wikipedia ESMA) ; pouvoir d'intervention temporaire MiFIR art. 40"
+    },
+    {
+      "id": "m1-f20",
+      "theme": "Europe — Union bancaire",
+      "recto": "Les 3 PILIERS de l'Union bancaire",
+      "verso": [
+        "MSU = Mécanisme de Supervision Unique (BCE superviseur de référence)",
+        "MRU = Mécanisme de Résolution Unique (Conseil de Résolution Unique, CRU)",
+        "FRU = Fonds de Résolution Unique",
+        "Le SEAD (assurance des dépôts) = PROJET, pas un pilier acquis"
+      ],
+      "visuel": {
+        "type": "pyramid",
+        "titre": "3 piliers (+ projet)",
+        "levels": [
+          { "t": "MSU", "d": "Supervision (BCE)" },
+          { "t": "MRU", "d": "Résolution (CRU)" },
+          { "t": "FRU", "d": "Fonds 55 Mds €" },
+          { "t": "SEAD", "d": "Assurance dépôts = PROJET (24/11/2015)" }
+        ]
+      }
+    },
+    {
+      "id": "m1-f21",
+      "theme": "Europe — Union bancaire",
+      "recto": "Chiffres-chocs de l'Union bancaire",
+      "verso": [
+        "FRU doté de 55 milliards € (≈ 1 % des dépôts couverts)",
+        "Crise déclencheuse : 2010-2014 (périphérie : Portugal, Irlande, Italie, Grèce, Espagne)",
+        "Stress tests TOUS LES ANS"
+      ],
+      "chiffres": ["55 Mds € ≈ 1 % des dépôts couverts", "Crise 2010-2014", "SEAD proposé le 24/11/2015"],
+      "visuel": { "type": "bignum", "titre": "Dotation du FRU", "value": "55 Mds €", "note": "≈ 1 % des dépôts couverts en zone euro" }
+    },
+    {
+      "id": "m1-f22",
+      "theme": "BCE — politique monétaire",
+      "recto": "EUROSYSTÈME vs SEBC (piège n°1)",
+      "verso": [
+        "EUROSYSTÈME = BCE + BCN des SEULS pays de la zone euro (conduit la politique monétaire)",
+        "SEBC = BCE + BCN de TOUS les États de l'UE (même hors euro)",
+        "Conseil des gouverneurs = organe de DÉCISION"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Eurosystème vs SEBC",
+        "headers": ["", "Eurosystème", "SEBC"],
+        "rows": [
+          { "cells": ["BCN incluses", "Zone euro seule", "TOUS les États UE"] },
+          { "cells": ["Rôle", "Politique monétaire", "Cadre global"] }
+        ]
+      }
+    },
+    {
+      "id": "m1-f23",
+      "theme": "BCE — politique monétaire",
+      "recto": "Objectif de la BCE & cible d'inflation",
+      "verso": [
+        "Objectif PRINCIPAL : stabilité des prix",
+        "Cible historique (cours) : « inférieure mais proche de 2 % »",
+        "Depuis 07/2021 : cible SYMÉTRIQUE de 2 % à moyen terme",
+        "La BCE seule AUTORISE l'émission des billets en euro"
+      ],
+      "chiffres": ["Cible actuelle : 2 % symétrique (réforme stratégie 2021)"],
+      "verif": "✓ À jour — la BCE vise désormais 2 % SYMÉTRIQUE (Conseil gouverneurs 08/07/2021, ecb.europa.eu) ; l'ancien « inférieur mais proche de 2 % » peut rester l'attendu QCM si le sujet est ancien"
+    },
+    {
+      "id": "m1-f24",
+      "theme": "BCE — taux directeurs",
+      "recto": "Les 3 taux directeurs BCE et leurs durées",
+      "verso": [
+        "Facilité de DÉPÔT → jour le jour (1 jour)",
+        "PRÊT MARGINAL → 24 heures",
+        "REFINANCEMENT (« taux de refi ») → 1 SEMAINE = le PRINCIPAL"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "3 taux directeurs BCE",
+        "headers": ["Taux", "Durée", "Rôle"],
+        "rows": [
+          { "cells": ["Facilité de dépôt", "1 jour", "Rémunère excédents"] },
+          { "cells": ["Prêt marginal", "24 h", "Liquidités d'appoint"] },
+          { "cells": ["Refi (OPR)", "1 semaine", "PRINCIPAL"] }
+        ]
+      }
+    },
+    {
+      "id": "m1-f25",
+      "theme": "Risque systémique & macro-prudentiel",
+      "recto": "Risque systémique + qui le surveille (macro-prudentiel)",
+      "verso": [
+        "Risque qu'un événement entraîne, par réactions en chaîne, des dégâts sur TOUT le système financier",
+        "Européen → CERS (sous la BCE)",
+        "France → HCSF (Haut Conseil de Stabilité Financière)"
+      ],
+      "chiffres": ["Macro = CERS (UE) / HCSF (France)"]
+    },
+    {
+      "id": "m1-f26",
+      "theme": "Risque systémique & macro-prudentiel",
+      "recto": "Subprimes : le déclencheur et le propagateur",
+      "verso": [
+        "Déclencheur : la FED monte son taux jusqu'à 5,25 % en 2006",
+        "Foyers modestes à taux variable ne remboursent plus",
+        "Propagation par la TITRISATION des créances → crise mondiale"
+      ],
+      "chiffres": ["FED : 5,25 % en 2006"],
+      "visuel": { "type": "bignum", "titre": "Taux FED (déclencheur subprimes)", "value": "5,25 %", "note": "atteint en 2006 ; titrisation = vecteur de propagation" }
+    },
+    {
+      "id": "m1-f27",
+      "theme": "Indicateurs économiques",
+      "recto": "Indicateurs RETARDÉS / COÏNCIDENTS / AVANCÉS (à classer)",
+      "verso": [
+        "RETARDÉ (lagging) : chômage longue durée, PIB final",
+        "COÏNCIDENT : PMI, revenu brut disponible",
+        "AVANCÉ (leading) : permis de construire, optimisme des ménages"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Typologie des indicateurs",
+        "headers": ["Type", "Mesure", "Exemples"],
+        "rows": [
+          { "cells": ["Retardé", "Passé", "Chômage LD, PIB final"] },
+          { "cells": ["Coïncident", "Présent", "PMI, RDB"] },
+          { "cells": ["Avancé", "Futur", "Permis de construire"] }
+        ]
+      }
+    },
+    {
+      "id": "m1-f28",
+      "theme": "Indicateurs économiques",
+      "recto": "PIB, inflation, déflation, stagflation : ne pas confondre",
+      "verso": [
+        "PIB = richesse produite en 1 an par les RÉSIDENTS (territoire, pas nationalité)",
+        "INFLATION = hausse durable et généralisée des prix ; IPC la mesure (panier type)",
+        "DÉFLATION = baisse durable ; STAGFLATION = inflation forte + croissance faible",
+        "Cumul mondial des PIB → publié par la BANQUE MONDIALE"
+      ]
+    },
+    {
+      "id": "m1-f29",
+      "theme": "Indicateurs économiques",
+      "recto": "PMI, volatilité, balances & organismes producteurs",
+      "verso": [
+        "PMI = enquête directeurs d'achats, 5 thèmes (commandes, production, emploi, livraisons, stocks), anticipations à 6 mois",
+        "Volatilité = mesure de RISQUE",
+        "Balance COMMERCIALE (biens) ⊂ balance des PAIEMENTS (tous flux, harmonisée OCDE)",
+        "INSEE = France | OCDE = international | FMI = stabilité monétaire | Banque Mondiale = PIB cumulé"
+      ],
+      "chiffres": ["FMI : Perspectives de l'Économie Mondiale 2 fois/an", "Michigan : 500 particuliers (USA) ; ZEW/IFO = Allemagne"]
+    },
+    {
+      "id": "m1-f30",
+      "theme": "Marchés émergents — BRICS",
+      "recto": "BRICS : qui, quand, combien de pays MSCI ?",
+      "verso": [
+        "BRIC créé en 2001 par Jim O'Neill (Goldman Sachs)",
+        "+ S (Afrique du Sud) en 2011 → BRICS",
+        "Indice MSCI Emerging Markets = 26 pays"
+      ],
+      "chiffres": ["BRIC = 2001 (Jim O'Neill, Goldman Sachs) ; +S = 2011", "MSCI EM = 26 pays", ">40 % population mondiale"]
+    },
+    {
+      "id": "m1-f31",
+      "theme": "Marchés émergents — risques",
+      "recto": "Marchés émergents : risques clés à retenir",
+      "verso": [
+        "Risque PLUS ÉLEVÉ, mais utiles pour DIVERSIFIER si faiblement corrélés",
+        "Liquidité (faibles volumes), politique (indice Coface : Iran en tête)",
+        "Change : hausse du dollar = MAUVAISE pour les émergents endettés en USD"
+      ]
+    }
+  ]
+}

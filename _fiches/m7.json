@@ -1,0 +1,377 @@
+{
+  "id": "m7",
+  "fiches": [
+    {
+      "id": "m7-f1",
+      "theme": "Actions — nature",
+      "recto": "Action vs Obligation : quelle différence fondamentale ?",
+      "verso": [
+        "Action = titre de CAPITAL (capitaux propres), pas de maturité",
+        "Obligation = titre de CRÉANCE (dette), remboursée à l'échéance",
+        "Les DEUX sont des valeurs mobilières"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Action vs Obligation",
+        "headers": ["", "Action", "Obligation"],
+        "rows": [
+          { "cells": ["Nature", "Capital", "Créance / dette"] },
+          { "cells": ["Maturité", "Aucune", "Date d'échéance"] },
+          { "cells": ["Rang liquidation", "DERNIER servi", "Avant l'actionnaire"] }
+        ]
+      }
+    },
+    {
+      "id": "m7-f2",
+      "theme": "Actions — liquidation",
+      "recto": "En liquidation, à quel rang l'actionnaire est-il servi ?",
+      "verso": [
+        "EN DERNIER, après TOUS les créanciers (dont obligataires)",
+        "Ne touche que le boni de liquidation = peut être NUL",
+        "Peut perdre la TOTALITÉ de sa mise"
+      ]
+    },
+    {
+      "id": "m7-f3",
+      "theme": "Actions — dividende",
+      "recto": "Le dividende est-il automatique ?",
+      "verso": [
+        "NON : il faut des bénéfices ET un vote en AG",
+        "Voté en AG sur PROPOSITION du conseil d'administration",
+        "Peut être NUL ; payé sous 9 mois après clôture",
+        "Au versement, le cours BAISSE du montant du dividende"
+      ],
+      "chiffres": [
+        "Paiement : dans les 9 mois après clôture",
+        "Majoration de fidélité : détention > 2 ans"
+      ]
+    },
+    {
+      "id": "m7-f4",
+      "theme": "Actions — types",
+      "recto": "Actions de préférence SANS droit de vote : quel plafond ?",
+      "verso": [
+        "Max 50 % du capital social (cas général)",
+        "Max 25 % pour les sociétés COTÉES",
+        "Certificat d'investissement ≠ « certificat » produit dérivé"
+      ],
+      "chiffres": ["50 % général / 25 % coté"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Plafond sans droit de vote",
+        "value": "50 / 25 %",
+        "note": "50 % général — 25 % si société cotée"
+      }
+    },
+    {
+      "id": "m7-f5",
+      "theme": "Actions — détention & valo",
+      "recto": "Au porteur vs nominatif + PER, c'est quoi ?",
+      "verso": [
+        "Au porteur = émetteur NE connaît PAS les propriétaires (registre = dépositaire central, ex Euroclear)",
+        "Nominatif = émetteur les connaît (pur ou administré)",
+        "PER = capitalisation / bénéfices ; capi = nb actions × cours",
+        "Prospectus VISÉ par l'AMF lors d'un appel public à l'épargne"
+      ]
+    },
+    {
+      "id": "m7-f6",
+      "theme": "Obligations — caractéristiques",
+      "recto": "Nominal, coupon, « au pair » : les bases d'une obligation",
+      "verso": [
+        "NOMINAL = montant remboursé à l'échéance",
+        "COUPON = intérêt périodique (% du nominal)",
+        "« Au pair » = émise à 100 % du nominal",
+        "Prix en % du nominal (base 100), hors coupon couru ; remboursement souvent IN FINE"
+      ]
+    },
+    {
+      "id": "m7-f7",
+      "theme": "Obligations — relation prix/taux",
+      "recto": "Si les taux MONTENT, le prix d'une obligation à taux fixe… ?",
+      "verso": [
+        "BAISSE : relation prix/taux INVERSE (piège majeur)",
+        "Sensibilité = duration modifiée = mesure du risque de taux",
+        "TRI = taux de rendement interne = rendement à maturité"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Relation prix / taux",
+        "headers": ["Taux (TRI)", "Prix obligation"],
+        "rows": [
+          { "cells": ["↑ Montent", "↓ Baisse"] },
+          { "cells": ["↓ Baissent", "↑ Monte"] }
+        ]
+      }
+    },
+    {
+      "id": "m7-f8",
+      "theme": "Obligations — OAT & variantes",
+      "recto": "OAT et obligations spéciales : que retenir ?",
+      "verso": [
+        "OAT = Obligations ASSIMILABLES du Trésor (État FR), meilleure note, risque crédit le + faible",
+        "OATi = inflation française ; OAT€i = inflation européenne",
+        "Convertible = droit d'échanger contre des ACTIONS",
+        "Zéro-coupon = aucun coupon, tout payé à l'échéance"
+      ]
+    },
+    {
+      "id": "m7-f9",
+      "theme": "Obligations — État & rating",
+      "recto": "3 titres d'État + 3 agences de notation",
+      "verso": [
+        "Titres d'État : BTF (court) / BTAN (moyen) / OAT (long)",
+        "3 agences : Fitch, Moody's, Standard & Poor's",
+        "Investment Grade (A) = peu risqué ; Speculative Grade (B) = risqué"
+      ],
+      "visuel": {
+        "type": "pyramid",
+        "titre": "Titres d'État par maturité",
+        "levels": [
+          { "t": "OAT", "d": "Long terme" },
+          { "t": "BTAN", "d": "Moyen terme (intérêts annualisés)" },
+          { "t": "BTF", "d": "Court terme (taux fixe)" }
+        ]
+      }
+    },
+    {
+      "id": "m7-f10",
+      "theme": "Marché monétaire — NeuCP/NeuMTN",
+      "recto": "NeuCP vs NeuMTN : durée et montant ?",
+      "verso": [
+        "NeuCP = COURT terme (1 jour à 1 an)",
+        "NeuMTN = MOYEN terme (min 1 an, jusqu'à 5 ans, in fine)",
+        "Montant unitaire TOUJOURS > 150 000 € (les deux)",
+        "Marché court terme supervisé par la BANQUE DE FRANCE"
+      ],
+      "chiffres": ["Montant unitaire > 150 000 €", "Réforme TCN : décret 30/05/2016"]
+    },
+    {
+      "id": "m7-f11",
+      "theme": "Marché monétaire — primaire/syndication",
+      "recto": "Naissance d'une obligation + primaire vs secondaire",
+      "verso": [
+        "3 étapes : Origination → Syndication (chef de file + reliquat) → Vente",
+        "Marché PRIMAIRE = émission",
+        "Marché SECONDAIRE = revente entre investisseurs",
+        "NEU CP a remplacé billets de trésorerie + certificats de dépôt (2016)"
+      ]
+    },
+    {
+      "id": "m7-f12",
+      "theme": "Risques",
+      "recto": "Les 7 risques à ne PAS confondre",
+      "verso": [
+        "CRÉDIT = l'émetteur ne rembourse pas",
+        "CONTREPARTIE = le paiement n'arrive pas (couvert par chambre de compensation)",
+        "MARCHÉ = fluctuation des prix ; LIQUIDITÉ = pas d'acheteur",
+        "CHANGE / TAUX / OPÉRATIONNEL (fraudes, pannes — dans le ratio de solvabilité)"
+      ]
+    },
+    {
+      "id": "m7-f13",
+      "theme": "Épargne — livrets",
+      "recto": "Livret A et Livret Jeune : chiffres clés",
+      "verso": [
+        "Livret A : 1 SEUL par personne, plafond 22 950 € (depuis 01/01/2013)",
+        "Taux par arrêté ministériel ; revenus exonérés (hors PFU)",
+        "Livret Jeune : 12-25 ans, taux ≥ 0,75 %",
+        "Intérêts à la quinzaine : dates pivots le 1er et le 16"
+      ],
+      "chiffres": ["Livret A : 22 950 €", "Livret Jeune : 12-25 ans"],
+      "verif": "✓ Vérifié — plafond Livret A 22 950 € toujours en vigueur 2026 ; Livret A exonéré de PFU"
+    },
+    {
+      "id": "m7-f14",
+      "theme": "Épargne — CAT & assurance-vie",
+      "recto": "CAT et assurance-vie : ce qui les distingue",
+      "verso": [
+        "CAT = versement UNIQUE, min 1 mois, max ~5 ans (produit de bilan)",
+        "Assurance-vie = PLACEMENT (pas produit de bilan)",
+        "Fonds euros GARANTIS (obligations) vs UC NON garanties (risque au client)",
+        "Hors actif successoral ; non réclamée → Caisse des Dépôts après 10 ans"
+      ],
+      "verif": "✓ Vérifié — assurance-vie : PFU global maintenu à 30 % en 2026 (CSG figée à 9,2 %)"
+    },
+    {
+      "id": "m7-f15",
+      "theme": "Épargne — PRIIPs & titrisation",
+      "recto": "PRIIPs et titrisation : à retenir",
+      "verso": [
+        "PRIIPs : en vigueur depuis 2018 (Commission UE), impose le DIC avant signature",
+        "DIC = Document d'Information Clé (risque, frais)",
+        "Titrisation = transformer de l'illiquide en titres négociables (OT)",
+        "Titres démarchables uniquement auprès d'investisseurs QUALIFIÉS"
+      ]
+    },
+    {
+      "id": "m7-f16",
+      "theme": "Dérivés — familles",
+      "recto": "Les 2 familles de produits dérivés ?",
+      "verso": [
+        "FERMES : Forward, Future, Swap (engagement obligatoire)",
+        "CONDITIONNELS : Options (Call = acheter, Put = vendre — un droit)",
+        "Tous = jeu à somme nulle + effet de levier SYSTÉMATIQUE"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Familles de dérivés",
+        "headers": ["Fermes", "Conditionnels"],
+        "rows": [
+          { "cells": ["Forward (gré à gré)", "Call = droit d'acheter"] },
+          { "cells": ["Future (marché organisé)", "Put = droit de vendre"] },
+          { "cells": ["Swap (échange de flux)", "Acheteur = a le CHOIX"] }
+        ]
+      }
+    },
+    {
+      "id": "m7-f17",
+      "theme": "Dérivés — forward/future/swap",
+      "recto": "Forward vs Future vs Swap",
+      "verso": [
+        "Forward = gré à gré (sur-mesure) ; Future = marché organisé (standardisé)",
+        "Future en France = MATIF (Euronext)",
+        "Swap = échange de FLUX ; jambes (legs) ; nominal/notionnel NON échangé",
+        "CDS = swap sur défaut de crédit (≠ swap de taux)"
+      ]
+    },
+    {
+      "id": "m7-f18",
+      "theme": "Dérivés — options",
+      "recto": "Option = assurance : qui risque quoi ?",
+      "verso": [
+        "Acheteur (assuré) : perte MAX = la PRIME ; gain illimité (call)",
+        "Vendeur (assureur) : gain MAX = la prime ; perte illimitée (call nu)",
+        "Européenne = exercice à l'échéance ; Américaine = à tout moment",
+        "Point mort : call = strike + prime ; put = strike − prime"
+      ],
+      "chiffres": ["Perte acheteur = prime", "Gain vendeur = prime"]
+    },
+    {
+      "id": "m7-f19",
+      "theme": "Dérivés — compensation & EMIR/MIFIR",
+      "recto": "Chambre de compensation, appel de marge, EMIR/MIFIR",
+      "verso": [
+        "Chambre de compensation = contrepartie centrale (annule risque de contrepartie via marge)",
+        "France = LCH Clearnet ; supervision = ESMA ; appel de marge = QUOTIDIEN",
+        "EMIR (août 2012) = compensation des dérivés OTC ; MIFIR (2018) = reporting",
+        "ESMA = restriction TEMPORAIRE ; AMF = interdiction SANS limite de temps"
+      ]
+    },
+    {
+      "id": "m7-f20",
+      "theme": "Dérivés — produits dangereux",
+      "recto": "CFD, options binaires, Loi Sapin",
+      "verso": [
+        "CFD = fort levier, clientèle non-pro ; restriction sanctuarisée par l'AMF en 2019",
+        "Option binaire = 2 issues (tout ou rien)",
+        "Loi Sapin (2016) = interdit la PUB électronique de ces produits aux particuliers",
+        "Visés : options binaires, Forex, CFD"
+      ],
+      "chiffres": ["Loi Sapin = 2016", "Restriction CFD AMF = 2019"]
+    },
+    {
+      "id": "m7-f21",
+      "theme": "Crypto — blockchain & bitcoin",
+      "recto": "Blockchain, bitcoin, ICO : les bases",
+      "verso": [
+        "Blockchain = registre DÉCENTRALISÉ, SANS tiers de confiance, sécurisé par cryptographie",
+        "Bitcoin créé en 2008 par Satoshi Nakamoto (pseudonyme)",
+        "Bitcoin + ethereum = les 2 cryptos les plus liquides",
+        "ICO = offre de JETONS au public (≠ IPO en bourse)"
+      ]
+    },
+    {
+      "id": "m7-f22",
+      "theme": "Crypto — cadre PACTE (PSAN)",
+      "recto": "Loi PACTE : visa ICO et PSAN, optionnels ou pas ?",
+      "verso": [
+        "Loi PACTE (2019) : visa AMF pour ICO + statut PSAN = OPTIONNELS",
+        "SAUF conservation et courtage = enregistrement OBLIGATOIRE auprès de l'AMF",
+        "Seuls 2 fonds en crypto : FPS (sous conditions) et FPCI (max 20 %)",
+        "ICO « au public » = plus de 150 personnes"
+      ],
+      "chiffres": ["PACTE = 2019", "FPCI : max 20 % de l'actif"]
+    },
+    {
+      "id": "m7-f23",
+      "theme": "Crypto — MiCA (cadre actuel)",
+      "recto": "MiCA : le règlement crypto européen qui remplace PSAN",
+      "verso": [
+        "MiCA = règlement UE en vigueur, applicable depuis le 30/12/2024 (stablecoins : 30/06/2024)",
+        "PSAN (loi PACTE) → PSCA / CASP (agrément AMF)",
+        "Période transitoire FR : les PSAN doivent passer en PSCA avant le 1er JUILLET 2026",
+        "3 catégories : EMT (e-monnaie), ART (adossés à actifs), autres (utility tokens)"
+      ],
+      "chiffres": ["MiCA applicable : 30/12/2024", "Transition PSAN→PSCA : 1er juillet 2026"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Avant / Après MiCA",
+        "headers": ["", "Avant (PACTE)", "Après (MiCA)"],
+        "rows": [
+          { "cells": ["Statut", "PSAN", "PSCA / CASP"] },
+          { "cells": ["Agrément", "Optionnel (sauf 2 services)", "Agrément AMF requis"] },
+          { "cells": ["Périmètre", "France", "Toute l'UE (passeport)"] }
+        ]
+      },
+      "verif": "✓ Vérifié — AMF 2024 : MiCA remplace PSAN par PSCA, fin période transitoire FR le 1er juillet 2026"
+    },
+    {
+      "id": "m7-f24",
+      "theme": "Marché monétaire — BCE & taux directeurs",
+      "recto": "Marché monétaire et taux directeurs BCE",
+      "verso": [
+        "Marché monétaire = court terme (< 1 an), interbancaire",
+        "Prêt « en blanc » = sans garantie ; « pension » = avec collatéral",
+        "Refi BAISSE → crédit STIMULÉ ; refi MONTE → crédit fléchit",
+        "BCE fixe un prix MAX de refinancement et un prix MIN de prêt"
+      ]
+    },
+    {
+      "id": "m7-f25",
+      "theme": "Taux de référence",
+      "recto": "€STR vs Euribor + transition des indices Libor",
+      "verso": [
+        "€STR (successeur EONIA) : BCE, 8h, overnight non garanti",
+        "Euribor : FBE, 11h, échéances 1 sem à 12 mois",
+        "Scandale Libor 2014 (taux par SONDAGE) → désormais TRANSACTIONS réelles"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Transition des indices",
+        "headers": ["Devise", "Nouveau taux", "Régulateur"],
+        "rows": [
+          { "cells": ["EUR (overnight)", "€STR", "BCE"] },
+          { "cells": ["USD", "SOFR", "Fed New York"] },
+          { "cells": ["GBP", "SONIA", "Bank of England"] },
+          { "cells": ["CHF / JPY", "SARON / TONAR", "SNB / BoJ"] }
+        ]
+      }
+    },
+    {
+      "id": "m7-f26",
+      "theme": "Forex",
+      "recto": "Le Forex : le plus grand marché du monde",
+      "verso": [
+        "Marché le plus VASTE et le plus LIQUIDE ; quasi 100 % gré à gré, dématérialisé, non régulé",
+        "EUR/USD = 25 % par paires (couple le + échangé)",
+        "USD = 88 % des transactions (devise la + échangée)",
+        "Réserves de change = devises OU or"
+      ],
+      "chiffres": ["Volume ≈ 7 500 Md USD/jour (BRI 2022)"],
+      "verif": "✓ Vérifié — BRI 2022 : 7,5 trillions USD/jour (vs 6,6 en 2019) ; USD = 88 %"
+    },
+    {
+      "id": "m7-f27",
+      "theme": "Biens divers",
+      "recto": "Biens divers : nature, délais AMF, sanctions",
+      "verso": [
+        "Actifs atypiques (vin, forêts, diamants, art…), NON standardisés, hors marchés encadrés (art. L550-1 CMF)",
+        "Opérateur = société par actions + compte spécifique et unique par opération",
+        "Inventaire (certifié par CAC) → AMF dans les 3 MOIS ; AMF a 2 MOIS pour ses observations",
+        "Sanction pénale : 5 ans + 18 000 € ; pécuniaire AMF : max 100 M€ OU x10 de l'avantage"
+      ],
+      "chiffres": ["Inventaire : 3 mois", "Observations AMF : 2 mois", "Pénale : 5 ans + 18 000 €"]
+    }
+  ]
+}

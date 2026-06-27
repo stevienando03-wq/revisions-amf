@@ -1,0 +1,376 @@
+{
+  "id": "m11",
+  "fiches": [
+    {
+      "id": "m11-f1",
+      "theme": "Primaire vs secondaire",
+      "recto": "Marché PRIMAIRE vs marché SECONDAIRE : qui lève des fonds ?",
+      "verso": [
+        "Primaire = le NEUF : l'émetteur émet ses titres pour la 1re fois et lève des fonds frais.",
+        "Secondaire = l'OCCASION = la BOURSE : revente entre investisseurs, l'émetteur n'encaisse rien."
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Primaire vs secondaire",
+        "headers": ["Critère", "Primaire", "Secondaire"],
+        "rows": [
+          { "cells": ["Image", "Le neuf", "L'occasion (la bourse)"] },
+          { "cells": ["Rôle", "L'émetteur lève des fonds", "Liquidité : revente entre investisseurs"] },
+          { "cells": ["Qui encaisse", "L'émetteur (argent frais)", "Les investisseurs entre eux"] },
+          { "cells": ["Émetteur présent", "Oui", "Non, sauf augmentation de capital"] }
+        ]
+      }
+    },
+    {
+      "id": "m11-f2",
+      "theme": "Primaire vs secondaire",
+      "recto": "Quand l'émetteur revient-il sur le marché SECONDAIRE ?",
+      "verso": [
+        "En principe : JAMAIS (le secondaire, c'est entre investisseurs).",
+        "Exception clé : l'AUGMENTATION DE CAPITAL, dont une partie des actions est admise en bourse pour les particuliers."
+      ]
+    },
+    {
+      "id": "m11-f3",
+      "theme": "PSI sur le primaire",
+      "recto": "Que fait le PSI sur le marché primaire ?",
+      "verso": [
+        "Aide à DÉFINIR les caractéristiques du titre.",
+        "PLACE les titres de GRÉ À GRÉ, gros montants, auprès d'institutionnels (gérants, assureurs).",
+        "Deux services : PLACEMENT ou PRISE FERME."
+      ],
+      "chiffres": ["PSI = Prestataire de Services d'Investissement"]
+    },
+    {
+      "id": "m11-f4",
+      "theme": "PSI sur le primaire",
+      "recto": "Placement vs prise ferme : quelle différence de RISQUE ?",
+      "verso": [
+        "Placement (simple) : le PSI cherche des acheteurs, sans s'engager à tout vendre.",
+        "Prise ferme (garantie) : le PSI ACHÈTE les titres puis les revend → il porte le risque de mévente."
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Placement vs prise ferme",
+        "headers": ["", "Placement", "Prise ferme"],
+        "rows": [
+          { "cells": ["Engagement", "Best effort", "Garantie totale"] },
+          { "cells": ["Qui porte le risque", "L'émetteur", "Le PSI"] }
+        ]
+      }
+    },
+    {
+      "id": "m11-f5",
+      "theme": "Action vs obligation",
+      "recto": "ACTION vs OBLIGATION : propriété ou créance ?",
+      "verso": [
+        "Action = titre de PROPRIÉTÉ → coactionnaire, dividende, droit de vote.",
+        "Obligation = titre de CRÉANCE → prêteur, coupon (intérêt) fixé À L'ÉMISSION, remboursement."
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Action vs obligation",
+        "headers": ["Critère", "Action", "Obligation"],
+        "rows": [
+          { "cells": ["Nature", "Propriété", "Créance (prêt)"] },
+          { "cells": ["Revenu", "Dividende (variable)", "Coupon (fixé à l'émission)"] },
+          { "cells": ["Droit de vote", "Oui", "Non"] }
+        ]
+      }
+    },
+    {
+      "id": "m11-f6",
+      "theme": "Action vs obligation",
+      "recto": "Obligation à COUPON ZÉRO : on gagne quoi ?",
+      "verso": [
+        "Aucun intérêt versé pendant la vie du titre.",
+        "Gain = prix d'ÉMISSION < prix de REMBOURSEMENT (la plus-value tient lieu d'intérêt)."
+      ]
+    },
+    {
+      "id": "m11-f7",
+      "theme": "Introduction en bourse (IPO)",
+      "recto": "Introduction en bourse (IPO) : c'est quoi, sur quel marché ?",
+      "verso": [
+        "Première admission des actions à la cotation → l'émetteur devient coté.",
+        "Combine PRIMAIRE (émission de titres neufs / cession) ET ouverture du SECONDAIRE.",
+        "Encadrée par l'AMF via un PROSPECTUS."
+      ]
+    },
+    {
+      "id": "m11-f8",
+      "theme": "Prospectus",
+      "recto": "PROSPECTUS : à quoi sert-il et qui le vise ?",
+      "verso": [
+        "Document d'information obligatoire pour une offre au public ou une admission sur marché réglementé.",
+        "Doit être APPROUVÉ par l'AMF (visa) AVANT diffusion.",
+        "But : informer l'investisseur (risques, finances, projet)."
+      ],
+      "verif": "✓ Vérifié — Règlement Prospectus UE / AMF 2024"
+    },
+    {
+      "id": "m11-f9",
+      "theme": "Prospectus",
+      "recto": "Seuil de DISPENSE de prospectus pour une offre au public ?",
+      "verso": [
+        "Sous le seuil national : pas de prospectus, mais un Document d'Information Synthétique (DIS).",
+        "Seuil France relevé à 12 M€ (Listing Act) en juin 2026, contre 8 M€ auparavant."
+      ],
+      "chiffres": ["8 M€ (ancien)", "12 M€ (depuis 05/06/2026)", "sur 12 mois glissants"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Seuil de dispense de prospectus",
+        "value": "12 M€",
+        "note": "Listing Act, en vigueur 05/06/2026 (avant : 8 M€). En-dessous = DIS, pas de prospectus."
+      },
+      "verif": "✓ Vérifié — Listing Act, en vigueur 05/06/2026 (avant : 8 M€)"
+    },
+    {
+      "id": "m11-f10",
+      "theme": "Augmentation de capital",
+      "recto": "AUGMENTATION DE CAPITAL : pourquoi et avec quel risque pour l'actionnaire ?",
+      "verso": [
+        "Émission d'actions nouvelles pour lever des fonds (renforcer les capitaux propres).",
+        "Risque pour l'actionnaire existant : la DILUTION (sa part du capital baisse)."
+      ]
+    },
+    {
+      "id": "m11-f11",
+      "theme": "Augmentation de capital",
+      "recto": "DPS : le bouclier anti-dilution",
+      "verso": [
+        "Droit Préférentiel de Souscription : souscrire en PRIORITÉ aux actions nouvelles, au prorata.",
+        "DÉTACHABLE et NÉGOCIABLE : l'actionnaire l'exerce, le VEND, ou y RENONCE.",
+        "Le supprimer exige un vote des associés + rapport du CAC."
+      ],
+      "verif": "✓ Vérifié — Code de commerce / DPS, droit français"
+    },
+    {
+      "id": "m11-f12",
+      "theme": "Augmentation de capital",
+      "recto": "PRIME D'ÉMISSION : à quoi sert-elle ?",
+      "verso": [
+        "Supplément payé au-dessus de la valeur nominale par les nouveaux souscripteurs.",
+        "Compense partiellement la dilution → protège la valeur des actions anciennes."
+      ]
+    },
+    {
+      "id": "m11-f13",
+      "theme": "OST",
+      "recto": "OST : qu'est-ce qu'une Opération Sur Titres ?",
+      "verso": [
+        "Événement qui modifie le titre ou les droits de l'actionnaire.",
+        "Exemples : dividende, division (split), augmentation de capital, OPA/OPE."
+      ],
+      "chiffres": ["OST = Opération Sur Titres"]
+    },
+    {
+      "id": "m11-f14",
+      "theme": "OST",
+      "recto": "DIVIDENDE : qui décide, comment est-il versé ?",
+      "verso": [
+        "Part du bénéfice distribuée aux actionnaires, votée en assemblée générale (AG).",
+        "Peut être payé en espèces ou en actions (dividende en actions).",
+        "Date de DÉTACHEMENT : le cours baisse mécaniquement du montant du dividende."
+      ]
+    },
+    {
+      "id": "m11-f15",
+      "theme": "OST",
+      "recto": "SPLIT (division du nominal) : ça change quoi ?",
+      "verso": [
+        "On multiplie le nombre d'actions et on divise le cours d'autant.",
+        "Capitalisation INCHANGÉE, patrimoine de l'actionnaire INCHANGÉ.",
+        "But : rendre l'action plus accessible / plus liquide."
+      ],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Split 1 → 4",
+        "value": "= 0 €",
+        "note": "4x plus d'actions, cours ÷ 4. La richesse de l'actionnaire ne bouge pas."
+      }
+    },
+    {
+      "id": "m11-f16",
+      "theme": "Offres publiques",
+      "recto": "OPA vs OPE : on paie comment ?",
+      "verso": [
+        "OPA = Offre Publique d'ACHAT → l'initiateur paie en ESPÈCES (cash).",
+        "OPE = Offre Publique d'ÉCHANGE → il paie en ses propres ACTIONS (titres).",
+        "Mixte possible (cash + titres)."
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "OPA vs OPE",
+        "headers": ["", "OPA", "OPE"],
+        "rows": [
+          { "cells": ["Paiement", "Espèces", "Titres de l'initiateur"] },
+          { "cells": ["Cible reçoit", "Du cash", "Des actions"] }
+        ]
+      }
+    },
+    {
+      "id": "m11-f17",
+      "theme": "Offres publiques",
+      "recto": "Quel SEUIL déclenche une OPA OBLIGATOIRE ?",
+      "verso": [
+        "Franchir 30 % du capital ou des droits de vote → offre publique OBLIGATOIRE.",
+        "Ou détenir 30-50 % et augmenter de +1 % en moins d'un an (excès de vitesse).",
+        "Prix ≥ prix le plus élevé payé par l'initiateur sur les 12 derniers mois."
+      ],
+      "chiffres": ["30 % = seuil obligatoire", "+1 % en < 1 an entre 30 et 50 %"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Seuil OPA obligatoire",
+        "value": "30 %",
+        "note": "Franchir 30 % du capital ou des droits de vote oblige à déposer un projet d'offre auprès de l'AMF."
+      },
+      "verif": "✓ Vérifié — RG AMF art. 234-2 (seuil 30 %)"
+    },
+    {
+      "id": "m11-f18",
+      "theme": "Offres publiques",
+      "recto": "OPR + RETRAIT OBLIGATOIRE : à quel seuil sort-on les minoritaires ?",
+      "verso": [
+        "OPR = Offre Publique de Retrait, suivie du retrait obligatoire (squeeze-out).",
+        "Seuil : le majoritaire détient ≥ 90 % du capital OU des droits de vote.",
+        "Les minoritaires (≤ 10 %) sont rachetés de force, indemnisés."
+      ],
+      "chiffres": ["90 % (loi PACTE, avant : 95 %)", "minoritaires ≤ 10 %"],
+      "verif": "✓ Vérifié — Loi PACTE : seuil abaissé de 95 % à 90 %"
+    },
+    {
+      "id": "m11-f19",
+      "theme": "Offres publiques",
+      "recto": "OPA HOSTILE vs AMICALE ?",
+      "verso": [
+        "Amicale : le conseil d'administration de la cible RECOMMANDE l'offre.",
+        "Hostile : l'offre est lancée CONTRE l'avis des dirigeants de la cible.",
+        "L'AMF veille à l'égalité d'information et de traitement des actionnaires."
+      ]
+    },
+    {
+      "id": "m11-f20",
+      "theme": "Marchés multilatéraux",
+      "recto": "Gré à gré (OTC) vs marché MULTILATÉRAL ?",
+      "verso": [
+        "Gré à gré (OTC) = DEUX acteurs face à face.",
+        "Multilatéral = un organisme + une MULTITUDE d'investisseurs.",
+        "Internalisation systématique = gré à gré ENCADRÉ, réservé aux professionnels."
+      ]
+    },
+    {
+      "id": "m11-f21",
+      "theme": "Marchés multilatéraux",
+      "recto": "Les 3 marchés MULTILATÉRAUX ?",
+      "verso": [
+        "Marché Réglementé (MR) : Euronext Paris.",
+        "SMN / MTF : Système Multilatéral de Négociation (ex : Marché Libre, Alternext).",
+        "OTF : Système Organisé de Négociation.",
+        "MR + SMN utilisent SYSTÉMATIQUEMENT une chambre de compensation."
+      ],
+      "visuel": {
+        "type": "pyramid",
+        "titre": "Marchés multilatéraux",
+        "levels": [
+          { "t": "MR", "d": "Marché Réglementé (Euronext Paris) — actions & obligations au comptant" },
+          { "t": "SMN / MTF", "d": "Système Multilatéral (Marché Libre, Alternext)" },
+          { "t": "OTF", "d": "Système Organisé de Négociation" }
+        ]
+      }
+    },
+    {
+      "id": "m11-f22",
+      "theme": "Chambre de compensation",
+      "recto": "À quoi sert la CHAMBRE DE COMPENSATION ?",
+      "verso": [
+        "S'intercale entre acheteur et vendeur → contrepartie unique (CCP).",
+        "Garantit la bonne fin, CONCENTRE le risque, calcule une POSITION NETTE.",
+        "Financée par les DÉPÔTS DE GARANTIE. Promue par EMIR et MIFIR."
+      ]
+    },
+    {
+      "id": "m11-f23",
+      "theme": "Post-marché",
+      "recto": "POST-MARCHÉ : qui tient les comptes espèces vs titres ?",
+      "verso": [
+        "Agent de règlement (banque centrale) = comptes ESPÈCES.",
+        "Dépositaire central = comptes TITRES.",
+        "Conservateur = inscrit/administre les titres de l'investisseur.",
+        "Règlement-livraison = élimine le risque EN PRINCIPAL."
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Acteurs du post-marché",
+        "headers": ["Acteur", "Rôle"],
+        "rows": [
+          { "cells": ["Agent de règlement", "Comptes espèces (banque centrale)"] },
+          { "cells": ["Dépositaire central", "Comptes titres"] },
+          { "cells": ["Conservateur", "Titres de l'investisseur"] }
+        ]
+      }
+    },
+    {
+      "id": "m11-f24",
+      "theme": "Ordres de bourse",
+      "recto": "Les 3 ORDRES de bourse à connaître ?",
+      "verso": [
+        "AU MARCHÉ : exécution immédiate, sans limite de prix (priorité à la quantité).",
+        "À LA MEILLEURE LIMITE : au meilleur prix dispo, solde inscrit au carnet.",
+        "À COURS LIMITÉ : prix MAX à l'achat / prix MIN à la vente."
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Les 3 ordres",
+        "headers": ["Ordre", "Caractéristique"],
+        "rows": [
+          { "cells": ["Au marché", "Immédiat, sans limite de prix"] },
+          { "cells": ["À la meilleure limite", "Meilleur prix dispo, solde au carnet"] },
+          { "cells": ["À cours limité", "Prix max achat / min vente"] }
+        ]
+      }
+    },
+    {
+      "id": "m11-f25",
+      "theme": "Ordres de bourse",
+      "recto": "FIXING et priorité d'exécution sur Euronext actions ?",
+      "verso": [
+        "Exécution automatique : priorité PRIX, puis TEMPS.",
+        "Fixing (ouverture 9h00, clôture 17h35) = prix qui MAXIMISE le nombre de titres échangés.",
+        "Continu de 9h01 à 17h30."
+      ]
+    },
+    {
+      "id": "m11-f26",
+      "theme": "Marché obligataire & SRD",
+      "recto": "Marché OBLIGATAIRE : gré à gré et pied de coupon ?",
+      "verso": [
+        "Principalement DE GRÉ À GRÉ.",
+        "Pied de coupon = on AJOUTE les intérêts courus au prix coté.",
+        "Quotité = achat/vente par LOTS."
+      ]
+    },
+    {
+      "id": "m11-f27",
+      "theme": "Marché obligataire & SRD",
+      "recto": "Comptant vs SRD (Service de Règlement Différé) ?",
+      "verso": [
+        "Comptant : paiement et livraison IMMÉDIATS.",
+        "SRD : le règlement-livraison au client a lieu en FIN DE MOIS BOURSIER (effet de levier).",
+        "À terme = à une date ultérieure."
+      ]
+    },
+    {
+      "id": "m11-f28",
+      "theme": "Risques",
+      "recto": "Les grands RISQUES sur titres ?",
+      "verso": [
+        "Crédit : l'émetteur ne paie pas (intérêts/capital).",
+        "Marché : variation offre/demande (sans lien avec la qualité de l'émetteur).",
+        "Liquidité : pas de contrepartie pour revendre.",
+        "Change / Taux : devises / taux d'intérêt.",
+        "Liquidité et opérationnel = NON couvrables par dérivés."
+      ]
+    }
+  ]
+}

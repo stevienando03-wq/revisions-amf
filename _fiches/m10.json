@@ -1,0 +1,411 @@
+{
+  "id": "m10",
+  "fiches": [
+    {
+      "id": "m10-f1",
+      "theme": "Post-marché — vue d'ensemble",
+      "recto": "Après l'exécution d'un ordre, quelles sont les 3 étapes du post-marché ?",
+      "verso": [
+        "1. COMPENSATION : la chambre calcule les positions nettes et garantit la bonne fin",
+        "2. RÈGLEMENT-LIVRAISON : règlement contre livraison (élimine le risque en principal)",
+        "3. CONSERVATION : le titre est inscrit au compte de l'investisseur chez son conservateur"
+      ],
+      "visuel": {
+        "type": "flow",
+        "titre": "Les 3 maillons de la chaîne post-marché",
+        "steps": [
+          { "t": "Compensation", "d": "Chambre : positions nettes + garantie de bonne fin" },
+          { "t": "Règlement-livraison", "d": "Règlement CONTRE livraison : élimine le risque en principal" },
+          { "t": "Conservation", "d": "Titre inscrit au compte de l'investisseur (conservateur)" }
+        ]
+      }
+    },
+    {
+      "id": "m10-f2",
+      "theme": "Chambre de compensation — rôle",
+      "recto": "À quoi sert la chambre de compensation ?",
+      "verso": [
+        "Elle s'INTERCALE entre l'acheteur et le vendeur",
+        "But : garantir la BONNE FIN des transactions",
+        "Elle devient la CONTREPARTIE UNIQUE des deux côtés (CCP)"
+      ],
+      "verif": "✓ Vérifié — CCP / contrepartie centrale (AMF, EMIR)"
+    },
+    {
+      "id": "m10-f3",
+      "theme": "Chambre de compensation — risque",
+      "recto": "La chambre SUPPRIME-t-elle le risque de contrepartie ?",
+      "verso": [
+        "NON : elle le CONCENTRE (piège QCM classique)",
+        "Elle devient contrepartie unique → le risque se reporte sur elle",
+        "C'est pour ça qu'elle exige des dépôts de garantie"
+      ],
+      "chiffres": ["CONCENTRE ≠ supprime"]
+    },
+    {
+      "id": "m10-f4",
+      "theme": "Chambre de compensation — défaut",
+      "recto": "Que fait la chambre si une contrepartie fait défaut ?",
+      "verso": [
+        "ACHETEUR défaillant → la chambre PAIE le vendeur",
+        "VENDEUR défaillant → la chambre ACHÈTE le titre manquant pour l'acheteur"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Défaut d'une contrepartie : que fait la chambre ?",
+        "headers": ["Qui fait défaut ?", "Action de la chambre"],
+        "rows": [
+          { "cells": ["L'ACHETEUR", "Elle PAIE le vendeur"] },
+          { "cells": ["Le VENDEUR", "Elle ACHÈTE le titre manquant pour l'acheteur"] }
+        ]
+      }
+    },
+    {
+      "id": "m10-f5",
+      "theme": "Chambre de compensation — 3 fonctions",
+      "recto": "Quelles sont les 3 fonctions de la chambre de compensation ?",
+      "verso": [
+        "1. Calcule une POSITION NETTE par opérateur (compense ses opérations)",
+        "2. GARANTIE : devient contrepartie unique",
+        "3. COMPENSATION MULTILATÉRALE des positions (pas bilatérale)"
+      ],
+      "visuel": {
+        "type": "flow",
+        "titre": "Les 3 fonctions de la chambre",
+        "steps": [
+          { "t": "Position nette", "d": "Compense les opérations de chaque opérateur" },
+          { "t": "Garantie", "d": "Contrepartie unique du vendeur ET de l'acheteur" },
+          { "t": "Compensation multilatérale", "d": "Sur l'ensemble des positions" }
+        ]
+      }
+    },
+    {
+      "id": "m10-f6",
+      "theme": "Chambre de compensation — financement",
+      "recto": "Comment la garantie de la chambre est-elle financée, et comment la chambre se rémunère-t-elle ?",
+      "verso": [
+        "Garantie financée par les DÉPÔTS DE GARANTIE versés par les intermédiaires",
+        "Rémunération = fraction MARGINALE du montant des transactions (pas majoritaire)"
+      ],
+      "chiffres": ["Dépôts de garantie = financement", "Rémunération = fraction MARGINALE"]
+    },
+    {
+      "id": "m10-f7",
+      "theme": "Chambre de compensation — périmètre",
+      "recto": "Sur quels marchés la chambre intervient-elle ?",
+      "verso": [
+        "Multilatéral / organisé (MR + SMN) : SYSTÉMATIQUEMENT, toutes les transactions",
+        "Gré à gré (OTC) : seulement une PART (pas la totalité)"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Où passe la chambre de compensation ?",
+        "headers": ["Type d'échange", "Passe par la chambre ?"],
+        "rows": [
+          { "cells": ["Multilatéral / organisé (MR + SMN)", "OUI, toutes les transactions"] },
+          { "cells": ["Gré à gré (OTC)", "Seulement une PART"] }
+        ]
+      }
+    },
+    {
+      "id": "m10-f8",
+      "theme": "Cadre réglementaire — compensation",
+      "recto": "Quels textes PROMEUVENT la compensation centrale ?",
+      "verso": [
+        "EMIR (European Market Infrastructure Regulation) → RÈGLEMENT",
+        "MIFIR (Markets in Financial Instruments Regulation) → RÈGLEMENT",
+        "PIÈGE : MiFID est une DIRECTIVE, à ne pas confondre"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "EMIR / MIFIR vs MiFID (piège terminologique)",
+        "headers": ["Texte", "Nature", "Rôle"],
+        "rows": [
+          { "cells": ["EMIR", "Règlement", "Promeut la compensation"] },
+          { "cells": ["MIFIR", "Règlement", "Promeut la compensation"] },
+          { "cells": ["MiFID", "Directive", "À NE PAS confondre"] }
+        ]
+      },
+      "verif": "✓ Vérifié — EMIR impose la compensation centrale des dérivés OTC standardisés ; MIFIR ajoute l'obligation de négociation (AMF)"
+    },
+    {
+      "id": "m10-f9",
+      "theme": "Règlement-livraison — principe",
+      "recto": "Quel risque le règlement-livraison élimine-t-il ?",
+      "verso": [
+        "Le risque EN PRINCIPAL : payer sans recevoir le titre (ou l'inverse)",
+        "Grâce au principe : RÈGLEMENT CONTRE LIVRAISON (les deux jambes en même temps)"
+      ]
+    },
+    {
+      "id": "m10-f10",
+      "theme": "Règlement-livraison — délai T+2",
+      "recto": "Quel est le délai standard de règlement-livraison en Europe ?",
+      "verso": [
+        "T+2 : règlement au plus tard 2 jours ouvrés après la négociation",
+        "Cadre = règlement CSDR (Règlement UE 909/2014)",
+        "À venir : passage à T+1 prévu en UE pour Q4 2027"
+      ],
+      "chiffres": ["T+2 aujourd'hui (CSDR)", "T+1 prévu Q4 2027"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Délai de règlement-livraison",
+        "value": "T+2",
+        "note": "2 jours ouvrés après la négociation (CSDR) — passage à T+1 prévu fin 2027"
+      },
+      "verif": "✓ Vérifié — CSDR fixe T+2 ; ESMA recommande T+1 pour Q4 2027 (rapport 18/11/2024)"
+    },
+    {
+      "id": "m10-f11",
+      "theme": "Acteurs post-marché — espèces vs titres",
+      "recto": "Qui tient les comptes ESPÈCES et qui tient les comptes TITRES ?",
+      "verso": [
+        "Agent de règlement (BANQUE CENTRALE) → comptes ESPÈCES",
+        "Dépositaire central → comptes TITRES",
+        "PIÈGE : inversion classique en QCM"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Espèces vs Titres (piège QCM)",
+        "headers": ["Acteur", "Tient les comptes"],
+        "rows": [
+          { "cells": ["Agent de règlement (banque centrale)", "Comptes ESPÈCES"] },
+          { "cells": ["Dépositaire central", "Comptes TITRES"] }
+        ]
+      }
+    },
+    {
+      "id": "m10-f12",
+      "theme": "Acteurs post-marché — dépositaire vs conservateur",
+      "recto": "Dépositaire central ou conservateur : qui fait quoi ?",
+      "verso": [
+        "DÉPOSITAIRE CENTRAL : tient les comptes titres au niveau CENTRAL (en France = Euroclear France)",
+        "CONSERVATEUR : inscrit et ADMINISTRE la vie des titres de l'investisseur"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Dépositaire central vs Conservateur",
+        "headers": ["Acteur", "Rôle"],
+        "rows": [
+          { "cells": ["Dépositaire central (Euroclear France)", "Comptes titres au niveau central"] },
+          { "cells": ["Conservateur", "Inscrit + administre la vie des titres de l'investisseur"] }
+        ]
+      },
+      "verif": "✓ Vérifié — Euroclear France = dépositaire central français ; teneur de compte-conservateur agréé ACPR (Banque de France)"
+    },
+    {
+      "id": "m10-f13",
+      "theme": "Modes de règlement — comptant / terme / SRD",
+      "recto": "Comptant, à terme, SRD : quelle différence ?",
+      "verso": [
+        "COMPTANT : paiement et livraison IMMÉDIATS",
+        "À TERME : à une date ULTÉRIEURE convenue",
+        "SRD (Service de Règlement Différé) : règlement-livraison reporté à la FIN DU MOIS BOURSIER"
+      ],
+      "verif": "✓ Vérifié — SRD = report au dernier jour de bourse du mois, effet de levier jusqu'à x5 (Euronext)"
+    },
+    {
+      "id": "m10-f14",
+      "theme": "Marchés — primaire vs secondaire",
+      "recto": "Marché primaire ou secondaire ?",
+      "verso": [
+        "PRIMAIRE = le 'neuf' : l'ÉMETTEUR lève des fonds (émission)",
+        "SECONDAIRE = l'occasion = la BOURSE : revente entre investisseurs",
+        "L'émetteur n'est PAS sur le secondaire (SAUF augmentation de capital)"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Primaire vs Secondaire",
+        "headers": ["Marché", "Qui ? / Quoi ?"],
+        "rows": [
+          { "cells": ["Primaire (neuf)", "Émetteur lève des fonds"] },
+          { "cells": ["Secondaire (bourse)", "Investisseurs s'échangent les titres"] }
+        ]
+      }
+    },
+    {
+      "id": "m10-f15",
+      "theme": "Marchés — gré à gré vs multilatéral",
+      "recto": "Gré à gré (OTC) ou multilatéral ?",
+      "verso": [
+        "GRÉ À GRÉ (OTC) = DEUX acteurs face à face",
+        "MULTILATÉRAL = un organisme + une multitude d'investisseurs",
+        "Internalisation systématique (IS) = gré à gré ENCADRÉ, réservé aux PROFESSIONNELS"
+      ]
+    },
+    {
+      "id": "m10-f16",
+      "theme": "Marchés — types de plateformes",
+      "recto": "Quels sont les 3 types de marchés multilatéraux ?",
+      "verso": [
+        "MR : Marché Réglementé (ex : Euronext Paris)",
+        "SMN / MTF : Système Multilatéral de Négociation",
+        "OTF : Système Organisé de Négociation",
+        "MR + SMN utilisent SYSTÉMATIQUEMENT une chambre de compensation"
+      ],
+      "visuel": {
+        "type": "pyramid",
+        "titre": "Les marchés multilatéraux",
+        "levels": [
+          { "t": "MR (Marché Réglementé)", "d": "Euronext Paris — le plus encadré" },
+          { "t": "SMN / MTF", "d": "Système Multilatéral de Négociation (ex : Marché Libre, Alternext)" },
+          { "t": "OTF", "d": "Système Organisé de Négociation" }
+        ]
+      }
+    },
+    {
+      "id": "m10-f17",
+      "theme": "Marchés Euronext — segments",
+      "recto": "Comptant, MATIF, MONEP, Marché Libre : c'est quoi ?",
+      "verso": [
+        "Euronext Paris = MR au COMPTANT (actions ET obligations)",
+        "MATIF = marché à TERME organisé",
+        "MONEP = marché réglementé des OPTIONS",
+        "Marché Libre = SMN (jeunes/petites entreprises) ; Alternext = SMN organisé hybride"
+      ]
+    },
+    {
+      "id": "m10-f18",
+      "theme": "Titres — propriété vs créance",
+      "recto": "Action ou obligation : propriété ou créance ?",
+      "verso": [
+        "ACTION = titre de PROPRIÉTÉ (coactionnaire, droits de vote/dividende)",
+        "OBLIGATION = titre de CRÉANCE (prêt à l'émetteur)",
+        "COUPON déterminé À L'ÉMISSION ; coupon zéro = pas d'intérêt mais prix d'émission < remboursement"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Action vs Obligation",
+        "headers": ["", "Action", "Obligation"],
+        "rows": [
+          { "cells": ["Nature", "Propriété", "Créance"] },
+          { "cells": ["Détenteur", "Coactionnaire", "Prêteur"] },
+          { "cells": ["Revenu", "Dividende (variable)", "Coupon (fixé à l'émission)"] }
+        ]
+      }
+    },
+    {
+      "id": "m10-f19",
+      "theme": "Transparence des marchés",
+      "recto": "Quelle transparence sur MR/SMN ?",
+      "verso": [
+        "PRÉ-négociation : affichage des 5 MEILLEURES offres et demandes",
+        "POST-négociation : publication des transactions",
+        "IS : régime SPÉCIFIQUE en pré, mais IDENTIQUE aux autres en post-négociation"
+      ],
+      "chiffres": ["5 meilleures offres/demandes (pré-négociation)"]
+    },
+    {
+      "id": "m10-f20",
+      "theme": "Animation de marché",
+      "recto": "Apporteur de liquidité ou teneur de marché ?",
+      "verso": [
+        "APPORTEUR DE LIQUIDITÉ : pour le compte d'un ÉMETTEUR",
+        "TENEUR DE MARCHÉ : pour SON propre compte",
+        "Les deux font des 'négociations pour compte propre'"
+      ]
+    },
+    {
+      "id": "m10-f21",
+      "theme": "Exécution des ordres — Euronext actions",
+      "recto": "Comment les ordres actions sont-ils exécutés sur Euronext ?",
+      "verso": [
+        "Exécution AUTOMATIQUE",
+        "Priorité : PRIX d'abord, puis TEMPS (1er arrivé)",
+        "FIXING = prix qui maximise le NOMBRE de titres échangés"
+      ],
+      "chiffres": ["Priorité = PRIX puis TEMPS"]
+    },
+    {
+      "id": "m10-f22",
+      "theme": "Exécution — horaires Euronext",
+      "recto": "Quels sont les grands horaires d'une séance Euronext actions ?",
+      "verso": [
+        "7h15-9h00 : préouverture (accumulation des ordres)",
+        "9h00 : fixing d'OUVERTURE",
+        "9h01-17h30 : séance en CONTINU",
+        "17h35 : fixing de CLÔTURE"
+      ],
+      "visuel": {
+        "type": "flow",
+        "titre": "Journée de bourse Euronext (actions)",
+        "steps": [
+          { "t": "7h15-9h00", "d": "Préouverture" },
+          { "t": "9h00", "d": "Fixing d'ouverture" },
+          { "t": "9h01-17h30", "d": "Continu" },
+          { "t": "17h35", "d": "Fixing de clôture" }
+        ]
+      }
+    },
+    {
+      "id": "m10-f23",
+      "theme": "Types d'ordres de bourse",
+      "recto": "Quels sont les 3 grands types d'ordres ?",
+      "verso": [
+        "AU MARCHÉ : exécution immédiate, AUCUNE limite de prix",
+        "À LA MEILLEURE LIMITE : au meilleur prix dispo, solde inscrit au même prix",
+        "À COURS LIMITÉ : prix MAX à l'achat / prix MIN à la vente"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Les 3 types d'ordres",
+        "headers": ["Ordre", "Logique de prix"],
+        "rows": [
+          { "cells": ["Au marché", "Aucune limite, priorité à l'exécution"] },
+          { "cells": ["À la meilleure limite", "Meilleur prix dispo, solde au carnet"] },
+          { "cells": ["À cours limité", "Prix MAX (achat) / MIN (vente)"] }
+        ]
+      }
+    },
+    {
+      "id": "m10-f24",
+      "theme": "Marché obligataire — spécificités",
+      "recto": "Quelles particularités du marché obligataire ?",
+      "verso": [
+        "Principalement DE GRÉ À GRÉ",
+        "PIED DE COUPON : ajouter les intérêts COURUS au prix",
+        "QUOTITÉ : achat/vente par LOTS"
+      ]
+    },
+    {
+      "id": "m10-f25",
+      "theme": "Produits dérivés",
+      "recto": "Fermes ou optionnels ? Où se traitent-ils ?",
+      "verso": [
+        "FERMES : Futures, Swaps (engagement obligatoire)",
+        "OPTIONNELS : Options (call/put — droit, pas obligation)",
+        "Futures : marché ORGANISÉ (dépôt de garantie à la chambre) ; Options : organisé OU gré à gré"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Dérivés fermes vs optionnels",
+        "headers": ["Type", "Instruments", "Marché"],
+        "rows": [
+          { "cells": ["Ferme", "Futures, Swaps, FRA", "Organisé (Futures)"] },
+          { "cells": ["Optionnel", "Options (call/put)", "Organisé OU gré à gré"] }
+        ]
+      }
+    },
+    {
+      "id": "m10-f26",
+      "theme": "Risques financiers",
+      "recto": "Quels sont les grands risques à connaître ?",
+      "verso": [
+        "CRÉDIT : l'émetteur ne paie pas intérêts/capital",
+        "CONTREPARTIE : l'emprunteur fait défaut",
+        "MARCHÉ : variation offre/demande (indépendant de la qualité de l'émetteur)",
+        "LIQUIDITÉ : pas de contrepartie pour revendre ; CHANGE ; TAUX"
+      ]
+    },
+    {
+      "id": "m10-f27",
+      "theme": "Risques — couverture",
+      "recto": "Quels risques ne sont PAS couvrables par des dérivés ?",
+      "verso": [
+        "Risque de LIQUIDITÉ et risque OPÉRATIONNEL : NON couvrables par dérivés",
+        "Les autres (taux, change, marché...) peuvent être couverts"
+      ],
+      "chiffres": ["Liquidité + opérationnel = non couvrables"]
+    }
+  ]
+}

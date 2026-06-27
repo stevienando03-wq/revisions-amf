@@ -1,0 +1,434 @@
+{
+  "id": "m5",
+  "fiches": [
+    {
+      "id": "m5-f1",
+      "theme": "Démarchage — définition",
+      "recto": "Qu'est-ce qu'un démarchage bancaire ou financier (art. L341-1 CMF) ?",
+      "verso": [
+        "Prise de contact NON SOLLICITÉE…",
+        "…avec une personne DÉTERMINÉE (ciblée)…",
+        "…pour obtenir un accord sur une opération/un service financier."
+      ],
+      "chiffres": ["Art. L341-1 CMF"],
+      "verif": "✓ Vérifié — Légifrance, art. L341-1 CMF (2024)"
+    },
+    {
+      "id": "m5-f2",
+      "theme": "Démarchage — définition",
+      "recto": "Les 2 critères CUMULATIFS du démarchage",
+      "verso": [
+        "1) Contact NON sollicité",
+        "2) Personne DÉTERMINÉE (pas une pub de masse)"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Démarchage : oui ou non ?",
+        "headers": ["Critère", "= Démarchage", "≠ Démarchage"],
+        "rows": [
+          { "cells": ["Contact", "Non sollicité", "Sollicité par le client"] },
+          { "cells": ["Cible", "Personne déterminée", "Pub de masse / mailing non ciblé"] },
+          { "cells": ["Lieu physique", "Domicile, travail, lieu non commercial (même à l'initiative du client)", "Entreprise reçoit à SA propre initiative sur son lieu de travail"] }
+        ]
+      }
+    },
+    {
+      "id": "m5-f3",
+      "theme": "Démarchage — définition",
+      "recto": "Le PIÈGE du lieu physique",
+      "verso": [
+        "Se rendre PHYSIQUEMENT au domicile / lieu de travail / lieu non commercial = démarchage…",
+        "…MÊME si le client est à l'initiative !",
+        "Exception : entreprise qui reçoit à SA propre initiative sur son lieu de travail."
+      ]
+    },
+    {
+      "id": "m5-f4",
+      "theme": "Démarchage — définition",
+      "recto": "Une pub de masse / un mailing non ciblé = démarchage ?",
+      "verso": [
+        "NON : il manque la personne DÉTERMINÉE.",
+        "Le moyen (mail, tél…) n'a aucune importance.",
+        "Une prise de contact SOLLICITÉE par le client n'est pas un démarchage."
+      ]
+    },
+    {
+      "id": "m5-f5",
+      "theme": "Démarchage — champ",
+      "recto": "Les 6 opérations/services visés (art. L341-1)",
+      "verso": [
+        "Instruments financiers / banque / service d'investissement…",
+        "…biens divers (L550-1) / conseil par un CIF / service de paiement."
+      ],
+      "visuel": {
+        "type": "pyramid",
+        "titre": "Les 6 objets possibles de l'accord recherché",
+        "levels": [
+          { "t": "1. Opération sur instruments financiers" },
+          { "t": "2. Opération de banque ou connexe" },
+          { "t": "3. Service d'investissement ou connexe" },
+          { "t": "4. Opération sur biens divers", "d": "art. L550-1" },
+          { "t": "5. Conseil en investissement par un CIF" },
+          { "t": "6. Service de paiement" }
+        ]
+      }
+    },
+    {
+      "id": "m5-f6",
+      "theme": "Démarchage — champ",
+      "recto": "Qui les règles protègent-elles EN PREMIER LIEU ?",
+      "verso": [
+        "Le CONSOMMATEUR = personne physique hors cadre professionnel.",
+        "NE s'appliquent PAS aux contreparties éligibles.",
+        "Une grande partie ne concerne pas non plus les clients professionnels."
+      ]
+    },
+    {
+      "id": "m5-f7",
+      "theme": "Démarchage — qui peut",
+      "recto": "Qui peut démarcher ? Le cas spécial du CIF",
+      "verso": [
+        "Établissements de crédit, entreprises d'investissement/d'assurance, sociétés de capital-risque, IOBSP, épargne salariale…",
+        "CIF : UNIQUEMENT pour SON propre service de conseil (piège !)."
+      ]
+    },
+    {
+      "id": "m5-f8",
+      "theme": "Démarchage — le mandat",
+      "recto": "Mandant vs Mandataire : ne pas inverser",
+      "verso": [
+        "Mandant = DONNE le mandat (prestataire habilité), reste civilement responsable.",
+        "Mandataire = REÇOIT le mandat : il VEND seulement, ne réalise JAMAIS la prestation."
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Mandant vs Mandataire",
+        "headers": ["", "Mandant", "Mandataire"],
+        "rows": [
+          { "cells": ["Rôle", "Donne le mandat", "Reçoit le mandat"] },
+          { "cells": ["Qui", "Prestataire habilité", "Personne physique/morale"] },
+          { "cells": ["Fait quoi", "Reste civilement responsable", "Vend, mais ne réalise PAS la prestation"] }
+        ]
+      }
+    },
+    {
+      "id": "m5-f9",
+      "theme": "Démarchage — conditions",
+      "recto": "Conditions de la personne physique qui démarche",
+      "verso": [
+        "18 ans min + formation/expérience min + honorabilité (pas de condamnation grave).",
+        "Assurance RC + enregistrement ORIAS (si mandat).",
+        "Carte de démarchage : OBLIGATOIRE seulement si déplacement chez le client."
+      ],
+      "chiffres": ["18 ans minimum", "Enregistrement : ORIAS"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Les conditions à cumuler",
+        "headers": ["Condition", "Exigence"],
+        "rows": [
+          { "cells": ["Âge", "18 ans minimum"] },
+          { "cells": ["Compétence", "Formation + expérience minimales"] },
+          { "cells": ["Honorabilité", "Pas de condamnation grave"] },
+          { "cells": ["Assurance", "Responsabilité civile"] },
+          { "cells": ["Enregistrement (si mandat)", "ORIAS"] },
+          { "cells": ["Carte de démarchage", "Si déplacement chez le client"] }
+        ]
+      }
+    },
+    {
+      "id": "m5-f10",
+      "theme": "Démarchage — obligations",
+      "recto": "Les obligations du démarcheur sont-elles allégées vs un PSI ?",
+      "verso": [
+        "NON : MÊMES obligations de loyauté, information, adéquation qu'un PSI…",
+        "…+ des obligations SPÉCIFIQUES de communication en plus."
+      ]
+    },
+    {
+      "id": "m5-f11",
+      "theme": "Démarchage — obligations",
+      "recto": "Ce que le démarcheur DOIT communiquer au client",
+      "verso": [
+        "Son nom, adresse, n° d'enregistrement.",
+        "La/les personne(s) morale(s) pour qui il agit.",
+        "Conditions du contrat + EXISTENCE ou ABSENCE d'un droit de rétractation et ses modalités.",
+        "Présenter sa CARTE s'il se déplace chez le client."
+      ]
+    },
+    {
+      "id": "m5-f12",
+      "theme": "Démarchage — avant l'offre",
+      "recto": "Les 3 éléments à recueillir AVANT de formuler une offre",
+      "verso": [
+        "Capacité financière (faire face aux risques)",
+        "Connaissance & expérience",
+        "Objectif d'investissement / financement"
+      ],
+      "visuel": {
+        "type": "flow",
+        "titre": "Avant l'offre : les 3 piliers MIF",
+        "steps": [
+          { "t": "Capacité financière", "d": "Faire face aux risques" },
+          { "t": "Connaissance & expérience", "d": "Produits/services financiers" },
+          { "t": "Objectif", "d": "Investissement / financement" }
+        ]
+      }
+    },
+    {
+      "id": "m5-f13",
+      "theme": "Droits — délais",
+      "recto": "PIÈGE MAJEUR : 14 jours vs 48 heures",
+      "verso": [
+        "14 JOURS = RÉTRACTATION = revenir en arrière APRÈS (cas général).",
+        "48 HEURES = RÉFLEXION = délai AVANT de s'engager (instruments financiers / RTO / exécution).",
+        "Ne JAMAIS les confondre."
+      ],
+      "chiffres": ["Rétractation : 14 jours", "Réflexion : 48 heures"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Rétractation vs Réflexion",
+        "headers": ["", "14 jours", "48 heures"],
+        "rows": [
+          { "cells": ["Nature", "Rétractation (revenir APRÈS)", "Réflexion (AVANT engagement)"] },
+          { "cells": ["Quand", "Cas général du démarchage", "Instruments financiers / RTO / exécution"] },
+          { "cells": ["Effet", "Sans justifier ni pénalité", "Puis consentement EXPRÈS requis"] }
+        ]
+      },
+      "verif": "✓ Vérifié — art. L341-16 CMF (Légifrance)"
+    },
+    {
+      "id": "m5-f14",
+      "theme": "Droits — délais",
+      "recto": "Délai de RÉTRACTATION du démarchage",
+      "verso": [
+        "14 jours, sans justifier sa décision ni payer de pénalité."
+      ],
+      "chiffres": ["14 jours"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Rétractation démarchage",
+        "value": "14 jours",
+        "note": "Sans justification ni pénalité"
+      },
+      "verif": "✓ Vérifié — art. L341-16 CMF"
+    },
+    {
+      "id": "m5-f15",
+      "theme": "Droits — délais",
+      "recto": "Délai de RÉFLEXION : quand et quelle suite ?",
+      "verso": [
+        "48 h pour : instruments financiers déterminés / exécution d'ordres / RTO.",
+        "PAS de rétractation dans ce cas.",
+        "Après les 48 h : recueillir le CONSENTEMENT EXPRÈS (le silence ≠ accord)."
+      ],
+      "chiffres": ["48 heures"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Réflexion (IF / RTO)",
+        "value": "48 heures",
+        "note": "Puis consentement exprès — pas de rétractation"
+      },
+      "verif": "✓ Vérifié — art. L341-16 CMF"
+    },
+    {
+      "id": "m5-f16",
+      "theme": "Droits — délais",
+      "recto": "Pourquoi réflexion (et pas rétractation) sur les instruments financiers ?",
+      "verso": [
+        "Prix VOLATIL : impossible de revenir en arrière APRÈS.",
+        "On protège donc le client AVANT l'engagement (délai de réflexion)."
+      ]
+    },
+    {
+      "id": "m5-f17",
+      "theme": "Sanctions",
+      "recto": "Sanction du démarchage IRRÉGULIER",
+      "verso": [
+        "Jusqu'à 5 ans de prison + 375 000 € d'amende.",
+        "+ interdiction d'exercer + privation des droits civiques.",
+        "Ne pas inventer un autre montant !"
+      ],
+      "chiffres": ["5 ans", "375 000 €"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Sanction démarchage irrégulier",
+        "value": "5 ans + 375 000 €",
+        "note": "+ interdiction d'exercer + privation des droits civiques"
+      },
+      "verif": "✓ Vérifié — art. L353-2 CMF (Légifrance)"
+    },
+    {
+      "id": "m5-f18",
+      "theme": "Vente à distance",
+      "recto": "Vente à distance : pour QUI et quel code ?",
+      "verso": [
+        "Régie par le Code de la CONSOMMATION (repris dans le CMF).",
+        "Ne concerne donc QUE les consommateurs (personnes physiques hors cadre pro).",
+        "Champ : de l'entrée en relation précontractuelle jusqu'à la conclusion."
+      ]
+    },
+    {
+      "id": "m5-f19",
+      "theme": "Vente à distance",
+      "recto": "Vente à distance : quels droits et quelle info ?",
+      "verso": [
+        "Rétractation 14 jours OUI…",
+        "…mais réflexion 48 h NON (piège !).",
+        "Info précontractuelle renforcée : AVANT signature, sur support DURABLE."
+      ],
+      "chiffres": ["14 jours (rétractation)", "Pas de 48 h"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Démarchage vs Vente à distance",
+        "headers": ["Droit du client", "Démarchage", "Vente à distance"],
+        "rows": [
+          { "cells": ["Rétractation 14 j", "Oui", "Oui"] },
+          { "cells": ["Réflexion 48 h", "Oui (IF / RTO)", "Non"] },
+          { "cells": ["Information", "Communications spécifiques", "Renforcée, AVANT signature, support durable"] }
+        ]
+      }
+    },
+    {
+      "id": "m5-f20",
+      "theme": "MIF — catégories de clients",
+      "recto": "Les 3 catégories MIF et leur niveau de protection",
+      "verso": [
+        "CNP (Non-Professionnel / détail) = MAX de protection.",
+        "CP (Professionnel) = protection MOINDRE.",
+        "CEL (Contrepartie Éligible) = PAS un client, AUCUNE protection."
+      ],
+      "visuel": {
+        "type": "pyramid",
+        "titre": "Protection décroissante",
+        "levels": [
+          { "t": "CNP — Client Non-Professionnel (détail)", "d": "Protection MAXIMALE" },
+          { "t": "CP — Client Professionnel", "d": "Protection moindre" },
+          { "t": "CEL — Contrepartie Éligible", "d": "Aucune protection (exécution / RTO / compte propre)" }
+        ]
+      },
+      "verif": "✓ Vérifié — MiFID II, classification des clients (AMF)"
+    },
+    {
+      "id": "m5-f21",
+      "theme": "MIF — catégories de clients",
+      "recto": "Changement de catégorie : qui peut quoi ?",
+      "verso": [
+        "Demander PLUS de protection : le PSI NE peut s'y opposer.",
+        "Demander MOINS (CNP→CP) : seulement à l'initiative du client + conditions de capacités."
+      ]
+    },
+    {
+      "id": "m5-f22",
+      "theme": "MIF — tests selon le service",
+      "recto": "Quel test selon le service rendu ?",
+      "verso": [
+        "Conseil + gestion sous mandat = ADÉQUATION (3 piliers) → abstention si pas d'info.",
+        "Exécution + RTO = CARACTÈRE APPROPRIÉ (connaissance/expérience) → mise en garde.",
+        "Exécution simple = AUCUN test."
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Test selon le service",
+        "headers": ["Service", "Test", "Si manque d'info"],
+        "rows": [
+          { "cells": ["Conseil / gestion sous mandat", "Adéquation (3 piliers)", "ABSTENTION"] },
+          { "cells": ["Exécution / RTO", "Caractère approprié (connais./expé.)", "MISE EN GARDE"] },
+          { "cells": ["Exécution simple", "Aucun test", "—"] }
+        ]
+      },
+      "verif": "✓ Vérifié — MiFID II / AMF DOC-2022-03 (ESMA)"
+    },
+    {
+      "id": "m5-f23",
+      "theme": "MIF — rémunérations",
+      "recto": "RÈGLE D'OR des commissions (rémunérations/avantages)",
+      "verso": [
+        "Doit AMÉLIORER la qualité du service…",
+        "…ET respecter l'intérêt EXCLUSIF du client…",
+        "…avec un lien DIRECT au service rendu. Sinon : INTERDITE."
+      ],
+      "chiffres": ["Art. 314-13 RG AMF (info commissions)"]
+    },
+    {
+      "id": "m5-f24",
+      "theme": "MIF — rémunérations",
+      "recto": "Rétrocommissions : peut-on les conserver ?",
+      "verso": [
+        "Conseil INDÉPENDANT ou gestion sous mandat : TOUT reversé au client (interdiction de conserver).",
+        "Conseil NON indépendant : peut conserver, AVEC transparence totale."
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Rétrocommissions",
+        "headers": ["Service", "Conserver ?"],
+        "rows": [
+          { "cells": ["Conseil indépendant", "Non — tout reversé au client"] },
+          { "cells": ["Gestion sous mandat", "Non — tout reversé au client"] },
+          { "cells": ["Conseil non indépendant", "Oui, avec transparence totale"] }
+        ]
+      }
+    },
+    {
+      "id": "m5-f25",
+      "theme": "MIF — rémunérations",
+      "recto": "Info sur les commissions : quoi et quand ?",
+      "verso": [
+        "Existence + nature + montant (ou mode de calcul).",
+        "De façon complète, exacte, compréhensible.",
+        "AVANT la fourniture du service."
+      ],
+      "chiffres": ["Art. 314-13 RG AMF"]
+    },
+    {
+      "id": "m5-f26",
+      "theme": "MIF — frais des OPC",
+      "recto": "Les 3 types de commissions des OPC",
+      "verso": [
+        "GESTION = % de l'actif net, à chaque valorisation.",
+        "MOUVEMENT = selon nb de transactions, partagée SGP + dépositaire.",
+        "PERFORMANCE = atteinte d'objectifs, cohérente avec le prospectus."
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Commissions des OPC",
+        "headers": ["Commission", "Assiette / base"],
+        "rows": [
+          { "cells": ["Gestion", "% actif net, à chaque valorisation"] },
+          { "cells": ["Mouvement", "Nb de transactions (SGP + dépositaire)"] },
+          { "cells": ["Performance", "Atteinte d'objectifs, cohérence prospectus"] }
+        ]
+      }
+    },
+    {
+      "id": "m5-f27",
+      "theme": "MIF — frais & DICI",
+      "recto": "DICI et impact des frais sur la VNI",
+      "verso": [
+        "DICI = Document d'Information Clé pour l'Investisseur.",
+        "Présente les frais du dernier exercice clos.",
+        "Ces frais se DÉDUISENT de la VNI (Valeur Nette d'Inventaire)."
+      ]
+    },
+    {
+      "id": "m5-f28",
+      "theme": "Identité & conservation",
+      "recto": "Vérification d'identité et conservation des documents",
+      "verso": [
+        "Personne morale : extrait de registre de MOINS DE 3 MOIS.",
+        "Conservation : toute la relation + 5 ANS après clôture du compte.",
+        "Pas de vérif possible → aucune relation ni opération."
+      ],
+      "chiffres": ["Extrait < 3 mois", "Conservation : relation + 5 ans"]
+    },
+    {
+      "id": "m5-f29",
+      "theme": "Sigles clés",
+      "recto": "Les sigles à connaître par cœur",
+      "verso": [
+        "PSI = Prestataire de Services d'Investissement ; CIF = Conseiller en Investissement Financier ; SGP = Société de Gestion de Portefeuille.",
+        "OPC = Organisme de Placement Collectif ; RTO = Réception/Transmission d'Ordres ; IOBSP = Intermédiaire en Opérations de Banque et Services de Paiement.",
+        "ORIAS = registre des intermédiaires ; CMF = Code Monétaire et Financier ; RG AMF = Règlement Général de l'AMF."
+      ]
+    }
+  ]
+}

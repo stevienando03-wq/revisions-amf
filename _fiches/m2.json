@@ -1,0 +1,375 @@
+{
+  "id": "m2",
+  "fiches": [
+    {
+      "id": "m2-f1",
+      "theme": "Principes déontologiques",
+      "recto": "Les 2 principes que les PSI respectent EN TOUTES CIRCONSTANCES ?",
+      "verso": [
+        "1) Servir au mieux l'INTÉRÊT DU CLIENT",
+        "2) Favoriser l'INTÉGRITÉ DES MARCHÉS",
+        "Piège : il y en a DEUX, pas seulement l'intérêt du client"
+      ],
+      "chiffres": ["2 principes"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Les 2 principes déontologiques",
+        "headers": ["", "Principe 1", "Principe 2"],
+        "rows": [
+          { "cells": ["But", "Protéger le CLIENT", "Protéger le MARCHÉ"] },
+          { "cells": ["Énoncé", "Servir l'intérêt du client", "Intégrité des marchés"] }
+        ]
+      }
+    },
+    {
+      "id": "m2-f2",
+      "theme": "Principes déontologiques",
+      "recto": "Comment le PSI doit-il agir ? (le triptyque)",
+      "verso": [
+        "De manière HONNÊTE, LOYALE et PROFESSIONNELLE",
+        "Mot exact : « LOYALE » (pas 'transparente' ni 'diligente')"
+      ],
+      "chiffres": ["3 qualificatifs"]
+    },
+    {
+      "id": "m2-f3",
+      "theme": "RG AMF — 2 familles de règles",
+      "recto": "Les 2 grandes familles de règles du RG AMF ?",
+      "verso": [
+        "ORGANISATION = tourné vers l'INTERNE (structure)",
+        "BONNE CONDUITE = tourné vers le CLIENT",
+        "Cadre : RG AMF + CMF (Code monétaire et financier)"
+      ],
+      "chiffres": ["2 familles"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Organisation vs Bonne conduite",
+        "headers": ["", "ORGANISATION (interne)", "BONNE CONDUITE (client)"],
+        "rows": [
+          { "cells": ["Exemples", "Données, conformité, dirigeants", "Catégorisation, information"] },
+          { "cells": ["", "Cartes pro, transactions perso", "Adéquation, conventions, ordres"] },
+          { "cells": ["Pièges", "Conflits d'intérêts = ICI", "Réclamations clients = ICI"] }
+        ]
+      }
+    },
+    {
+      "id": "m2-f4",
+      "theme": "RG AMF — 2 familles de règles",
+      "recto": "Conflits d'intérêts et transactions personnelles : quelle famille ?",
+      "verso": [
+        "ORGANISATION (orienté interne) — piège classique !",
+        "À l'inverse : catégorisation des clients = BONNE CONDUITE"
+      ]
+    },
+    {
+      "id": "m2-f5",
+      "theme": "RG AMF — 2 familles de règles",
+      "recto": "Le rapport annuel sur la gestion pour compte de tiers : à qui ? combien de fois ?",
+      "verso": [
+        "À l'AMF (et NON au client)",
+        "1 fois par an",
+        "Figure pourtant dans les règles de BONNE CONDUITE"
+      ],
+      "chiffres": ["1 fois / an", "destinataire = AMF"]
+    },
+    {
+      "id": "m2-f6",
+      "theme": "Dispositif de conformité",
+      "recto": "De quoi est composé le dispositif de conformité ?",
+      "verso": [
+        "1) des PROCÉDURES et mesures (détecter la non-conformité)",
+        "2) une FONCTION conformité (adapter, vérifier, conseiller)",
+        "Le responsable doit être AUTONOME et INDÉPENDANT"
+      ],
+      "chiffres": ["2 composantes"]
+    },
+    {
+      "id": "m2-f7",
+      "theme": "Dispositif de conformité",
+      "recto": "Les 3 dimensions du RISQUE DE CONFORMITÉ ?",
+      "verso": [
+        "1) SANCTIONS",
+        "2) PERTE FINANCIÈRE",
+        "3) ATTEINTE À LA RÉPUTATION",
+        "Piège : ce n'est pas QUE les sanctions"
+      ],
+      "chiffres": ["3 dimensions"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Risque de conformité",
+        "value": "3",
+        "note": "Sanctions + Perte financière + Atteinte à la réputation"
+      }
+    },
+    {
+      "id": "m2-f8",
+      "theme": "RCCI / RCSI",
+      "recto": "RCCI ou RCSI ? Qui pour qui ?",
+      "verso": [
+        "RCCI = SGP (sociétés de gestion de portefeuille)",
+        "RCSI = AUTRES PSI (banques, brokers…)",
+        "Astuce : RCCI a un 'CI' de plus = Contrôle Interne (renforcé chez les SGP)"
+      ],
+      "verif": "✓ Vérifié — AMF / cartes pro RCCI & RCSI 2024",
+      "visuel": {
+        "type": "compare",
+        "titre": "RCCI vs RCSI",
+        "headers": ["", "RCCI", "RCSI"],
+        "rows": [
+          { "cells": ["Sigle", "Conformité + Contrôle Interne", "Conformité Services d'Invest."] },
+          { "cells": ["Pour qui", "SGP (gestion de portefeuille)", "Autres PSI"] },
+          { "cells": ["Carte pro", "AMF", "AMF"] }
+        ]
+      }
+    },
+    {
+      "id": "m2-f9",
+      "theme": "RCCI / RCSI",
+      "recto": "Qui délivre la carte professionnelle du responsable conformité ?",
+      "verso": [
+        "L'AMF (pas l'ACPR, pas l'employeur)"
+      ],
+      "verif": "✓ Vérifié — AMF (obtention carte pro RCSI/RCCI)"
+    },
+    {
+      "id": "m2-f10",
+      "theme": "RCCI / RCSI",
+      "recto": "Les 3 missions clés du Responsable Conformité (RC) ?",
+      "verso": [
+        "1) ADAPTER le dispositif aux activités/évolutions",
+        "2) CONSEILLER / INFORMER les collaborateurs",
+        "3) VÉRIFIER la bonne application des procédures"
+      ],
+      "chiffres": ["3 missions"]
+    },
+    {
+      "id": "m2-f11",
+      "theme": "RCCI / RCSI",
+      "recto": "Le RC peut-il déléguer ou externaliser ses tâches ?",
+      "verso": [
+        "OUI, il peut déléguer / externaliser",
+        "MAIS il en garde la RESPONSABILITÉ",
+        "Déléguer ≠ transférer la responsabilité"
+      ]
+    },
+    {
+      "id": "m2-f12",
+      "theme": "Contrôle interne — 3 niveaux",
+      "recto": "Les 3 niveaux de contrôle interne ?",
+      "verso": [
+        "N1 = OPÉRATIONNELS + leur responsable",
+        "N2 = contrôle PERMANENT (Conformité, Risques, Contrôle interne)",
+        "N3 = contrôle PÉRIODIQUE (Audit)"
+      ],
+      "chiffres": ["3 niveaux"],
+      "verif": "✓ Vérifié — permanent (N1/N2) vs périodique (N3 = audit interne)",
+      "visuel": {
+        "type": "pyramid",
+        "titre": "Les 3 niveaux de contrôle",
+        "levels": [
+          { "t": "Niveau 3 — Audit", "d": "Contrôle PÉRIODIQUE" },
+          { "t": "Niveau 2 — Conformité / Risques / CI", "d": "Contrôle PERMANENT" },
+          { "t": "Niveau 1 — Opérationnels", "d": "Eux-mêmes + leur responsable" }
+        ]
+      }
+    },
+    {
+      "id": "m2-f13",
+      "theme": "Contrôle interne — 3 niveaux",
+      "recto": "PERMANENT ou PÉRIODIQUE ? Le piège du QCM",
+      "verso": [
+        "PERMANENT = Niveau 2 (Conformité / Risques / CI)",
+        "PÉRIODIQUE = Niveau 3 (Audit)",
+        "Ne pas inverser !"
+      ]
+    },
+    {
+      "id": "m2-f14",
+      "theme": "AMF, sanctions, responsabilités",
+      "recto": "Sur quel périmètre l'AMF contrôle-t-elle les PSI ?",
+      "verso": [
+        "1) PSI dont l'activité est en FRANCE",
+        "2) PSI de l'EEE opérant en France via le PASSEPORT EUROPÉEN",
+        "EEE = Espace Économique Européen"
+      ]
+    },
+    {
+      "id": "m2-f15",
+      "theme": "AMF, sanctions, responsabilités",
+      "recto": "Quels types de sanctions encourent PSI et collaborateurs ?",
+      "verso": [
+        "ADMINISTRATIVES ET PÉNALES (les deux)",
+        "Piège : pas seulement administratives"
+      ],
+      "chiffres": ["2 types : admin. + pénales"]
+    },
+    {
+      "id": "m2-f16",
+      "theme": "AMF, sanctions, responsabilités",
+      "recto": "Qui reste responsable malgré… ? (3 idées-pièges)",
+      "verso": [
+        "Nommer un RC ne DÉDOUANE PAS les dirigeants",
+        "Externaliser ne DÉCHARGE PAS le PSI",
+        "C'est une obligation de MOYENS (pas de résultat) — mais elle n'exonère personne"
+      ]
+    },
+    {
+      "id": "m2-f17",
+      "theme": "Conflits d'intérêts",
+      "recto": "Les 3 étapes de gestion des conflits d'intérêts ?",
+      "verso": [
+        "1) IDENTIFIER",
+        "2) EMPÊCHER (séparation = « muraille de Chine »)",
+        "3) INFORMER le client (AVANT la relation si conflit non éliminable)"
+      ],
+      "chiffres": ["3 étapes"],
+      "verif": "✓ Vérifié — identifier / prévenir (chinese walls) / gérer (cadre AMF)",
+      "visuel": {
+        "type": "flow",
+        "titre": "Conflits d'intérêts : 3 étapes",
+        "steps": [
+          { "t": "1. IDENTIFIER", "d": "Repérer les conflits" },
+          { "t": "2. EMPÊCHER", "d": "Muraille de Chine (séparation)" },
+          { "t": "3. INFORMER", "d": "Le client, avant la relation" }
+        ]
+      }
+    },
+    {
+      "id": "m2-f18",
+      "theme": "Conflits d'intérêts",
+      "recto": "Qu'est-ce que la « muraille de Chine » ? Un conflit oppose qui ?",
+      "verso": [
+        "Muraille de Chine = SÉPARATION DES ACTIVITÉS (étape 2 = empêcher)",
+        "Ce n'est PAS une mesure d'information",
+        "Conflit possible : client / employeur MAIS AUSSI client / autre client"
+      ]
+    },
+    {
+      "id": "m2-f19",
+      "theme": "Information privilégiée",
+      "recto": "Les 4 critères CUMULATIFS d'une information privilégiée ?",
+      "verso": [
+        "1) PRÉCISE",
+        "2) NON PUBLIQUE",
+        "3) sur émetteur(s) / instrument(s) financier(s)",
+        "4) INFLUENCE SENSIBLE sur le cours si rendue publique"
+      ],
+      "chiffres": ["4 critères cumulatifs", "Art. 621-1 RG AMF"],
+      "verif": "✓ Vérifié — déf. reprise par MAR art. 7 (« influence de façon sensible »)",
+      "visuel": {
+        "type": "bignum",
+        "titre": "Le mot-piège",
+        "value": "SENSIBLE",
+        "note": "Influence « sensible » sur le cours (PAS 'significative' ni 'forte')"
+      }
+    },
+    {
+      "id": "m2-f20",
+      "theme": "Information privilégiée",
+      "recto": "Le dispositif info privilégiée : la même logique en 3 temps ?",
+      "verso": [
+        "IDENTIFIER (listes : surveillance, interdiction, initiés)",
+        "PRÉVENIR (barrières à l'information)",
+        "INFORMER (transactions perso des personnes concernées)"
+      ],
+      "chiffres": ["3 temps"]
+    },
+    {
+      "id": "m2-f21",
+      "theme": "Listes : surveillance / interdiction / initiés",
+      "recto": "Qui dresse quelle liste ? (le piège de l'auteur)",
+      "verso": [
+        "SURVEILLANCE + INTERDICTION = dressées par le PSI",
+        "INITIÉS = établie par l'ÉMETTEUR",
+        "Surveillance = le PSI A une info privilégiée ; Interdiction = le PSI doit RESTREINDRE ses activités"
+      ],
+      "chiffres": ["Liste d'initiés : art. 621-18-4 CMF"],
+      "verif": "✓ Vérifié — liste d'initiés établie par l'émetteur (MAR art. 18)",
+      "visuel": {
+        "type": "compare",
+        "titre": "Les 3 listes",
+        "headers": ["Liste", "Auteur", "Objet"],
+        "rows": [
+          { "cells": ["Surveillance", "PSI", "Info privilégiée détenue"] },
+          { "cells": ["Interdiction", "PSI", "Activités à restreindre"] },
+          { "cells": ["Initiés", "ÉMETTEUR", "Personnes ayant accès aux infos"] }
+        ]
+      }
+    },
+    {
+      "id": "m2-f22",
+      "theme": "Listes : surveillance / interdiction / initiés",
+      "recto": "Liste d'initiés : à disposition de qui ? déclaration CNIL ?",
+      "verso": [
+        "Tenue à disposition de l'AMF",
+        "DISPENSÉE de déclaration à la CNIL",
+        "Établie, mise à jour et conservée par l'émetteur"
+      ],
+      "verif": "✓ Vérifié — dispense de déclaration CNIL confirmée (régime MAR)"
+    },
+    {
+      "id": "m2-f23",
+      "theme": "Listes : surveillance / interdiction / initiés",
+      "recto": "À partir des listes, le PSI surveille quoi ? (3 éléments)",
+      "verso": [
+        "1) Le compte PROPRE du PSI",
+        "2) Les TRANSACTIONS PERSONNELLES",
+        "3) Les RECOMMANDATIONS D'INVESTISSEMENT"
+      ],
+      "chiffres": ["3 éléments surveillés"]
+    },
+    {
+      "id": "m2-f24",
+      "theme": "Barrières à l'information",
+      "recto": "Les 3 mesures des barrières à l'information ?",
+      "verso": [
+        "1) LOCALISATION des informations privilégiées",
+        "2) INTERDICTION de diffusion",
+        "3) SÉPARATION des activités et entités"
+      ],
+      "chiffres": ["3 mesures"]
+    },
+    {
+      "id": "m2-f25",
+      "theme": "Transactions personnelles",
+      "recto": "Transaction personnelle (art. 313-9 RG AMF) : combien de conditions ?",
+      "verso": [
+        "AU MOINS UNE condition remplie (pas toutes cumulées)",
+        "Hors fonctions ; OU pour soi / liens familiaux ou étroits ; OU intérêt direct/indirect important"
+      ],
+      "chiffres": ["≥ 1 condition", "Art. 313-9 RG AMF"]
+    },
+    {
+      "id": "m2-f26",
+      "theme": "Transactions personnelles",
+      "recto": "Qui est une « personne concernée » ? (3 cas)",
+      "verso": [
+        "1) SALARIÉ du PSI",
+        "2) DIRIGEANT du PSI",
+        "3) Personne EXTÉRIEURE fournissant des services d'investissement pour le PSI"
+      ],
+      "chiffres": ["3 cas"]
+    },
+    {
+      "id": "m2-f27",
+      "theme": "Transactions personnelles",
+      "recto": "Dispositif transactions perso : les 3 obligations du PSI ?",
+      "verso": [
+        "1) DÉFINIR le périmètre des personnes concernées",
+        "2) les INFORMER des restrictions",
+        "3) être TENU INFORMÉ des transactions réalisées"
+      ],
+      "chiffres": ["3 obligations"]
+    },
+    {
+      "id": "m2-f28",
+      "theme": "Alerte éthique",
+      "recto": "Devoir d'alerte éthique : comment et auprès de qui ?",
+      "verso": [
+        "ANONYMEMENT",
+        "Auprès du RC (Responsable Conformité)",
+        "Pas directement auprès de l'AMF, pas auprès des dirigeants"
+      ]
+    }
+  ]
+}

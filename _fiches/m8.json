@@ -1,0 +1,460 @@
+{
+  "id": "m8",
+  "fiches": [
+    {
+      "id": "m8-f1",
+      "theme": "Gestion collective — bases",
+      "recto": "Qu'est-ce qu'un OPC et à quoi sert la gestion collective ?",
+      "verso": [
+        "OPC = Organisme de Placement Collectif : mutualise l'épargne de nombreux investisseurs",
+        "Confiée à des gérants pros (le particulier n'a ni temps, ni savoir, ni moyens)",
+        "Parts/actions d'OPC = TITRES FINANCIERS (art. L. 211-1 CMF)"
+      ],
+      "chiffres": ["Art. L. 211-1 CMF = titres financiers", "Art. L. 214-1 CMF = définition des OPC"]
+    },
+    {
+      "id": "m8-f2",
+      "theme": "Gestion collective — bases",
+      "recto": "Qui exerce la gestion pour compte de tiers, à titre principal vs accessoire ?",
+      "verso": [
+        "À titre PRINCIPAL : les SGP (Sociétés de Gestion de Portefeuille)",
+        "À titre ACCESSOIRE : les PSI (Prestataires de Services d'Investissement)",
+        "Piège : ne JAMAIS inverser SGP (principal) et PSI (accessoire)"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "SGP vs PSI",
+        "headers": ["", "SGP", "PSI"],
+        "rows": [
+          { "cells": ["Gestion compte de tiers", "Principale", "Accessoire"] },
+          { "cells": ["Statut", "PSI faisant de la gestion collective", "Prestataire généraliste"] }
+        ]
+      }
+    },
+    {
+      "id": "m8-f3",
+      "theme": "Gestion collective — bases",
+      "recto": "SICAV ou FCP : on souscrit des actions ou des parts ?",
+      "verso": [
+        "SICAV = société → on souscrit des ACTIONS",
+        "FCP = copropriété → on souscrit des PARTS",
+        "Vocabulaire : on SOUSCRIT (entrée), on RACHÈTE (sortie)"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "SICAV vs FCP",
+        "headers": ["", "SICAV", "FCP"],
+        "rows": [
+          { "cells": ["Nature", "Société", "Copropriété"] },
+          { "cells": ["Titre détenu", "Actions", "Parts"] }
+        ]
+      }
+    },
+    {
+      "id": "m8-f4",
+      "theme": "OPCVM / FIA & directive AIFM",
+      "recto": "Les deux SEULES catégories d'OPC ?",
+      "verso": [
+        "OPCVM (UCITS) = directive 2009/65/CE — grand public, liquide",
+        "FIA = directive AIFM 2011/61/UE — défini par EXCLUSION (tout OPC qui n'est PAS un OPCVM)",
+        "Un OPC est SOIT OPCVM SOIT FIA, jamais les deux"
+      ],
+      "chiffres": ["OPCVM = 2009/65/CE (13/07/2009)", "FIA/AIFM = 2011/61/UE (08/06/2011)"],
+      "visuel": {
+        "type": "compare",
+        "titre": "OPCVM vs FIA",
+        "headers": ["", "OPCVM", "FIA"],
+        "rows": [
+          { "cells": ["Directive", "2009/65/CE (UCITS)", "2011/61/UE (AIFM)"] },
+          { "cells": ["Définition", "Encadré, liquide, grand public", "Par exclusion (≠ OPCVM)"] }
+        ]
+      },
+      "verif": "✓ Vérifié — BNP Paribas Securities Services / Banque de France 2023"
+    },
+    {
+      "id": "m8-f5",
+      "theme": "OPCVM / FIA & directive AIFM",
+      "recto": "Que réglemente la directive AIFM et qui vise son passeport ?",
+      "verso": [
+        "Le 'M' = Manager : réglemente les GESTIONNAIRES de FIA (pas les fonds)",
+        "Instaure un PASSEPORT européen de gestion/commercialisation transfrontalière",
+        "Ciblé sur les investisseurs PROFESSIONNELS (pas les particuliers)"
+      ],
+      "chiffres": ["En vigueur en France : 22 juillet 2013"],
+      "verif": "✓ Vérifié — directive 2011/61/UE, ordonnance 25/07/2013"
+    },
+    {
+      "id": "m8-f6",
+      "theme": "Acteurs — SGP & dépositaire",
+      "recto": "Quels sont les DEUX acteurs pour créer un OPC, et qui détient les actifs ?",
+      "verso": [
+        "SGP : GÈRE le fonds (jamais ne détient les actifs — séparation des avoirs)",
+        "DÉPOSITAIRE : société indépendante qui CONSERVE les actifs + contrôle la conformité",
+        "Piège : la SGP ne détient JAMAIS les actifs des porteurs"
+      ]
+    },
+    {
+      "id": "m8-f7",
+      "theme": "Acteurs — SGP & dépositaire",
+      "recto": "Les 2 missions du dépositaire d'OPCVM ?",
+      "verso": [
+        "1) TENUE DE COMPTE-CONSERVATION des actifs (titres + espèces, OST, règlement-livraison)",
+        "2) CONTRÔLE de conformité (règles d'investissement, VL, inventaire)",
+        "Restitution due MÊME en cas de délégation à un autre conservateur",
+        "Atteste CHAQUE ANNÉE au CAC l'existence des titres"
+      ],
+      "visuel": {
+        "type": "flow",
+        "titre": "Rôle du dépositaire",
+        "steps": [
+          { "t": "Conserver", "d": "Titres + espèces du fonds" },
+          { "t": "Contrôler", "d": "Conformité de la gestion / VL" },
+          { "t": "Restituer", "d": "Obligation maintenue même si délégation" }
+        ]
+      }
+    },
+    {
+      "id": "m8-f8",
+      "theme": "Acteurs — contrôles",
+      "recto": "Qui contrôle l'OPC : interne vs externe ?",
+      "verso": [
+        "INTERNE à la SGP : le RCCI (Responsable Conformité & Contrôle Interne)",
+        "EXTERNES à l'OPC : le DÉPOSITAIRE (contrôle conformité) + le CAC",
+        "Le CAC (commissaire aux comptes) AUDITE et CERTIFIE les comptes — chaque année"
+      ],
+      "chiffres": ["Certification des comptes par le CAC : annuelle"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Qui contrôle quoi",
+        "headers": ["Acteur", "Position", "Rôle"],
+        "rows": [
+          { "cells": ["RCCI", "Interne SGP", "Conformité interne"] },
+          { "cells": ["Dépositaire", "Externe", "Conserve + contrôle"] },
+          { "cells": ["CAC", "Externe", "Certifie les comptes"] }
+        ]
+      }
+    },
+    {
+      "id": "m8-f9",
+      "theme": "Rôle de l'AMF — 3 régimes",
+      "recto": "Les 3 régimes possibles d'un OPC selon l'AMF ?",
+      "verso": [
+        "AGRÉMENT préalable (contrôle a priori du produit)",
+        "DÉCLARATION préalable (certains FIA, à la création)",
+        "VISA du prospectus si appel public à l'épargne",
+        "RG AMF : Livre 4 dédié aux OPC"
+      ],
+      "chiffres": ["RG AMF = Livre 4 (IV)", "Art. L. 621-8 CMF = visa du prospectus"]
+    },
+    {
+      "id": "m8-f10",
+      "theme": "Rôle de l'AMF — 3 régimes",
+      "recto": "Que signifie (et ne signifie PAS) le VISA de l'AMF ?",
+      "verso": [
+        "Atteste que le prospectus est : COMPLET, COMPRÉHENSIBLE, COHÉRENT",
+        "Ne porte AUCUN jugement sur l'opportunité/la rentabilité de l'investissement",
+        "Art. L. 621-8 CMF"
+      ]
+    },
+    {
+      "id": "m8-f11",
+      "theme": "DIC / PRIIPS",
+      "recto": "Qu'est-ce que le DIC (KID) et quand est-il remis ?",
+      "verso": [
+        "DIC = Document d'Information Clé (ex-DICI) — information PRÉCONTRACTUELLE",
+        "Remis AVANT la souscription (jamais après)",
+        "Permet de comparer objectifs, risque, performances passées"
+      ],
+      "verif": "✓ Vérifié — CPR AM / France Invest 2024"
+    },
+    {
+      "id": "m8-f12",
+      "theme": "DIC / PRIIPS",
+      "recto": "L'échelle de risque du DIC : quelle plage, et le DICI a basculé en DIC PRIIPS quand ?",
+      "verso": [
+        "Échelle de risque/rendement de 1 à 7 (PAS 1-10 ni 0-7)",
+        "Catégorie 1 (la plus faible) ≠ « sans risque »",
+        "Depuis le 01/01/2023 : le DICI (OPCVM) est remplacé par le DIC PRIIPS",
+        "L'ancien SRRI devient le SRI (risque de marché + risque de crédit)"
+      ],
+      "chiffres": ["Échelle = 1 à 7", "DICI → DIC PRIIPS : 1er janvier 2023"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Échelle de risque DIC",
+        "value": "1→7",
+        "note": "1 ≠ sans risque ; indicateur = SRI (marché + crédit) depuis 2023"
+      },
+      "verif": "✓ Vérifié — Natixis / Fundkis : SRRI→SRI, DIC PRIIPS au 01/01/2023 (source m8 dit 'depuis 2019' = entrée du règlement, bascule effective 2023)"
+    },
+    {
+      "id": "m8-f13",
+      "theme": "DIC / PRIIPS",
+      "recto": "Quels risques NE sont PAS capturés par l'échelle 1-7 ?",
+      "verso": [
+        "Risque de CRÉDIT, de LIQUIDITÉ, de CONTREPARTIE",
+        "Risque OPÉRATIONNEL, impact des produits DÉRIVÉS",
+        "Détaillés à part, en texte, dans le DIC"
+      ]
+    },
+    {
+      "id": "m8-f14",
+      "theme": "Performance — définition",
+      "recto": "Les deux sources de gain d'un investissement ?",
+      "verso": [
+        "PLUS-VALUES = gain en capital, caractère ALÉATOIRE",
+        "RENDEMENTS/REVENUS = dividende (action) ou intérêt (obligation)",
+        "Une performance peut être NÉGATIVE (une perte est une 'performance')",
+        "Contrôle d'ADÉQUATION = risque produit vs profil investisseur"
+      ]
+    },
+    {
+      "id": "m8-f15",
+      "theme": "Performance — norme GIPS",
+      "recto": "Norme GIPS : comment présenter OPCVM vs benchmark ?",
+      "verso": [
+        "GIPS = norme internationale (concurrence loyale, exactitude)",
+        "OPCVM = COUPONS réinvestis",
+        "Benchmark = DIVIDENDES réinvestis",
+        "Présentation sur 5 ans, nette de frais RÉELS et de fiscalité non récupérable"
+      ],
+      "chiffres": ["Présentation sur 5 ans", "OPCVM = coupons / benchmark = dividendes réinvestis"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Réinvestissement GIPS",
+        "headers": ["", "OPCVM", "Benchmark"],
+        "rows": [
+          { "cells": ["Réinvestit", "Coupons", "Dividendes"] }
+        ]
+      }
+    },
+    {
+      "id": "m8-f16",
+      "theme": "Performance — calcul",
+      "recto": "Calcul de la performance : formule, méthode flux, chaînage ?",
+      "verso": [
+        "Perf = (VL fin / VL début) × Coefficients ; VL = actif valeur marché / nb de parts",
+        "Apports/retraits au prorata temporis = TWRR (pondéré par le TEMPS)",
+        "Sous-périodes raccordées par CHAÎNAGE GÉOMÉTRIQUE (pas arithmétique)",
+        "Revenus comptés en DATE DE DÉTACHEMENT du coupon"
+      ],
+      "chiffres": ["Avant 2001 : valo trimestrielle", "2001-2010 : mensuelle", "Depuis 2010 : à chaque flux"]
+    },
+    {
+      "id": "m8-f17",
+      "theme": "Performance — benchmark",
+      "recto": "Le benchmark : à quoi sert-il, est-il obligatoire de le suivre ?",
+      "verso": [
+        "Indicateur de référence pour juger la performance (exprimé dividendes réinvestis, GIPS)",
+        "Cohérence avec la gestion = LOGIQUE mais PAS OBLIGATOIRE (piège QCM)",
+        "AUCUNE obligation de suivre le benchmark",
+        "Composite = ex. 50% S&P 500 / 25% Dow Jones / 25% Nasdaq"
+      ],
+      "chiffres": ["Dow Jones = industriel", "Nasdaq = techno", "S&P 500 = 500 plus grosses capi US"]
+    },
+    {
+      "id": "m8-f18",
+      "theme": "Performance — gestion active/passive",
+      "recto": "Gestion active vs passive et Tracking Error ?",
+      "verso": [
+        "PASSIVE = reproduire l'indice → Tracking Error FAIBLE",
+        "ACTIVE = battre l'indice en s'en écartant → Tracking Error ÉLEVÉE",
+        "S'écarter peut donner sur- OU sous-performance (pas de garantie)",
+        "Tracking Error = mesure de l'écart/corrélation au benchmark"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Active vs Passive",
+        "headers": ["", "Passive", "Active"],
+        "rows": [
+          { "cells": ["Objectif", "Répliquer l'indice", "Battre l'indice"] },
+          { "cells": ["Tracking Error", "Faible", "Élevée"] }
+        ]
+      }
+    },
+    {
+      "id": "m8-f19",
+      "theme": "Performance — indicateurs",
+      "recto": "Volatilité, Beta, Alpha : qui mesure quoi ?",
+      "verso": [
+        "VOLATILITÉ = risque interne (moyenne des écarts de cotation)",
+        "BETA = risque RELATIF (volatilité portefeuille / volatilité indice)",
+        "ALPHA = TALENT du gérant (surperformance hors risque ; peut être négatif)"
+      ],
+      "chiffres": ["Beta 0-1 = moins risqué", "Beta=1 = égal indice", "Beta>1 = plus risqué", "Beta 1,6 → +16% si indice +10%"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Beta — lecture",
+        "headers": ["Beta", "Lecture"],
+        "rows": [
+          { "cells": ["0 à 1", "Moins risqué que l'indice"] },
+          { "cells": ["= 1", "Aussi risqué que l'indice"] },
+          { "cells": ["> 1", "Plus risqué que l'indice"] }
+        ]
+      }
+    },
+    {
+      "id": "m8-f20",
+      "theme": "Performance — interprétation",
+      "recto": "Pourquoi la 'profondeur de champ' change l'interprétation ?",
+      "verso": [
+        "Un fonds peut surperformer DEPUIS SA CRÉATION mais sous-performer SUR LA PÉRIODE RÉCENTE",
+        "Performances passées ≠ performances futures (mention systématique)",
+        "Toujours croiser : benchmark + risque (Beta/volatilité) + talent (Alpha)"
+      ]
+    },
+    {
+      "id": "m8-f21",
+      "theme": "ESG — définition",
+      "recto": "Que sont les critères ESG ?",
+      "verso": [
+        "E = Environnement, S = Social/Sociétal, G = Gouvernance",
+        "Critères EXTRA-FINANCIERS qui COMPLÈTENT (ne remplacent pas) l'analyse financière",
+        "Concernent TOUS les émetteurs : privés ET publics (souverains inclus)",
+        "Liste NON exhaustive (peut évoluer)"
+      ],
+      "verif": "✓ Vérifié — cadre SFDR/ESG, Société Générale Securities Services"
+    },
+    {
+      "id": "m8-f22",
+      "theme": "ESG — classification (pièges)",
+      "recto": "E, S ou G ? Les pièges de classification à connaître",
+      "verso": [
+        "E : bilan carbone, énergie, pollution, déchets, biodiversité",
+        "S : accidents du travail, travail forcé/enfants, droits humains, inclusion",
+        "G : PARITÉ + FORMATION des salariés, anti-corruption, droit de vote des MINORITAIRES, rému dirigeants"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Pièges de classement ESG",
+        "headers": ["Critère", "Pilier"],
+        "rows": [
+          { "cells": ["Bilan carbone", "E"] },
+          { "cells": ["Accidents du travail", "S"] },
+          { "cells": ["Parité / formation salariés", "G"] },
+          { "cells": ["Actionnaires minoritaires", "G"] }
+        ]
+      }
+    },
+    {
+      "id": "m8-f23",
+      "theme": "ESG — finance durable européenne",
+      "recto": "SFDR : que classent les articles 6, 8 et 9 ?",
+      "verso": [
+        "Art. 6 = fonds SANS objectif durable / sans intégration ESG affichée",
+        "Art. 8 = fonds qui PROMEUVENT des caractéristiques E/S ('light green')",
+        "Art. 9 = fonds à OBJECTIF d'investissement durable ('dark green')"
+      ],
+      "visuel": {
+        "type": "pyramid",
+        "titre": "Ambition durable SFDR",
+        "levels": [
+          { "t": "Art. 9", "d": "Objectif durable — dark green" },
+          { "t": "Art. 8", "d": "Promeut des critères E/S — light green" },
+          { "t": "Art. 6", "d": "Pas d'objectif durable affiché" }
+        ]
+      },
+      "verif": "✓ Vérifié — Robeco / Société Générale Securities Services 2024"
+    },
+    {
+      "id": "m8-f24",
+      "theme": "ESG — finance durable européenne",
+      "recto": "Le Règlement Taxonomie : à quoi sert-il ?",
+      "verso": [
+        "Règlement (UE) 2020/852 : classe les activités économiques 'vertes'/durables",
+        "6 objectifs environnementaux (2 climat + 4 : eau, économie circulaire, pollution, biodiversité)",
+        "3 conditions : contribution substantielle + DNSH (ne pas nuire) + garanties sociales minimales"
+      ],
+      "chiffres": ["Règlement 2020/852", "6 objectifs environnementaux"],
+      "verif": "✓ Vérifié — Sami / Société Générale Securities Services"
+    },
+    {
+      "id": "m8-f25",
+      "theme": "ESG — labels",
+      "recto": "Les 3 grands labels : Finansol, Greenfin, ISR — qui délivre quoi ?",
+      "verso": [
+        "FINANSOL : association (1995), épargne SOLIDAIRE — 3 critères : Solidarité, Transparence, Information",
+        "GREENFIN : Min. Transition Écologique, finance VERTE — 3 piliers : part verte+exclusions, critères ESG, impacts positifs",
+        "ISR : Min. Économie & Finances, investissement responsable — label 3 ANS renouvelable"
+      ],
+      "chiffres": ["Finansol = 1995", "ISR = décret 2016-10 du 08/01/2016, label 3 ans"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Les 3 labels",
+        "headers": ["Label", "Porté par", "Cible"],
+        "rows": [
+          { "cells": ["Finansol", "Association (1995)", "Épargne solidaire"] },
+          { "cells": ["Greenfin", "Min. Transition Écologique", "Finance verte"] },
+          { "cells": ["ISR", "Min. Économie & Finances", "Invest. responsable"] }
+        ]
+      },
+      "verif": "✓ Vérifié — Trésor / ecologie.gouv.fr : ISR toujours 3 ans renouvelable + contrôles annuels (référentiel V3 en vigueur depuis 01/01/2025)"
+    },
+    {
+      "id": "m8-f26",
+      "theme": "ESG — labels",
+      "recto": "Qui certifie réellement Greenfin et ISR ?",
+      "verso": [
+        "Délivrés par des organismes INDÉPENDANTS mais ACCRÉDITÉS (ex. AFNOR, EY, Bureau Veritas)",
+        "AFNOR = certificateur, PAS propriétaire du label",
+        "Un OPC labellisé ISR est inscrit sur la liste officielle du ministère"
+      ],
+      "verif": "✓ Vérifié — AFNOR Certification / ecologie.gouv.fr"
+    },
+    {
+      "id": "m8-f27",
+      "theme": "ESG — obligations vertes",
+      "recto": "Green bonds : qui peut émettre, qui certifie le caractère vert ?",
+      "verso": [
+        "Obligation verte = finance un projet à impact positif ENVIRONNEMENTAL",
+        "Émise par ENTREPRISES comme par SOUVERAINS (États)",
+        "L'émetteur s'AUTO-qualifie 'verte' MAIS un TIERS INDÉPENDANT vérifie les données d'impact",
+        "Piège : l'AMF NE certifie PAS elle-même le caractère vert ; social bond = impact social"
+      ],
+      "chiffres": ["Ex. PepsiCo 2019 : 1 Md USD d'obligations vertes"]
+    },
+    {
+      "id": "m8-f28",
+      "theme": "ESG — fonds ESG",
+      "recto": "Les 4 types de fonds ESG ?",
+      "verso": [
+        "SÉLECTION ESG : best-in-class (garde les biais sectoriels du benchmark) vs best-in-universe (les abandonne)",
+        "EXCLUSION : retire les secteurs néfastes (fossiles, tabac, armes, jeux…)",
+        "THÉMATIQUE : 1 thème (eau, santé, climat), seuil de CA ou position dominante",
+        "IMPACT : rendement + impact MESURÉ (≠ philanthropie, doit rémunérer ; n'est pas une classe d'actifs)"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Best-in-class vs Best-in-universe",
+        "headers": ["", "Best-in-class", "Best-in-universe"],
+        "rows": [
+          { "cells": ["Biais sectoriels", "Conservés (≈ benchmark)", "Abandonnés"] },
+          { "cells": ["Logique", "Meilleurs DE chaque secteur", "Meilleurs tous secteurs"] }
+        ]
+      }
+    },
+    {
+      "id": "m8-f29",
+      "theme": "ESG — initiatives publiques",
+      "recto": "Finance verte : initiatives international / européen / national ?",
+      "verso": [
+        "INTERNATIONAL : Fonds Stratégique Climat = BANQUE MONDIALE",
+        "EUROPÉEN : Plan d'action finance durable = 2018 (suite COP21)",
+        "NATIONAL : observatoire du verdissement de la finance AU SEIN DE L'AMF",
+        "Engagement actionnarial = droit de vote en AG pour influencer en faveur de l'ESG"
+      ],
+      "chiffres": ["PERCO : ≥ 10% en entreprises solidaires non cotées", "Fonds de partage : don ≥ 25% des revenus"]
+    },
+    {
+      "id": "m8-f30",
+      "theme": "ESG — reporting extra-financier",
+      "recto": "Reporting extra-financier : seuils et directive CSRD ?",
+      "verso": [
+        "Cotées (marché réglementé) : > 20 M€ bilan / 40 M€ CA / 500 salariés",
+        "Non cotées : 100 M€ CA / 100 M€ bilan / 500 salariés (500 salariés dans les 2 cas)",
+        "CSRD (Corporate Sustainability Reporting Directive) renforce le reporting — applicable depuis le 01/01/2024"
+      ],
+      "chiffres": ["Cotées : 20/40 M€ + 500 sal.", "Non cotées : 100/100 M€ + 500 sal.", "CSRD : 01/01/2024"],
+      "verif": "✓ Vérifié — Agence LUCIE / Goodwill-management : CSRD en vigueur 2024 (liée à la Taxonomie)"
+    }
+  ]
+}

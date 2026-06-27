@@ -1,0 +1,422 @@
+{
+ "id": "m9",
+ "fiches": [
+  {
+   "id": "m9-f1",
+   "theme": "Rôle des marchés",
+   "recto": "À quoi servent les marchés financiers ? (2 missions)",
+   "verso": [
+    "Mettent en relation ceux qui ONT BESOIN de fonds (émetteurs) et ceux qui en DISPOSENT (investisseurs)",
+    "Double mission : FINANCER l'économie ET TRANSFÉRER / contrôler les risques",
+    "Piège : ce n'est pas QUE du financement"
+   ]
+  },
+  {
+   "id": "m9-f2",
+   "theme": "Rôle des marchés",
+   "recto": "Émetteurs vs investisseurs : qui est qui ?",
+   "verso": [
+    "Émetteurs (lèvent des fonds) : États (dette court ET long terme), collectivités, banques, entreprises",
+    "Investisseurs : les mêmes + particuliers + institutionnels (les 'zinzins' : assurances, retraites, sociétés de gestion)",
+    "Un même acteur peut être les DEUX selon l'opération"
+   ],
+   "pieges": [
+    "Les particuliers sont investisseurs, JAMAIS listés comme émetteurs",
+    "L'État émet à court ET long terme"
+   ]
+  },
+  {
+   "id": "m9-f3",
+   "theme": "Primaire / secondaire",
+   "recto": "Marché primaire vs secondaire ?",
+   "verso": [
+    "PRIMAIRE = le 'neuf' : l'émetteur lève des fonds (via PSI, de gré à gré, gros montants)",
+    "SECONDAIRE = l'occasion = la BOURSE : revente entre investisseurs",
+    "Sur le secondaire l'émetteur n'encaisse rien (sauf augmentation de capital)"
+   ],
+   "visuel": {
+    "type": "compare",
+    "titre": "Primaire vs secondaire",
+    "headers": ["", "Primaire (neuf)", "Secondaire (occasion)"],
+    "rows": [
+     {"cells": ["Qui lève des fonds", "L'émetteur", "Personne (revente)"]},
+     {"cells": ["Lieu", "Gré à gré via PSI", "La Bourse"]},
+     {"cells": ["Acteurs", "Émetteur + investisseurs", "Investisseurs entre eux"]}
+    ]
+   }
+  },
+  {
+   "id": "m9-f4",
+   "theme": "Primaire / secondaire",
+   "recto": "Que fait un PSI sur le marché primaire ?",
+   "verso": [
+    "PSI = Prestataire de Services d'Investissement",
+    "Aide l'émetteur à définir le titre puis le PLACE de gré à gré, pour de gros montants",
+    "Services : PLACEMENT ou PRISE FERME"
+   ]
+  },
+  {
+   "id": "m9-f5",
+   "theme": "Titres",
+   "recto": "Titre de PROPRIÉTÉ vs titre de CRÉANCE ?",
+   "verso": [
+    "Action = titre de PROPRIÉTÉ → coactionnaire, droits attachés",
+    "Obligation / titre négociable = titre de CRÉANCE → simple prêteur",
+    "Faux-ami n°1 du QCM : ne jamais inverser"
+   ],
+   "visuel": {
+    "type": "compare",
+    "titre": "Propriété vs créance",
+    "headers": ["Critère", "Action (propriété)", "Obligation (créance)"],
+    "rows": [
+     {"cells": ["Statut", "Coactionnaire", "Créancier / prêteur"]},
+     {"cells": ["Droit de propriété", "Oui", "Non"]},
+     {"cells": ["Rémunération", "Selon résultats", "Coupon fixé à l'émission"]}
+    ]
+   }
+  },
+  {
+   "id": "m9-f6",
+   "theme": "Titres",
+   "recto": "Le coupon : quand est-il fixé ? Et le coupon zéro ?",
+   "verso": [
+    "Coupon = intérêt fixé À L'ÉMISSION, versé toute la vie de l'obligation",
+    "Coupon ZÉRO = aucun intérêt versé MAIS prix d'émission < remboursement (décote)",
+    "Piège : le coupon zéro rapporte quand même (la décote)"
+   ],
+   "chiffres": ["Coupon : déterminé à l'émission, versé toute la vie du titre"]
+  },
+  {
+   "id": "m9-f7",
+   "theme": "Classification instruments",
+   "recto": "Les 2 grandes catégories d'instruments financiers ?",
+   "verso": [
+    "TITRES financiers : Actions, Obligations, Titres négociables CT/MT, OPC",
+    "CONTRATS financiers : Fermes (Futures, Swaps) / Optionnels (Options)"
+   ],
+   "visuel": {
+    "type": "pyramid",
+    "titre": "Instruments financiers",
+    "levels": [
+     {"t": "Instruments financiers", "d": "2 grandes catégories"},
+     {"t": "Titres financiers", "d": "Actions, obligations, titres négociables CT/MT, OPC"},
+     {"t": "Contrats financiers", "d": "Fermes (Futures, Swaps) / Optionnels (Options)"}
+    ]
+   }
+  },
+  {
+   "id": "m9-f8",
+   "theme": "Classification instruments",
+   "recto": "Neu CP vs Neu MTN ? Et les OPC ?",
+   "verso": [
+    "Neu CP = COURT terme (billets de trésorerie, certificats de dépôt, BTF)",
+    "Neu MTN = MOYEN terme",
+    "OPC = catégorie générale = OPCVM + FIA (Fonds d'Investissement Alternatifs)",
+    "Tous les titres négociables = titres de CRÉANCE"
+   ]
+  },
+  {
+   "id": "m9-f9",
+   "theme": "Dérivés",
+   "recto": "Les 4 instruments à terme (contrats financiers) ?",
+   "verso": [
+    "FRA, Futures, Swaps, Options",
+    "FERMES : Futures, Swaps",
+    "OPTIONNELS : Options (call = achat, put = vente)"
+   ],
+   "visuel": {
+    "type": "compare",
+    "titre": "Fermes vs optionnels",
+    "headers": ["Type", "Instruments"],
+    "rows": [
+     {"cells": ["Fermes", "Futures, Swaps"]},
+     {"cells": ["Optionnels", "Options (call / put)"]}
+    ]
+   }
+  },
+  {
+   "id": "m9-f10",
+   "theme": "Dérivés",
+   "recto": "Couverture vs spéculation : les 2 motivations de la contrepartie ?",
+   "verso": [
+    "SPÉCULATION = la contrepartie PARIE que le risque ne se réalisera pas",
+    "COUVERTURE inverse = elle craint le même risque mais en SENS OPPOSÉ",
+    "Un dérivé ne couvre PAS tous les risques (liquidité et opérationnel exclus)"
+   ]
+  },
+  {
+   "id": "m9-f11",
+   "theme": "Risques",
+   "recto": "Risque de CRÉDIT vs risque de CONTREPARTIE ?",
+   "verso": [
+    "CRÉDIT (titres de créance) : l'ÉMETTEUR ne paie pas intérêts/capital",
+    "CONTREPARTIE : un EMPRUNTEUR défaillant ne rembourse plus sa dette",
+    "Distinction subtile et très piégeuse"
+   ]
+  },
+  {
+   "id": "m9-f12",
+   "theme": "Risques",
+   "recto": "Les autres risques : marché, liquidité, change, taux ?",
+   "verso": [
+    "MARCHÉ : perte due à l'offre/demande globale (sans lien avec la qualité de l'émetteur)",
+    "LIQUIDITÉ : pas de contrepartie pour REVENDRE",
+    "CHANGE : variation des devises — TAUX : variation des taux d'intérêt",
+    "NON couvrables par dérivés : LIQUIDITÉ + OPÉRATIONNEL"
+   ],
+   "visuel": {
+    "type": "compare",
+    "titre": "Les risques financiers",
+    "headers": ["Risque", "Définition"],
+    "rows": [
+     {"cells": ["Marché", "Offre/demande globale"]},
+     {"cells": ["Liquidité", "Pas de contrepartie pour revendre"]},
+     {"cells": ["Change", "Variation des devises"]},
+     {"cells": ["Taux", "Variation des taux d'intérêt"]}
+    ]
+   }
+  },
+  {
+   "id": "m9-f13",
+   "theme": "Organisation marchés",
+   "recto": "Gré à gré (OTC) vs multilatéral ?",
+   "verso": [
+    "GRÉ À GRÉ = OTC = DEUX acteurs seulement",
+    "MULTILATÉRAL = un organisme + une MULTITUDE d'investisseurs",
+    "Ne pas inverser : c'est le piège central"
+   ],
+   "verif": "✓ Vérifié — définitions MIFID II / AMF"
+  },
+  {
+   "id": "m9-f14",
+   "theme": "Organisation marchés",
+   "recto": "Les 3 marchés MULTILATÉRAUX ?",
+   "verso": [
+    "Marchés RÉGLEMENTÉS (ex. Euronext Paris)",
+    "SMN = MTF (Système Multilatéral de Négociation)",
+    "OTF (Système Organisé de Négociation, réservé au non-actions : obligations, dérivés)",
+    "MR + SMN utilisent SYSTÉMATIQUEMENT une chambre de compensation"
+   ],
+   "verif": "✓ Vérifié — MR/MTF = exécution non discrétionnaire, OTF = discrétionnaire (MIFID II)"
+  },
+  {
+   "id": "m9-f15",
+   "theme": "Organisation marchés",
+   "recto": "L'Internalisateur Systématique (IS) ?",
+   "verso": [
+    "PSI qui, de façon organisée/fréquente/systématique, négocie pour son COMPTE PROPRE",
+    "Exécute les ordres de ses clients EN DEHORS d'un MR / SMN / OTF",
+    "= gré à gré ENCADRÉ, réservé aux PROFESSIONNELS"
+   ],
+   "verif": "✓ Vérifié — définition AMF / MIFID II"
+  },
+  {
+   "id": "m9-f16",
+   "theme": "Organisation marchés",
+   "recto": "Diversité des marchés : avantage et inconvénient ?",
+   "verso": [
+    "Avantage : COMPÉTITION entre marchés (meilleurs tarifs/services)",
+    "Inconvénient : FRAGMENTATION (pas de vision globale)",
+    "Solution : OBLIGATION de révéler les transactions → CONSOLIDATION"
+   ]
+  },
+  {
+   "id": "m9-f17",
+   "theme": "Marchés de Paris",
+   "recto": "Euronext Paris, MATIF, MONEP, Marché Libre ?",
+   "verso": [
+    "Euronext Paris = RÉGLEMENTÉ au COMPTANT (actions ET obligations)",
+    "MATIF = à TERME organisé — MONEP = réglementé des OPTIONS",
+    "Marché Libre = SMN (jeunes/petites entreprises) ; Alternext = SMN organisé (hybride)"
+   ],
+   "visuel": {
+    "type": "compare",
+    "titre": "Les marchés de Paris",
+    "headers": ["Marché", "Nature", "Produits"],
+    "rows": [
+     {"cells": ["Euronext Paris", "Réglementé comptant", "Actions + obligations"]},
+     {"cells": ["MATIF", "À terme organisé", "Contrats à terme"]},
+     {"cells": ["MONEP", "Réglementé d'options", "Options"]}
+    ]
+   }
+  },
+  {
+   "id": "m9-f18",
+   "theme": "Marchés de Paris",
+   "recto": "Comptant vs terme vs SRD ?",
+   "verso": [
+    "COMPTANT : paiement et livraison IMMÉDIATS",
+    "À TERME : à une date ULTÉRIEURE",
+    "SRD (Règlement Différé) : règlement-livraison reporté à la FIN DU MOIS BOURSIER"
+   ]
+  },
+  {
+   "id": "m9-f19",
+   "theme": "Marchés de Paris",
+   "recto": "Marché obligataire : comment fonctionne-t-il ?",
+   "verso": [
+    "Principalement DE GRÉ À GRÉ (pas centralisé comme les actions)",
+    "Pied de coupon = AJOUTER les intérêts courus au prix coté",
+    "Quotité = achat/vente par LOTS"
+   ]
+  },
+  {
+   "id": "m9-f20",
+   "theme": "Dérivés - négociation",
+   "recto": "Où se négocient Futures et Options ?",
+   "verso": [
+    "FUTURES : marché ORGANISÉ + dépôt de garantie auprès de la chambre",
+    "OPTIONS : marché organisé OU de gré à gré",
+    "Dépôt de garantie = sécurité de la chambre de compensation"
+   ]
+  },
+  {
+   "id": "m9-f21",
+   "theme": "Chambre de compensation",
+   "recto": "Rôle de la chambre de compensation ?",
+   "verso": [
+    "S'intercale entre acheteur et vendeur → contrepartie UNIQUE",
+    "Garantit la bonne fin, CONCENTRE le risque de contrepartie",
+    "Calcule une position NETTE (compensation multilatérale), financée par les DÉPÔTS DE GARANTIE",
+    "Promue par EMIR et MIFIR"
+   ],
+   "verif": "✓ Vérifié — CCP, EMIR (G20 2009) : appels de marge + dépôt de garantie (AMF)"
+  },
+  {
+   "id": "m9-f22",
+   "theme": "Post-marché",
+   "recto": "Les 3 acteurs du post-marché ?",
+   "verso": [
+    "AGENT DE RÈGLEMENT (banque centrale) = comptes ESPÈCES",
+    "DÉPOSITAIRE CENTRAL = comptes TITRES",
+    "CONSERVATEUR = inscrit/administre les titres de l'investisseur",
+    "Règlement contre livraison → élimine le risque EN PRINCIPAL"
+   ],
+   "visuel": {
+    "type": "compare",
+    "titre": "Qui gère quoi ?",
+    "headers": ["Acteur", "Gère"],
+    "rows": [
+     {"cells": ["Agent de règlement (banque centrale)", "Espèces"]},
+     {"cells": ["Dépositaire central", "Titres"]},
+     {"cells": ["Conservateur", "Titres de l'investisseur"]}
+    ]
+   }
+  },
+  {
+   "id": "m9-f23",
+   "theme": "Transparence",
+   "recto": "Transparence MR/SMN : le chiffre à retenir ?",
+   "verso": [
+    "PRÉ-négociation : affichage des 5 MEILLEURES offres et 5 meilleures demandes",
+    "POST-négociation : publication des transactions",
+    "IS : SPÉCIFIQUE en pré, IDENTIQUE en post"
+   ],
+   "visuel": {
+    "type": "bignum",
+    "titre": "Transparence pré-négociation",
+    "value": "5",
+    "note": "meilleures offres + 5 meilleures demandes (MR/SMN)"
+   }
+  },
+  {
+   "id": "m9-f24",
+   "theme": "Transparence",
+   "recto": "Apporteur de liquidité vs teneur de marché ?",
+   "verso": [
+    "APPORTEUR de liquidité = pour le compte d'un ÉMETTEUR",
+    "TENEUR de marché (market maker) = pour SON propre compte",
+    "Point commun : tous deux font des 'négociations pour compte propre'"
+   ]
+  },
+  {
+   "id": "m9-f25",
+   "theme": "Cotation Euronext",
+   "recto": "Les horaires d'une séance Euronext actions ?",
+   "verso": [
+    "7h15-9h00 préouverture (centralisation, 0 transaction)",
+    "9h00 fixing d'ouverture → 9h01-17h30 continu",
+    "17h30-17h35 préclôture → 17h35 fixing de clôture → 17h35-17h40 dernier prix"
+   ],
+   "chiffres": ["Fixing = prix maximisant le NOMBRE de titres échangés"],
+   "visuel": {
+    "type": "flow",
+    "titre": "Journée de cotation Euronext",
+    "steps": [
+     {"t": "7h15-9h00 Préouverture", "d": "Centralisation, 0 transaction"},
+     {"t": "9h00 Fixing ouverture", "d": "Max de titres échangés"},
+     {"t": "9h01-17h30 Continu", "d": "Cotation au fil de l'eau"},
+     {"t": "17h30-17h35 Préclôture", "d": "0 transaction"},
+     {"t": "17h35 Fixing clôture", "d": "Max de titres échangés"},
+     {"t": "17h35-17h40 Dernier prix", "d": "Au dernier cours uniquement"}
+    ]
+   },
+   "verif": "✓ Vérifié — horaires Euronext Paris (continu 9h-17h30, fixing clôture 17h35, TAL 17h35-17h40)"
+  },
+  {
+   "id": "m9-f26",
+   "theme": "Cotation Euronext",
+   "recto": "Règle de priorité d'exécution et fixing ?",
+   "verso": [
+    "Priorité : le PRIX d'abord, puis le TEMPS (jamais l'inverse)",
+    "Fixing = prix qui maximise le NOMBRE de titres échangés (pas le prix le plus haut)",
+    "Préouverture/préclôture = ZÉRO transaction"
+   ]
+  },
+  {
+   "id": "m9-f27",
+   "theme": "Types d'ordres",
+   "recto": "Les 3 types d'ordres de base ?",
+   "verso": [
+    "AU MARCHÉ : exécution immédiate, SANS limite de prix",
+    "À LA MEILLEURE LIMITE : au meilleur prix dispo, solde inscrit au carnet au même prix",
+    "À COURS LIMITÉ : prix MAX à l'achat / prix MIN à la vente"
+   ],
+   "visuel": {
+    "type": "compare",
+    "titre": "Les 3 ordres",
+    "headers": ["Ordre", "Comportement"],
+    "rows": [
+     {"cells": ["Au marché", "Immédiat, sans limite de prix"]},
+     {"cells": ["Meilleure limite", "Meilleur prix dispo, solde au carnet"]},
+     {"cells": ["Cours limité", "Max à l'achat / min à la vente"]}
+    ]
+   },
+   "verif": "✓ Vérifié — typologie des ordres (AMF / Euronext)"
+  },
+  {
+   "id": "m9-f28",
+   "theme": "Carnet d'ordres",
+   "recto": "Carnet d'ordres : où sont les meilleurs prix ?",
+   "verso": [
+    "Côté ACHAT : le meilleur prix est le plus HAUT",
+    "Côté VENTE : le meilleur prix est le plus BAS",
+    "Ordre au marché : prend le meilleur prix de la contrepartie opposée"
+   ]
+  },
+  {
+   "id": "m9-f29",
+   "theme": "Carnet d'ordres",
+   "recto": "Exemple chiffré : ordre AU MARCHÉ (carnet 61,25 / 61,45) ?",
+   "verso": [
+    "ACHAT au marché → exécuté à 61,45 (meilleure offre de VENTE)",
+    "VENTE au marché → exécutée à 61,25 (meilleure offre d'ACHAT)"
+   ],
+   "chiffres": ["Achat au marché : 61,45", "Vente au marché : 61,25"]
+  },
+  {
+   "id": "m9-f30",
+   "theme": "Carnet d'ordres",
+   "recto": "Exemple chiffré : meilleure limite vs cours limité ?",
+   "verso": [
+    "MEILLEURE LIMITE achat 300 → 250 exécutées à 61,45 + 50 inscrites au carnet à 61,45",
+    "MEILLEURE LIMITE vente 300 → 200 exécutées à 61,25 + 100 inscrites à 61,25",
+    "COURS LIMITÉ loin du marché (achat 61,30 / vente 61,70) → 0 exécutée, tout inscrit"
+   ],
+   "chiffres": [
+    "Meilleure limite : solde au MÊME prix que le meilleur prix",
+    "Cours limité loin du marché = 0 exécution"
+   ]
+  }
+ ]
+}

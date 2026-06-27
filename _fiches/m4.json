@@ -1,0 +1,347 @@
+{
+ "id": "m4",
+ "fiches": [
+  {
+   "id": "m4-f1",
+   "theme": "Notion — abus de marché",
+   "recto": "C'est quoi un abus de marché, au fond ?",
+   "verso": [
+    "Tirer un profit aux dépens des AUTRES investisseurs",
+    "En influençant le marché OU en utilisant une info que les autres n'ont pas",
+    "Principe lésé : l'ÉQUITÉ / l'égalité de traitement des investisseurs"
+   ]
+  },
+  {
+   "id": "m4-f2",
+   "theme": "Les 3 abus de marché",
+   "recto": "Les 3 abus de marché à connaître par cœur (fiche AMF)",
+   "verso": [
+    "1) Opération d'initié : utiliser une info privilégiée",
+    "2) Manipulation de cours : fausser l'offre/demande ou le cours (inclut l'abus de position)",
+    "3) Diffusion d'infos fausses ou trompeuses : répandre de fausses indications"
+   ],
+   "chiffres": ["3 types d'abus de marché"],
+   "visuel": {
+    "type": "compare",
+    "titre": "Reconnaître chaque abus à son exemple",
+    "headers": ["Type d'abus", "En quoi ça consiste", "Exemple QCM"],
+    "rows": [
+     {"cells": ["Opération d'initié", "Utiliser une info privilégiée", "Acheter AVANT l'annonce publique"]},
+     {"cells": ["Manipulation de cours", "Fausser l'offre/demande, fixer un cours artificiel (= abus de position)", "Acheter en masse pour faire monter, puis revendre"]},
+     {"cells": ["Diffusion fausses infos", "Répandre des indications fausses/trompeuses", "Lancer une fausse rumeur de dépôt de bilan"]}
+    ]
+   }
+  },
+  {
+   "id": "m4-f3",
+   "theme": "Les 3 abus de marché",
+   "recto": "Définition exacte d'une INFORMATION PRIVILÉGIÉE",
+   "verso": [
+    "Une info qui INFLUENCERAIT le cours SI elle était rendue publique",
+    "Donc : non encore publique (sinon elle n'est plus privilégiée)",
+    "Influence POTENTIELLE, pas avérée"
+   ],
+   "verif": "✓ Vérifié — MAR, info non publique et sensible au cours (FCA/ESMA 2024)"
+  },
+  {
+   "id": "m4-f4",
+   "theme": "Les 3 abus de marché",
+   "recto": "Piège : associer l'exemple au bon abus",
+   "verso": [
+    "Acheter avant l'annonce = opération d'INITIÉ",
+    "Acheter en masse pour gonfler le prix = MANIPULATION de cours",
+    "Répandre une rumeur fausse = DIFFUSION de fausses infos"
+   ],
+   "chiffres": ["Abus de POSITION = rattaché à la manipulation de cours (PAS à l'initié)"]
+  },
+  {
+   "id": "m4-f5",
+   "theme": "Réglementation MAR + AMF",
+   "recto": "MAR : c'est quoi et qui le complète ?",
+   "verso": [
+    "MAR = Market Abuse Regulation = RÈGLEMENT de l'UE (directement applicable)",
+    "Définit : abus, prévention, déclarations, sanctions MINIMALES",
+    "En France, l'AMF le COMPLÈTE par des règles nationales (MAR n'est PAS défini par l'AMF)"
+   ],
+   "verif": "✓ Vérifié — MAR = règlement UE n°596/2014 (AMF / EUR-Lex 2024)"
+  },
+  {
+   "id": "m4-f6",
+   "theme": "Réglementation MAR + AMF",
+   "recto": "Qui est concerné par la réglementation abus de marché ?",
+   "verso": [
+    "Périmètre LARGE, pas seulement les pros",
+    "PSI + entreprises de marché + émetteurs + TOUT investisseur (pro ou non)"
+   ]
+  },
+  {
+   "id": "m4-f7",
+   "theme": "Réglementation MAR + AMF",
+   "recto": "3 niveaux d'autorité : qui agit à quel échelon ?",
+   "verso": [
+    "OICV-IOSCO = coordination INTERNATIONALE (mondiale)",
+    "MAR = niveau EUROPÉEN (UE)",
+    "AMF = niveau NATIONAL (France)"
+   ],
+   "visuel": {
+    "type": "pyramid",
+    "titre": "Du mondial au national",
+    "levels": [
+     {"t": "OICV-IOSCO", "d": "Coordination internationale (mondiale)"},
+     {"t": "MAR", "d": "Règlement européen (UE)"},
+     {"t": "AMF", "d": "Règles nationales (France)"}
+    ]
+   }
+  },
+  {
+   "id": "m4-f8",
+   "theme": "Réglementation MAR + AMF",
+   "recto": "Qui doit constituer des LISTES D'INITIÉS ?",
+   "verso": [
+    "Les ÉMETTEURS de titres ET les PSI",
+    "Pas seulement les émetteurs ; pas l'AMF",
+    "Les initiés doivent connaître les restrictions qui pèsent sur eux"
+   ]
+  },
+  {
+   "id": "m4-f9",
+   "theme": "Signalement (STOR)",
+   "recto": "STOR : sigle, rôle et périmètre",
+   "verso": [
+    "Suspicious Transaction and Order Reporting",
+    "Déclaration à l'AMF, homogène dans toute l'UE",
+    "Couvre ORDRES + transactions + TENTATIVES, SUR et HORS plate-forme"
+   ],
+   "verif": "✓ Vérifié — STOR = MAR art. 16 ; couvre ordres, transactions et tentatives (AMF 2024)",
+   "visuel": {
+    "type": "flow",
+    "titre": "Déclarer une opération suspecte (STOR)",
+    "steps": [
+     {"t": "Détection", "d": "Opérateurs/pros repèrent un ordre ou une transaction suspect"},
+     {"t": "Périmètre large", "d": "Tout ordre/transaction, SUR ou HORS plate-forme ; abus ET tentatives"},
+     {"t": "Déclaration AMF", "d": "Obligation de signaler, sans délai, de façon homogène dans l'UE"}
+    ]
+   }
+  },
+  {
+   "id": "m4-f10",
+   "theme": "Sanctions",
+   "recto": "Sanction administrative MAR : quel montant maximal ?",
+   "verso": [
+    "Au moins 3 FOIS (×3) l'avantage retiré OU les pertes évitées",
+    "C'est un PLANCHER de pouvoir (au moins ×3), chiffre piège",
+    "Si profits non déterminables : planchers fixes (voir chiffres)"
+   ],
+   "chiffres": ["×3 l'avantage / les pertes évitées", "5 M€ mini (personnes physiques)", "15 M€ ou 15 % du CA (personnes morales)"],
+   "verif": "✓ Vérifié — MAR : ×3, sinon 5 M€ / 15 M€ ou 15 % du CA (AMF / EUR-Lex 2024)",
+   "visuel": {
+    "type": "bignum",
+    "titre": "Sanction pécuniaire administrative",
+    "value": "× 3",
+    "note": "Au MOINS 3 fois l'avantage retiré ou les pertes évitées (plancher de pouvoir, pas un plafond)."
+   }
+  },
+  {
+   "id": "m4-f11",
+   "theme": "Sanctions",
+   "recto": "Volet administratif vs volet pénal : qui sanctionne ?",
+   "verso": [
+    "Administratif = l'AMF (abus OU défaut de procédures d'un PSI)",
+    "Pénal = Parquet financier + Procureur (poursuites)",
+    "L'AMF ne décide PAS du pénal"
+   ],
+   "visuel": {
+    "type": "compare",
+    "titre": "Qui sanctionne quoi",
+    "headers": ["Volet", "Qui décide", "Déclencheur"],
+    "rows": [
+     {"cells": ["Administratif", "AMF", "Abus ou défaut de procédures d'un PSI"]},
+     {"cells": ["Pénal", "Parquet financier + Procureur", "Présomption de délit, décision de poursuites"]}
+    ]
+   }
+  },
+  {
+   "id": "m4-f12",
+   "theme": "Sanctions",
+   "recto": "Quand l'AMF peut-elle sanctionner un PSI sans abus commis ?",
+   "verso": [
+    "Si ses procédures de contrôle des abus de marché sont insuffisantes OU inexistantes",
+    "Le PSI doit PRÉVENIR : mettre en place des procédures internes",
+    "Faute = défaut de dispositif, même sans abus personnel"
+   ]
+  },
+  {
+   "id": "m4-f13",
+   "theme": "Transactions des dirigeants",
+   "recto": "Que prévoit MAR pour les transactions des dirigeants ?",
+   "verso": [
+    "INTERDIT d'opérer à l'APPROCHE d'un événement sensible (résultat semestriel, AG)",
+    "= fenêtres négatives / closed periods (PAS une interdiction permanente)",
+    "Publier vite les infos sensibles = prévention des délits d'initié"
+   ]
+  },
+  {
+   "id": "m4-f14",
+   "theme": "Valeur liquidative (VL)",
+   "recto": "VL d'un OPC : formule et où est fixée sa périodicité ?",
+   "verso": [
+    "VL = ACTIF NET / NOMBRE DE PARTS (ne pas inverser)",
+    "Base des achats/ventes de parts de fonds",
+    "Périodicité et heure fixées au PROSPECTUS (pas par une loi uniforme)"
+   ],
+   "verif": "✓ Vérifié — VL = actif net / nb de parts, heure au prospectus (AMF 2024)"
+  },
+  {
+   "id": "m4-f15",
+   "theme": "Valeur liquidative (VL)",
+   "recto": "Pourquoi la VL à COURS INCONNU protège-t-elle ?",
+   "verso": [
+    "L'investisseur souscrit/rachète à un cours pas encore connu",
+    "Il ne peut donc PAS profiter de l'info de la VL",
+    "Anti late trading / market timing. La VL à cours CONNU expose."
+   ],
+   "visuel": {
+    "type": "compare",
+    "titre": "VL cours connu vs cours inconnu",
+    "headers": ["Type de VL", "Cours pour l'investisseur", "Effet"],
+    "rows": [
+     {"cells": ["Cours connu", "Connu au moment de l'ordre", "Expose au late trading / market timing"]},
+     {"cells": ["Cours inconnu", "Divulgué ultérieurement", "PROTECTEUR : empêche de profiter de l'info"]}
+    ]
+   }
+  },
+  {
+   "id": "m4-f16",
+   "theme": "Late trading",
+   "recto": "Le LATE TRADING, c'est quoi ?",
+   "verso": [
+    "Souscription/rachat accepté APRÈS l'heure limite de centralisation",
+    "On joue sur l'HEURE (ordre exécuté à une VL déjà connue)",
+    "Atteinte à l'équité : tous n'ont pas accès au hors-délai"
+   ],
+   "verif": "✓ Vérifié — late trading = ordre au-delà du cut-off du prospectus, prohibé (AMF DOC-2004-07)"
+  },
+  {
+   "id": "m4-f17",
+   "theme": "Late trading",
+   "recto": "Late trading : l'heure limite et la SEULE exception",
+   "verso": [
+    "France : heure limite au PROSPECTUS de l'OPC",
+    "USA : 16h, identique pour tous les fonds",
+    "Seule exception : dysfonctionnement technique exceptionnel + accord du RCCI (pas gérant/client)"
+   ],
+   "chiffres": ["USA : centralisation à 16h pour tous les fonds"],
+   "visuel": {
+    "type": "flow",
+    "titre": "Late trading : mécanisme et exception",
+    "steps": [
+     {"t": "Heure limite dépassée", "d": "Ordre transmis hors délai de centralisation"},
+     {"t": "Atteinte à l'équité", "d": "Tous n'ont pas accès au hors-délai"},
+     {"t": "Seule exception", "d": "Dysfonctionnement technique EXCEPTIONNEL"},
+     {"t": "Accord du RCCI", "d": "Le RCCI valide (PAS le gérant ni le client)"}
+    ]
+   }
+  },
+  {
+   "id": "m4-f18",
+   "theme": "Market timing",
+   "recto": "Le MARKET TIMING, c'est quoi ?",
+   "verso": [
+    "Arbitrage exploitant le DÉCALAGE VL (valeur comptable) vs valeur de marché",
+    "Via un accès douteux à la composition du portefeuille",
+    "Contraire à l'égalité des porteurs (accès inventaire ~2 fois/an seulement)"
+   ],
+   "chiffres": ["Accès ordinaire à l'inventaire : ~2 fois par an"],
+   "verif": "✓ Vérifié — market timing = arbitrage book value vs valeur de marché (AMF DOC-2004-07)"
+  },
+  {
+   "id": "m4-f19",
+   "theme": "Market timing",
+   "recto": "Délai de transmission de la compo aux pros (Solvabilité 2)",
+   "verso": [
+    "La société de gestion ne communique PAS la compo en temps réel",
+    "Aux pros (ACPR/AMF, Solvabilité 2) : délai NE POUVANT être INFÉRIEUR à 48 h après la VL",
+    "48 h = PLANCHER, pas un plafond (piège)"
+   ],
+   "chiffres": ["48 h mini après publication de la VL", "Solvabilité 2 = directive 2009/138/CE", "Art. RG AMF 318-62 et 321-97"],
+   "visuel": {
+    "type": "bignum",
+    "titre": "Délai de transmission aux pros (Solvabilité 2)",
+    "value": "48 heures",
+    "note": "La compo du portefeuille ne peut être transmise dans un délai INFÉRIEUR à 48 h après la VL (plancher, chiffre piège)."
+   }
+  },
+  {
+   "id": "m4-f20",
+   "theme": "Late trading vs Market timing",
+   "recto": "Différence FONDAMENTALE late trading / market timing",
+   "verso": [
+    "Late trading = on joue sur l'HEURE limite (ordre après le cut-off)",
+    "Market timing = on joue sur le DÉCALAGE de valorisation (VL vs marché)",
+    "Les deux concernent les OPC/fonds et sont interdits par le RG AMF"
+   ]
+  },
+  {
+   "id": "m4-f21",
+   "theme": "Front running",
+   "recto": "Le FRONT RUNNING, c'est quoi ?",
+   "verso": [
+    "Devancer un ORDRE CLIENT en attente pour son propre compte",
+    "Ex : ordre client 500 000 titres → courtier achète d'abord 10 000 pour lui",
+    "Viole l'obligation de BEST EXECUTION (meilleure exécution)"
+   ],
+   "chiffres": ["Exemple : ordre client 500 000 titres / courtier 10 000 titres"],
+   "visuel": {
+    "type": "flow",
+    "titre": "Front running : devancer l'ordre du client",
+    "steps": [
+     {"t": "Ordre client reçu", "d": "Gros ordre d'achat (ex. 500 000 titres) susceptible de faire monter le cours"},
+     {"t": "Le courtier devance", "d": "Il achète d'abord pour son compte (ex. 10 000 titres)"},
+     {"t": "Revente", "d": "Plus-value, au détriment du client (prix plus élevé)"},
+     {"t": "Violation", "d": "Atteinte à la best execution"}
+    ]
+   }
+  },
+  {
+   "id": "m4-f22",
+   "theme": "Front running",
+   "recto": "Piège : front running vs délit d'initié 'classique'",
+   "verso": [
+    "Front running : info = l'ORDRE du client en attente (interne au courtier)",
+    "Délit d'initié classique : info sur la SANTÉ de l'émetteur",
+    "Ne pas confondre avec la manipulation de cours"
+   ]
+  },
+  {
+   "id": "m4-f23",
+   "theme": "Synthèse des 3 autres pratiques",
+   "recto": "Les 3 'autres pratiques interdites' : sur quoi on joue ?",
+   "verso": [
+    "Late trading → l'HEURE limite (fonds)",
+    "Market timing → le DÉCALAGE de valorisation (fonds)",
+    "Front running → l'ORDRE d'un client (relation courtier-client)"
+   ],
+   "visuel": {
+    "type": "compare",
+    "titre": "Late trading / Market timing / Front running",
+    "headers": ["Pratique", "Sur quoi on joue", "Périmètre"],
+    "rows": [
+     {"cells": ["Late trading", "L'HEURE limite de centralisation", "OPC / fonds (VL)"]},
+     {"cells": ["Market timing", "Le DÉCALAGE VL vs valeur de marché", "OPC / fonds (VL)"]},
+     {"cells": ["Front running", "L'ORDRE d'un client en attente", "Relation courtier-client"]}
+    ]
+   }
+  },
+  {
+   "id": "m4-f24",
+   "theme": "Repère historique",
+   "recto": "Le scandale de référence et les 6 pratiques à savoir nommer",
+   "verso": [
+    "Scandale aux USA fin 2003 : market timing (contestable) + late trading (prohibé)",
+    "À NOMMER : 3 abus de marché + 3 autres pratiques = 6 au total",
+    "Toutes violent l'égalité de traitement et sont passibles de sanctions AMF"
+   ],
+   "chiffres": ["Scandale américain : fin 2003", "6 pratiques à nommer (3 abus + 3 autres)"]
+  }
+ ]
+}

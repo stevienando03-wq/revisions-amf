@@ -16,7 +16,7 @@ function blank() {
     starQ: {}, starSec: {},
     daily: { goal: 20, log: {}, streak: 0, best: 0, lastDay: '' },
     examHistory: [], examInProgress: null, lastAction: null,
-    snap: null, theme: '', scale: 1, onboarded: false
+    snap: null, theme: '', scale: 1, onboarded: false, ficheKnown: {}
   };
 }
 function loadState() {
@@ -41,7 +41,7 @@ function applyTheme() {
 }
 
 /* ---------- Contenu ---------- */
-let C = null, QBYID = {}, QBYMOD = {}, MOD = {}, FLASH = [], READTIME = {}, VIS_BY_SEC = {}, QCM_BY_SEC = {};
+let C = null, QBYID = {}, QBYMOD = {}, MOD = {}, FLASH = [], READTIME = {}, VIS_BY_SEC = {}, QCM_BY_SEC = {}, FICHES = [], FICHES_BY_MOD = {};
 function boot() {
   applyTheme();
   fetch('content.json', { cache: 'no-cache' })
@@ -50,9 +50,10 @@ function boot() {
     .catch(() => { $('#view').innerHTML = '<div class="card"><b>Impossible de charger le contenu.</b></div>'; });
 }
 function indexContent() {
-  QBYID = {}; QBYMOD = {}; MOD = {}; FLASH = []; READTIME = {}; VIS_BY_SEC = {}; QCM_BY_SEC = {};
+  QBYID = {}; QBYMOD = {}; MOD = {}; FLASH = []; READTIME = {}; VIS_BY_SEC = {}; QCM_BY_SEC = {}; FICHES = []; FICHES_BY_MOD = {};
   C.modules.forEach(m => {
-    MOD[m.id] = m; QBYMOD[m.id] = [];
+    MOD[m.id] = m; QBYMOD[m.id] = []; FICHES_BY_MOD[m.id] = [];
+    (m.fiches || []).forEach((f, i) => { f.id = f.id || (m.id + '-f' + i); f.mid = m.id; f.modnum = m.num; FICHES.push(f); FICHES_BY_MOD[m.id].push(f); });
     (m.qcm || []).forEach((q, i) => {
       q.id = q.id || (m.id + '-q' + i); q.module = m.id; q.modnum = m.num;
       q.options = shuffle(q.options || []); // mélange les positions à chaque session (anti-biais "toujours A")
@@ -147,6 +148,8 @@ function render() {
   else if (s === 'stats') { setTab('entrainement'); v.innerHTML = vStats(); }
   else if (s === 'reglages') { v.innerHTML = vReglages(); bindReglages(); }
   else if (s === 'recherche') { v.innerHTML = vRecherche(); bindRecherche(); }
+  else if (s === 'fiches') { setTab('fiches'); v.innerHTML = vFichesList(); }
+  else if (s === 'deck') { setTab('fiches'); startDeck(p[1] || 'all'); }
   else { v.innerHTML = vAccueil(); afterAccueil(); }
 }
 
@@ -194,6 +197,8 @@ function vAccueil() {
     <div class="stat"><div class="ring" style="--p:${p}"><i>${done}/${goal}</i></div><div class="lbl">objectif du jour</div></div>
   </div>`;
 
+  // fiches — révision rapide, mise en avant
+  html += `<button class="btn or" style="margin-bottom:12px" onclick="go('#/fiches')">🃏 Réviser en fiches — rapide &amp; visuel</button>`;
   // erreurs dues
   const nbWrong = Object.keys(S.wrong).length;
   if (nbWrong) html += `<button class="btn" style="margin-bottom:12px" onclick="go('#/erreurs')">🔁 Réviser mes erreurs (${nbWrong})</button>`;
@@ -585,6 +590,94 @@ function renderFlash() {
 }
 window.flashRate = function (known) { const f = FLASH[fsess.queue[fsess.i]]; if (known) { fsess.known++; S.flashKnown[f.id] = 1; } else delete S.flashKnown[f.id]; touchDaily(); save(); haptic(12); fsess.i++; renderFlash(); };
 
+/* ============================================================ FICHES (flashcards riches & illustrées) */
+let dsess = null;
+function ficheKnownCount(mid) { let n = 0; (FICHES_BY_MOD[mid] || []).forEach(f => { if (S.ficheKnown[f.id]) n++; }); return n; }
+function recordFiche(fid, known) { if (known) S.ficheKnown[fid] = 1; else delete S.ficheKnown[fid]; touchDaily(); save(); }
+function FBYID(id) { return FICHES.find(f => f.id === id); }
+
+function vFichesList() {
+  const total = FICHES.length; let kn = 0; FICHES.forEach(f => { if (S.ficheKnown[f.id]) kn++; });
+  const review = total - kn;
+  let html = `<div class="fintro"><h2>🃏 Fiches de révision</h2><p>Tout le programme en cartes courtes, illustrées et vérifiées. Retourne la carte, dis « je sais » ou « à revoir ». On révise vite — sans relire tout le cours.</p></div>`;
+  html += `<div class="btn-row"><button class="btn or" onclick="go('#/deck/all')">▶︎ Tout réviser (${total})</button>`;
+  if (review && review < total) html += `<button class="btn sec" onclick="go('#/deck/revoir')">🔁 À revoir (${review})</button>`;
+  html += `</div><div class="sp"></div><h3 class="sec">Par module</h3>`;
+  C.modules.forEach(m => {
+    const tot = (FICHES_BY_MOD[m.id] || []).length, k = ficheKnownCount(m.id), p = pct(k, tot);
+    html += `<a class="deckcard" onclick="go('#/deck/${m.id}')"><div class="dn">${m.num}</div>
+      <div style="flex:1"><div class="dnom">${esc(m.nom)}</div><div class="dcount">${tot ? k + '/' + tot + ' cartes sues' : 'bientôt'}</div>
+      <div class="dbar"><i style="width:${p}%"></i></div></div><span class="dchev">›</span></a>`;
+  });
+  return html;
+}
+function startDeck(scope) {
+  let ids;
+  if (scope === 'revoir') ids = shuffle(FICHES.filter(f => !S.ficheKnown[f.id]).map(f => f.id));
+  else if (scope === 'all') ids = shuffle(FICHES.map(f => f.id));
+  else ids = (FICHES_BY_MOD[scope] || []).map(f => f.id);
+  if (!ids.length) { $('#view').innerHTML = `<div class="empty"><div class="em">✅</div><h2 class="page">Rien à réviser ici</h2><p class="muted">Tout est su, ou ce module n'a pas encore de fiches.</p><button class="btn" onclick="go('#/fiches')">Retour aux fiches</button></div>`; return; }
+  dsess = { scope, ids, i: 0, flipped: false, known: 0 };
+  S.lastAction = { type: 'fiches', href: '#/deck/' + scope, label: 'fiches ' + (MOD[scope] ? MOD[scope].nom : scope === 'revoir' ? 'à revoir' : 'tout'), ts: Date.now() }; save();
+  renderDeck();
+}
+function fcardHTML(f, verso) {
+  let h = `<div class="accent"></div><div class="fhead"><span class="ftheme">${esc(f.theme || MOD[f.mid].nom)}</span>${f.verif ? `<span class="fverif">${esc(f.verif)}</span>` : ''}</div><div class="fbody">`;
+  if (!verso) {
+    h += `<div class="frecto"><span class="qmark">?</span>${esc(f.recto)}</div><div class="fhint">touche la carte pour révéler ▾</div>`;
+  } else {
+    h += `<div class="fverso"><div class="vtop">${esc(f.recto)}</div><ul>${(f.verso || []).map(p => '<li>' + esc(p) + '</li>').join('')}</ul>`;
+    if (f.visuel) h += renderVisual(f.visuel);
+    if ((f.chiffres || []).length) h += `<div class="fchips">${f.chiffres.map(c => '<span class="fchip n">' + esc(c) + '</span>').join('')}</div>`;
+    h += `<div class="fmodtag">Module ${f.modnum} · ${esc(MOD[f.mid].nom)}</div></div>`;
+  }
+  return h + `</div>`;
+}
+function renderDeck() {
+  if (!dsess) { go('#/fiches'); return; }
+  if (dsess.i >= dsess.ids.length) { $('#view').innerHTML = vDeckEnd(); return; }
+  const f = FBYID(dsess.ids[dsess.i]), total = dsess.ids.length;
+  const title = dsess.scope === 'all' ? 'Tout réviser' : dsess.scope === 'revoir' ? 'À revoir' : MOD[dsess.scope].nom;
+  let html = `<div class="qhead"><a onclick="quitDeck()">‹ Fiches</a><span class="mid">${esc(title)}</span><span></span></div>`;
+  html += `<div class="deck"><div class="fcounter"><span>${dsess.i + 1}/${total}</span><div class="fprog"><i style="width:${pct(dsess.i, total)}%"></i></div><span>${dsess.known} ✓</span></div>`;
+  html += `<div class="fcard" id="fcard" onclick="flipDeck()">${fcardHTML(f, false)}</div><div class="fcard-actions" id="factions"></div></div>`;
+  $('#view').innerHTML = html;
+  dsess.flipped = false;
+  attachDeckSwipe();
+}
+window.quitDeck = function () { dsess = null; go('#/fiches'); };
+window.flipDeck = function () {
+  if (!dsess || dsess.flipped) return;
+  const c = $('#fcard'); if (!c) return;
+  c.classList.add('flip'); haptic(10);
+  setTimeout(() => {
+    const f = FBYID(dsess.ids[dsess.i]); c.innerHTML = fcardHTML(f, true); c.classList.remove('flip'); dsess.flipped = true; enhanceVisuals();
+    const a = $('#factions'); if (a) a.innerHTML = `<div class="frate"><button class="btn bad-b" onclick="rateDeck(false)">🔁 À revoir</button><button class="btn good-b" onclick="rateDeck(true)">Je sais ✓</button></div>`;
+  }, 170);
+};
+window.rateDeck = function (known) {
+  if (!dsess) return; const f = FBYID(dsess.ids[dsess.i]); recordFiche(f.id, known); if (known) dsess.known++;
+  haptic(known ? 16 : [10, 30, 10]); dsess.i++; renderDeck();
+};
+function vDeckEnd() {
+  const total = dsess.ids.length, k = dsess.known, scope = dsess.scope;
+  let html = `<h2 class="page">Deck terminé 🎉</h2><div class="card center"><div class="bigscore">${k}/${total}</div><div class="muted">cartes marquées « je sais »</div></div>`;
+  const left = total - k;
+  if (left) html += `<button class="btn or" onclick="go('#/deck/revoir')">🔁 Revoir ce que je n'ai pas su</button><div class="sp"></div>`;
+  html += `<div class="btn-row"><button class="btn sec" onclick="go('#/deck/${scope}')">↻ Recommencer</button><button class="btn sec" onclick="go('#/fiches')">Autres fiches</button></div>`;
+  dsess = null;
+  return html;
+}
+let _dtx = 0, _dty = 0;
+function attachDeckSwipe() {
+  const c = $('#fcard'); if (!c) return;
+  c.addEventListener('touchstart', e => { _dtx = e.changedTouches[0].clientX; _dty = e.changedTouches[0].clientY; }, { passive: true });
+  c.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - _dtx, dy = e.changedTouches[0].clientY - _dty;
+    if (Math.abs(dx) > 60 && Math.abs(dy) < 50 && dsess) { if (!dsess.flipped) flipDeck(); else rateDeck(dx > 0); }
+  }, { passive: true });
+}
+
 /* ============================================================ STATS */
 function vStats() {
   let html = `<div class="qhead"><a onclick="go('#/entrainement')">‹ Entraînement</a><span class="mid">Mes stats</span><span></span></div><h2 class="page">📊 Mes stats</h2>`;
@@ -687,6 +780,12 @@ function confetti() {
 
 /* ============================================================ Clavier & swipe */
 function onKey(e) {
+  if (parseHash()[0] === 'deck' && dsess) {
+    if (!dsess.flipped && (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowDown')) { e.preventDefault(); flipDeck(); }
+    else if (dsess.flipped && (e.key === 'ArrowRight' || e.key === 'Enter')) { e.preventDefault(); rateDeck(true); }
+    else if (dsess.flipped && e.key === 'ArrowLeft') { e.preventDefault(); rateDeck(false); }
+    return;
+  }
   if (!sess) return;
   const SESSION_SCREENS = ['drill', 'erreurs', 'echauffement', 'esg', 'favoris', 'examen-run'];
   if (!SESSION_SCREENS.includes(parseHash()[0])) return;

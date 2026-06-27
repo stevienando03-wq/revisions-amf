@@ -1,0 +1,343 @@
+{
+  "id": "m6",
+  "fiches": [
+    {
+      "id": "m6-f1",
+      "theme": "Démarchage — définition",
+      "recto": "Qu'est-ce que le DÉMARCHAGE bancaire ou financier ?",
+      "verso": [
+        "Prise de contact NON SOLLICITÉE avec une personne déterminée (tél, courrier, mail…)",
+        "OU se rendre physiquement au domicile / lieu de travail / lieu non commercial",
+        "Le déplacement physique = démarchage MÊME si c'est le client qui sollicite (sauf entreprise à son initiative)"
+      ],
+      "chiffres": ["Base légale : art. L341-1 CMF"],
+      "verif": "✓ Vérifié — Légifrance, art. L341-1 CMF"
+    },
+    {
+      "id": "m6-f2",
+      "theme": "Démarchage — délais",
+      "recto": "Rétractation vs Réflexion : les 2 délais à NE PAS confondre",
+      "verso": [
+        "RÉTRACTATION = 14 jours (sans justification, sans pénalité)",
+        "RÉFLEXION = 48 h pour instruments financiers / RTO / exécution d'ordres (PAS de rétractation, mais consentement EXPRÈS après)",
+        "Le silence à l'issue des 48 h ≠ consentement"
+      ],
+      "chiffres": ["Rétractation : 14 jours", "Réflexion : 48 heures"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Rétractation (14 j) vs Réflexion (48 h)",
+        "headers": ["", "Rétractation 14 j", "Réflexion 48 h"],
+        "rows": [
+          { "cells": ["S'applique à", "Démarchage (cas général)", "Instr. financiers / RTO / exécution"] },
+          { "cells": ["Nature", "Annuler après coup", "Attendre avant d'agir"] },
+          { "cells": ["Après le délai", "—", "Consentement exprès requis"] }
+        ]
+      },
+      "verif": "✓ Vérifié — Légifrance, CMF art. L341-16"
+    },
+    {
+      "id": "m6-f3",
+      "theme": "Démarchage — vente à distance & sanctions",
+      "recto": "Vente à distance + sanctions du démarchage",
+      "verso": [
+        "Vente à distance : rétractation 14 j OUI, réflexion 48 h NON (Code conso → consommateurs)",
+        "Info AVANT signature, sur support DURABLE",
+        "Sanctions démarchage : 5 ans prison + 375 000 € + interdiction d'exercer + privation droits civiques"
+      ],
+      "chiffres": ["5 ans de prison", "375 000 € d'amende"]
+    },
+    {
+      "id": "m6-f4",
+      "theme": "Identité — vérification (LCB-FT)",
+      "recto": "Vérifier l'identité du client : QUAND et avec QUOI ?",
+      "verso": [
+        "QUAND : AVANT toute prestation + dès que les éléments semblent ne plus être exacts",
+        "Personne PHYSIQUE : doc officiel en cours de validité avec PHOTOGRAPHIE",
+        "Personne MORALE : extrait de registre officiel de MOINS de 3 MOIS",
+        "Impossible de vérifier → AUCUNE relation ni opération"
+      ],
+      "chiffres": ["Extrait personne morale : < 3 mois"],
+      "verif": "✓ Vérifié — cadre LCB-FT (CMF)"
+    },
+    {
+      "id": "m6-f5",
+      "theme": "Identité — conservation",
+      "recto": "Combien de temps conserver les docs d'identité ?",
+      "verso": [
+        "Toute la durée de la relation + 5 ANS après la CLÔTURE du compte",
+        "Piège : le délai court de la CLÔTURE, pas de l'entrée en relation",
+        "Ne pas confondre les 3 mois (validité extrait PM) et les 5 ans (conservation)"
+      ],
+      "chiffres": ["Conservation : relation + 5 ans après clôture"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Conservation des documents",
+        "value": "5 ans",
+        "note": "à compter de la CLÔTURE du compte (en plus de toute la relation)"
+      }
+    },
+    {
+      "id": "m6-f6",
+      "theme": "Identité — client à distance",
+      "recto": "Client NON physiquement présent : quelle obligation ?",
+      "verso": [
+        "Mesures de VIGILANCE COMPLÉMENTAIRES (pièces justificatives supplémentaires)",
+        "La vérification d'identité reste obligatoire (renforcée, pas allégée)"
+      ]
+    },
+    {
+      "id": "m6-f7",
+      "theme": "Catégories MIF — les 3 niveaux",
+      "recto": "Les 3 catégories de clients MIF et leur protection",
+      "verso": [
+        "CNP (Non-Professionnel / détail) = MAXIMUM de protection",
+        "CP (Professionnel) = protection MOINDRE",
+        "CEL (Contrepartie ÉLigible) = PAS un client, équivalent du PSI, AUCUNE protection",
+        "Échelle : CNP > CP > CEL"
+      ],
+      "chiffres": ["Outil : questionnaire MIF (MiFID)"],
+      "visuel": {
+        "type": "pyramid",
+        "titre": "Protection décroissante",
+        "levels": [
+          { "t": "CNP", "d": "Non-pro / détail — protection MAXIMALE" },
+          { "t": "CP", "d": "Professionnel — protection moindre" },
+          { "t": "CEL", "d": "Contrepartie éligible — pas un client, AUCUNE protection" }
+        ]
+      },
+      "verif": "✓ Vérifié — MiFID II (classification 3 catégories)"
+    },
+    {
+      "id": "m6-f8",
+      "theme": "Catégories MIF — CEL & CNP",
+      "recto": "Les 2 pièges classiques sur CEL et CNP",
+      "verso": [
+        "CEL n'est PAS le mieux protégé : c'est l'inverse, équivalent du PSI = aucune protection",
+        "CEL = uniquement exécution, RTO, transactions pour compte propre",
+        "Le MAXIMUM de protection = CNP (et non le professionnel)",
+        "Faux-ami : 'client de détail' = 'client non-professionnel' (même chose)"
+      ]
+    },
+    {
+      "id": "m6-f9",
+      "theme": "Catégories MIF — changement",
+      "recto": "Changer de catégorie : dans quel sens est-ce encadré ?",
+      "verso": [
+        "Vers PLUS de protection (CP/CEL → plus protégé) : le PSI NE PEUT PAS s'y opposer",
+        "Vers MOINS de protection (CNP → CP) : SEULEMENT à l'initiative du client + conditions de capacités",
+        "Le changement peut être général OU limité à certains services/instruments",
+        "Le PSI peut aussi reclasser si la situation du client évolue"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Sens du changement de catégorie",
+        "headers": ["", "Vers PLUS de protection", "Vers MOINS de protection"],
+        "rows": [
+          { "cells": ["Qui décide", "Le client (PSI ne refuse pas)", "Le client SEUL, à son initiative"] },
+          { "cells": ["Conditions", "Aucune opposition possible", "Conditions de capacités"] }
+        ]
+      }
+    },
+    {
+      "id": "m6-f10",
+      "theme": "Information client — CNP",
+      "recto": "Quel client reçoit le BLOC d'information le plus complet ?",
+      "verso": [
+        "Le CNP : régime d'information le plus protecteur et complet",
+        "Infos prestataire : raison sociale, agrément, autorité compétente, rapports de performance",
+        "Toujours : politique de gestion des CONFLITS D'INTÉRÊTS",
+        "CP : reçoit EN PLUS les modalités du prospectus (offre publique) + info garantie d'un tiers"
+      ]
+    },
+    {
+      "id": "m6-f11",
+      "theme": "Information client — risques",
+      "recto": "Description des risques des instruments (au CNP) : quoi mentionner ?",
+      "verso": [
+        "Risques par type d'instrument : effet de levier, risque de perte TOTALE",
+        "Volatilité du prix et caractère limité du marché",
+        "Engagements au-delà du coût d'acquisition (y compris dettes) et exigences de marge",
+        "Instrument composé : interaction des composants qui accroît le risque"
+      ]
+    },
+    {
+      "id": "m6-f12",
+      "theme": "Tests — adéquation vs adapté (CŒUR cat. A)",
+      "recto": "Quel TEST selon le service, et que faire SANS info ?",
+      "verso": [
+        "CONSEIL + GESTION SOUS MANDAT → ADÉQUATION (3 piliers) → sans info = ABSTENTION",
+        "EXÉCUTION + RTO → caractère ADAPTÉ (connaissance/expérience seule) → sans info = MISE EN GARDE",
+        "EXÉCUTION SIMPLE (execution only) → AUCUN test → on continue quand même"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Test par service (à NE PAS inverser)",
+        "headers": ["Service", "Test", "Sans info"],
+        "rows": [
+          { "cells": ["Conseil / Gestion mandat", "Adéquation (3 piliers)", "ABSTENTION"] },
+          { "cells": ["Exécution + RTO", "Caractère adapté (1 pilier)", "MISE EN GARDE"] },
+          { "cells": ["Exécution simple", "Aucun", "On continue"] }
+        ]
+      },
+      "verif": "✓ Vérifié — MiFID II (suitability vs appropriateness ; CEL exemptée)"
+    },
+    {
+      "id": "m6-f13",
+      "theme": "Tests — les 3 piliers",
+      "recto": "Les 3 PILIERS du test d'adéquation (conseil & gestion mandat)",
+      "verso": [
+        "1. Connaissance et expérience",
+        "2. Situation financière",
+        "3. Objectifs d'investissement",
+        "Caractère adapté (exéc + RTO) = SEULEMENT le pilier 1 (connaissance/expérience)"
+      ],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Test d'adéquation",
+        "value": "3 piliers",
+        "note": "Connaissance/expérience + Situation financière + Objectifs"
+      }
+    },
+    {
+      "id": "m6-f14",
+      "theme": "Frais — transparence prix total (CNP)",
+      "recto": "Transparence des frais : que doit fournir le PSI au CNP ?",
+      "verso": [
+        "Le PRIX TOTAL à payer (frais, commissions, charges, taxes via le PSI)",
+        "Commissions du PSI : VENTILÉES séparément (jamais globalisées)",
+        "Prix exact inconnu → fournir la BASE DE CALCUL vérifiable (pas de silence)",
+        "Devise ≠ euro → indiquer taux et frais de change"
+      ],
+      "chiffres": ["Commissions du PSI : à ventiler séparément"]
+    },
+    {
+      "id": "m6-f15",
+      "theme": "Commissions — règle d'or",
+      "recto": "La RÈGLE D'OR : une commission est valable si… ?",
+      "verso": [
+        "1. Elle AMÉLIORE la QUALITÉ du service rendu, ET",
+        "2. Elle respecte l'INTÉRÊT EXCLUSIF du client",
+        "+ lien DIRECT avec le service (le lien indirect ne suffit pas)",
+        "Sinon : interdite (la transparence seule ne suffit jamais)"
+      ],
+      "visuel": {
+        "type": "flow",
+        "titre": "Commission valable ?",
+        "steps": [
+          { "t": "Améliore la qualité ?", "d": "du service rendu au client" },
+          { "t": "Intérêt exclusif ?", "d": "du client respecté" },
+          { "t": "Lien direct ?", "d": "avec le service rendu" }
+        ]
+      }
+    },
+    {
+      "id": "m6-f16",
+      "theme": "Rétrocessions — indépendant vs non (CŒUR cat. A)",
+      "recto": "Rétrocommissions : qui peut CONSERVER, qui doit REVERSER ?",
+      "verso": [
+        "Conseil NON indépendant (ex. salarié réseau bancaire) → peut CONSERVER, avec transparence",
+        "Conseil INDÉPENDANT ou GESTION SOUS MANDAT → TOUT reverser au client (interdiction de conserver)",
+        "Piège majeur : ne PAS inverser les deux cas"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Rétrocommissions : conserver ou reverser ?",
+        "headers": ["", "Non indépendant", "Indépendant / Gestion mandat"],
+        "rows": [
+          { "cells": ["Peut conserver ?", "OUI (transparence)", "NON — interdit"] },
+          { "cells": ["Reversement client", "Non obligatoire", "INTÉGRAL obligatoire"] }
+        ]
+      },
+      "verif": "✓ Vérifié — RG AMF art. 314-13 à 314-20 ; MiFID II conseil indépendant"
+    },
+    {
+      "id": "m6-f17",
+      "theme": "Rétrocessions — information",
+      "recto": "Info sur les commissions : quoi, comment, QUAND ?",
+      "verso": [
+        "Existence + Nature + Montant (ou mode de calcul) de la rémunération",
+        "De manière complète, exacte et compréhensible",
+        "AVANT que le service ne soit fourni (jamais après)",
+        "N'intègre PAS la rémunération des vendeurs salariés du PSI"
+      ],
+      "chiffres": ["Réf. : art. 314-13 RG AMF"]
+    },
+    {
+      "id": "m6-f18",
+      "theme": "Frais SGP — les 4 commissions",
+      "recto": "Les 4 commissions d'une SGP : gestion, mouvement, performance, souscription/rachat",
+      "verso": [
+        "GESTION : % de l'actif net, prélevée à CHAQUE valorisation",
+        "MOUVEMENT : selon le NOMBRE de transactions, partagée SGP + dépositaire UNIQUEMENT",
+        "PERFORMANCE : atteinte des objectifs + cohérence avec le prospectus",
+        "RACHAT acquise → investisseurs restants ; non acquise → distributeur + SGP"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Commissions SGP",
+        "headers": ["Commission", "Base", "Pour qui"],
+        "rows": [
+          { "cells": ["Gestion", "% actif net / valorisation", "SGP (part au distributeur)"] },
+          { "cells": ["Mouvement", "Nb de transactions", "SGP + dépositaire"] },
+          { "cells": ["Performance", "Atteinte objectifs", "SGP (si cohérent prospectus)"] },
+          { "cells": ["Rachat acquise", "Sortie", "Investisseurs restants"] }
+        ]
+      }
+    },
+    {
+      "id": "m6-f19",
+      "theme": "Frais SGP — déontologie AFG",
+      "recto": "Rémunération du gérant : que dit le règlement de déontologie AFG ?",
+      "verso": [
+        "EXCLURE toute gratification portant atteinte à l'indépendance de la gestion",
+        "Part variable basée essentiellement sur la QUALITÉ du service, dans l'intérêt des porteurs",
+        "N'interdit PAS : stock-options, intéressement, participation, actionnariat salarié"
+      ],
+      "chiffres": ["Règlement déontologie AFG : 10 décembre 2009"]
+    },
+    {
+      "id": "m6-f20",
+      "theme": "Budget recherche",
+      "recto": "Budget recherche/conseil de la SGP : excédent et dépassement ?",
+      "verso": [
+        "Budget validé / communiqué au client pour ACCORD",
+        "Excédent non consommé en fin d'année → REVERSÉ aux clients (ne reste pas à la SGP)",
+        "En cas de DÉPASSEMENT → ALERTER le client"
+      ]
+    },
+    {
+      "id": "m6-f21",
+      "theme": "Frais d'intermédiation & OPC propre",
+      "recto": "Frais d'intermédiation + cas de l'OPC géré par la SGP elle-même",
+      "verso": [
+        "Frais d'intermédiation : RTO/exécution + conseil/analyse financière + investissement dans d'autres OPC",
+        "Risque de confusion : le courtier exécute ET fournit l'analyse financière",
+        "OPC géré par la SGP elle-même : commissions de souscription/rachat INTERDITES (sauf acquises à l'OPCVM)"
+      ]
+    },
+    {
+      "id": "m6-f22",
+      "theme": "DICI / DIC & VNI",
+      "recto": "DICI (DIC) : quels frais présente-t-il et quel effet sur la VNI ?",
+      "verso": [
+        "Tableau des frais facturés à l'OPC au DERNIER EXERCICE CLOS",
+        "Ces frais se DÉDUISENT de la VNI (ne s'y ajoutent JAMAIS)",
+        "Frais de transaction → note détaillée du PROSPECTUS complet (à ne pas confondre)",
+        "Total des frais exprimé en % de la VL pour comparer au rendement"
+      ],
+      "chiffres": ["DICI = Document d'Information Clé pour l'Investisseur", "VNI = Valeur Nette d'Inventaire"],
+      "verif": "✓ Vérifié — depuis le 1er janvier 2023, le DICI est remplacé par le DIC (KID PRIIPs)"
+    },
+    {
+      "id": "m6-f23",
+      "theme": "Sigles à connaître",
+      "recto": "Les sigles incontournables du module",
+      "verso": [
+        "PSI = Prestataire de Services d'Investissement ; CIF = Conseiller en Investissement Financier",
+        "SGP = Société de Gestion de Portefeuille ; OPC = Organisme de Placement Collectif",
+        "RTO = Réception/Transmission d'Ordres ; CMF = Code Monétaire et Financier ; RG AMF = Règlement Général AMF",
+        "MIF = Marchés d'Instruments Financiers (MiFID) ; LCB-FT = Lutte Contre Blanchiment & Financement du Terrorisme"
+      ]
+    }
+  ]
+}

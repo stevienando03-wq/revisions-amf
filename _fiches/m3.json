@@ -1,0 +1,368 @@
+{
+  "id": "m3",
+  "fiches": [
+    {
+      "id": "m3-f1",
+      "theme": "Définition — sources",
+      "recto": "D'où vient la DÉFINITION du blanchiment ?",
+      "verso": [
+        "Définition = ARTICLE 324-1 du CODE PÉNAL",
+        "Obligations des PSI (identification, vigilance, déclaration) = CMF",
+        "Piège : ne pas confondre les deux codes"
+      ],
+      "chiffres": ["Art. 324-1 Code pénal = définition du délit"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Définition vs obligations",
+        "headers": ["Aspect", "Code pénal 324-1", "CMF"],
+        "rows": [
+          { "cells": ["Rôle", "Définit le délit", "Obligations des PSI"] },
+          { "cells": ["Contenu", "Justification mensongère de l'origine", "Identification, vigilance, déclaration"] }
+        ]
+      },
+      "verif": "✓ Vérifié — Code pénal art. 324-1 / CMF (Légifrance 2026)"
+    },
+    {
+      "id": "m3-f2",
+      "theme": "Définition — concept",
+      "recto": "Le blanchiment, c'est quoi en une phrase ?",
+      "verso": [
+        "FACILITER la justification mensongère de l'origine de biens issus d'un crime/délit",
+        "OU apporter son concours à un placement/dissimulation/conversion du produit du délit",
+        "Suppose une INFRACTION SOUS-JACENTE ayant procuré un profit (direct OU indirect)"
+      ],
+      "chiffres": ["Profit direct OU indirect : les deux comptent"]
+    },
+    {
+      "id": "m3-f3",
+      "theme": "Définition — aggravé",
+      "recto": "Quand le blanchiment est-il AGGRAVÉ ?",
+      "verso": [
+        "1) De façon HABITUELLE",
+        "2) Via les facilités d'une ACTIVITÉ PROFESSIONNELLE",
+        "3) En BANDE ORGANISÉE",
+        "Piège : ça ne dépend PAS du montant"
+      ],
+      "chiffres": ["3 circonstances alternatives, pas un montant"],
+      "visuel": {
+        "type": "pyramid",
+        "titre": "Blanchiment aggravé : 3 circonstances",
+        "levels": [
+          { "t": "Habituel", "d": "Commis de façon habituelle" },
+          { "t": "Activité pro", "d": "Facilités d'une activité professionnelle" },
+          { "t": "Bande organisée", "d": "Dans le cadre d'une bande organisée" }
+        ]
+      },
+      "verif": "✓ Vérifié — Code pénal art. 324-2 (Légifrance 2026)"
+    },
+    {
+      "id": "m3-f4",
+      "theme": "Mécanisme — 3 étapes",
+      "recto": "Les 3 étapes du blanchiment, dans l'ordre ?",
+      "verso": [
+        "1) PLACEMENT : l'argent sale entre dans le circuit financier",
+        "2) EMPILEMENT : multiplier les opérations pour brouiller les pistes",
+        "3) INTÉGRATION : réinvestir dans l'économie légale (ressort propre)"
+      ],
+      "chiffres": ["Placement → Empilement → Intégration"],
+      "visuel": {
+        "type": "flow",
+        "titre": "Les 3 étapes (ordre à retenir)",
+        "steps": [
+          { "t": "1. Placement", "d": "Entrée des fonds dans le système financier" },
+          { "t": "2. Empilement", "d": "Multiplier les opérations, casser la traçabilité" },
+          { "t": "3. Intégration", "d": "Réinvestir dans les circuits légaux" }
+        ]
+      }
+    },
+    {
+      "id": "m3-f5",
+      "theme": "Mécanisme — pièges étapes",
+      "recto": "Empilement vs Intégration : ne pas inverser !",
+      "verso": [
+        "EMPILEMENT = brouiller (multiplication d'opérations)",
+        "INTÉGRATION = faire ressortir l'argent propre dans le légal",
+        "L'empilement vient AVANT l'intégration"
+      ]
+    },
+    {
+      "id": "m3-f6",
+      "theme": "TRACFIN — rôle",
+      "recto": "TRACFIN : qui est-il et que fait-il ?",
+      "verso": [
+        "Cellule PUBLIQUE française (organisme d'État, pas interne au PSI)",
+        "Recueille les déclarations de soupçon, conseille, forme",
+        "Fait passer du SOUPÇON à la PRÉSOMPTION",
+        "Transmet au PROCUREUR DE LA RÉPUBLIQUE — il ne juge PAS"
+      ],
+      "chiffres": ["Destinataire final : Procureur de la République"],
+      "visuel": {
+        "type": "flow",
+        "titre": "TRACFIN : du soupçon à la justice",
+        "steps": [
+          { "t": "Déclaration", "d": "Le pro déclare au moindre doute" },
+          { "t": "Recueil TRACFIN", "d": "Cellule publique recueille et analyse" },
+          { "t": "Soupçon → présomption", "d": "L'analyse qualifie la présomption" },
+          { "t": "Transmission", "d": "Dossier au Procureur de la République" }
+        ]
+      }
+    },
+    {
+      "id": "m3-f7",
+      "theme": "Déclaration de soupçon — déclenchement",
+      "recto": "Quand déclencher une déclaration de soupçon ?",
+      "verso": [
+        "Au MOINDRE DOUTE sur une opération et/ou un client",
+        "Le simple soupçon suffit : PAS besoin de preuve",
+        "Aucun seuil de montant ne conditionne la déclaration"
+      ],
+      "verif": "✓ Vérifié — economie.gouv.fr / AMF doc-2019-18 (TRACFIN)"
+    },
+    {
+      "id": "m3-f8",
+      "theme": "Déclaration de soupçon — modalités",
+      "recto": "Comment doit être faite la déclaration ?",
+      "verso": [
+        "Dès que POSSIBLE",
+        "DÉTAILLÉE",
+        "CONFIDENTIELLE : interdit de prévenir le client"
+      ],
+      "chiffres": ["3 modalités : possible / détaillée / confidentielle"]
+    },
+    {
+      "id": "m3-f9",
+      "theme": "Fonctions internes — TRACFIN",
+      "recto": "Déclarant vs Correspondant TRACFIN ?",
+      "verso": [
+        "DÉCLARANT = TRANSMET les soupçons à TRACFIN",
+        "CORRESPONDANT = RÉPOND à TRACFIN et diffuse ses avis/infos",
+        "Un MEMBRE DE LA DIRECTION est responsable du dispositif LAB-FT"
+      ],
+      "visuel": {
+        "type": "compare",
+        "titre": "Déclarant vs Correspondant",
+        "headers": ["Fonction", "Rôle"],
+        "rows": [
+          { "cells": ["Déclarant", "Émet / transmet les soupçons"] },
+          { "cells": ["Correspondant", "Répond / diffuse pour TRACFIN"] }
+        ]
+      }
+    },
+    {
+      "id": "m3-f10",
+      "theme": "KYC — moment & documents",
+      "recto": "Identifier le client : quand et avec quoi ?",
+      "verso": [
+        "AVANT l'entrée en relation contractuelle (point de départ)",
+        "Personne physique : pièce officielle valide AVEC PHOTO",
+        "Personne morale : extrait Kbis de MOINS DE 3 MOIS"
+      ],
+      "chiffres": ["Kbis : moins de 3 mois", "Identification = AVANT la relation"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Documents d'identification",
+        "headers": ["Client", "Document requis"],
+        "rows": [
+          { "cells": ["Personne physique", "Pièce valide AVEC photo"] },
+          { "cells": ["Personne morale", "Kbis < 3 mois"] }
+        ]
+      }
+    },
+    {
+      "id": "m3-f11",
+      "theme": "KYC — relation d'affaires",
+      "recto": "Au-delà de l'identité, que recueille le pro ?",
+      "verso": [
+        "Nature/montant des opérations envisagées",
+        "Provenance et destination des fonds, fonctionnement du compte",
+        "Revenus, patrimoine, statut PPE (ou lien avec une PPE)",
+        "Infos MISES À JOUR tout au long de la relation"
+      ]
+    },
+    {
+      "id": "m3-f12",
+      "theme": "Bénéficiaire effectif",
+      "recto": "Bénéficiaire effectif : c'est qui, à quel seuil ?",
+      "verso": [
+        "TOUJOURS une PERSONNE PHYSIQUE (jamais une société)",
+        "Détient PLUS DE 25 % du capital OU des droits de vote",
+        "OU exerce un pouvoir de contrôle (un seul critère suffit)",
+        "Piège : +25 %, pas 'au moins 25 %' ni 50 %"
+      ],
+      "chiffres": ["+ de 25 % du capital ou des droits de vote", "Art. L. 561-2-2 CMF"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Seuil bénéficiaire effectif",
+        "value": "+ de 25 %",
+        "note": "Personne physique : > 25 % capital OU droits de vote, OU pouvoir de contrôle (art. L. 561-2-2 / R. 561-1 CMF)."
+      },
+      "verif": "✓ Vérifié — CMF art. L. 561-2-2 et R. 561-1 (Légifrance 2026)"
+    },
+    {
+      "id": "m3-f13",
+      "theme": "Devoir d'abstention",
+      "recto": "Pièces insuffisantes pour identifier : on fait quoi ?",
+      "verso": [
+        "DEVOIR D'ABSTENTION : on N'ENTRE PAS en relation",
+        "Si déjà engagée : on Y MET FIN",
+        "Pas 'continuer en surveillant' — c'est l'abstention totale"
+      ],
+      "chiffres": ["Pas de pièces = pas de relation (ou rupture)"]
+    },
+    {
+      "id": "m3-f14",
+      "theme": "Conservation",
+      "recto": "Combien de temps conserver les informations ?",
+      "verso": [
+        "5 ANS",
+        "À ne pas confondre avec le Kbis (3 mois) ni les peines"
+      ],
+      "chiffres": ["Conservation : 5 ans"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Durée de conservation",
+        "value": "5 ans",
+        "note": "Conservation des infos d'identification et de vigilance (art. L. 561-12 CMF)."
+      },
+      "verif": "✓ Vérifié — CMF art. L. 561-12 (economie.gouv.fr)"
+    },
+    {
+      "id": "m3-f15",
+      "theme": "Vigilance — approche par les risques",
+      "recto": "La vigilance s'exerce comment ?",
+      "verso": [
+        "AU PRÉALABLE et TOUT AU LONG de la relation",
+        "MODULÉE selon le client et l'opération (approche par les risques)",
+        "Chaque PSI a sa procédure interne et sa grille de seuils"
+      ]
+    },
+    {
+      "id": "m3-f16",
+      "theme": "Vigilance — 4 niveaux",
+      "recto": "Les 4 niveaux de mesures de vigilance ?",
+      "verso": [
+        "ALLÉGÉES : faible risque",
+        "PAR DÉFAUT : standard",
+        "COMPLÉMENTAIRES : client absent OU PPE à l'étranger",
+        "RENFORCÉES : opérations avec pays peu sûrs"
+      ],
+      "chiffres": ["4 niveaux : allégées / défaut / complémentaires / renforcées"],
+      "visuel": {
+        "type": "pyramid",
+        "titre": "4 niveaux de vigilance",
+        "levels": [
+          { "t": "Allégées", "d": "Faible risque" },
+          { "t": "Par défaut", "d": "Standard" },
+          { "t": "Complémentaires", "d": "Client absent / PPE étranger" },
+          { "t": "Renforcées", "d": "Pays peu sûrs" }
+        ]
+      }
+    },
+    {
+      "id": "m3-f17",
+      "theme": "Vigilance — pièges niveaux",
+      "recto": "Complémentaires vs Renforcées : ne pas confondre",
+      "verso": [
+        "COMPLÉMENTAIRES = client NON présent physiquement OU PPE à l'étranger",
+        "RENFORCÉES = opérations avec PAYS PEU SÛRS",
+        "ALLÉGÉES = uniquement faible risque (jamais un PPE !)"
+      ]
+    },
+    {
+      "id": "m3-f18",
+      "theme": "Vigilance — examen renforcé",
+      "recto": "Qu'est-ce qui déclenche un EXAMEN RENFORCÉ ?",
+      "verso": [
+        "Opération COMPLEXE",
+        "OU MONTANT ÉLEVÉ",
+        "OU SANS JUSTIFICATION économique",
+        "Alors : vérifier origine, destination, objet, bénéficiaire"
+      ],
+      "chiffres": ["3 critères alternatifs (un seul suffit)"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Examen renforcé systématique",
+        "value": "3 critères",
+        "note": "Complexe OU montant élevé OU sans justification économique. Un seul suffit."
+      }
+    },
+    {
+      "id": "m3-f19",
+      "theme": "Sanctions — administratives",
+      "recto": "Amendes administratives (manquement LAB-FT) ?",
+      "verso": [
+        "Personne physique : 300 K€ OU x5 des profits",
+        "PSI : 100 M€ OU x10 des profits",
+        "Aussi : avertissement, blâme, interdiction, retrait d'agrément",
+        "Base : art. L. 561-40 CMF"
+      ],
+      "chiffres": ["Personne physique : 300 K€ / x5", "PSI : 100 M€ / x10"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Amende administrative",
+        "headers": ["Redevable", "Plafond", "Ou multiple"],
+        "rows": [
+          { "cells": ["Personne physique", "300 K€", "x5"] },
+          { "cells": ["PSI", "100 M€", "x10"] }
+        ]
+      }
+    },
+    {
+      "id": "m3-f20",
+      "theme": "Sanctions — pénales blanchiment",
+      "recto": "Peines pénales : blanchiment simple vs aggravé ?",
+      "verso": [
+        "SIMPLE : 5 ans + 375 000 €",
+        "AGGRAVÉ : 10 ans + 750 000 € (les chiffres DOUBLENT)"
+      ],
+      "chiffres": ["Simple : 5 ans / 375 000 €", "Aggravé : 10 ans / 750 000 €"],
+      "visuel": {
+        "type": "compare",
+        "titre": "Sanctions pénales du blanchiment",
+        "headers": ["Type", "Prison", "Amende"],
+        "rows": [
+          { "cells": ["Simple", "5 ans", "375 000 €"] },
+          { "cells": ["Aggravé", "10 ans", "750 000 €"] }
+        ]
+      },
+      "verif": "✓ Vérifié — Code pénal art. 324-1 & 324-2 (Légifrance 2026)"
+    },
+    {
+      "id": "m3-f21",
+      "theme": "Sanctions — divulgation au client",
+      "recto": "Le pro prévient son client de la déclaration : sanction ?",
+      "verso": [
+        "AMENDE de 22 500 € (art. L. 574-1 CMF)",
+        "La déclaration est CONFIDENTIELLE : la divulguer est une infraction",
+        "Chiffre très spécifique, souvent demandé à l'examen"
+      ],
+      "chiffres": ["Divulgation au client : 22 500 € (art. L. 574-1 CMF)"],
+      "visuel": {
+        "type": "bignum",
+        "titre": "Divulgation au client",
+        "value": "22 500 €",
+        "note": "Amende pénale pour avoir prévenu le client (art. L. 574-1 CMF)."
+      }
+    },
+    {
+      "id": "m3-f22",
+      "theme": "Sanctions — ne pas confondre",
+      "recto": "Administratif vs pénal : bien séparer les chiffres",
+      "verso": [
+        "ADMINISTRATIF : 300 K€ (physique) / 100 M€ (PSI) — base L. 561-40",
+        "PÉNAL : 5 ans/375 K€ (simple), 10 ans/750 K€ (aggravé)",
+        "Piège : 300 000 € ≠ 375 000 € ; 750 000 € est PÉNAL, pas admin."
+      ]
+    },
+    {
+      "id": "m3-f23",
+      "theme": "Sigles à connaître",
+      "recto": "Les sigles clés du module ?",
+      "verso": [
+        "LCB-FT / LAB-FT : Lutte (Anti) Blanchiment & Financement du Terrorisme",
+        "PSI : Prestataire de Services d'Investissement",
+        "PPE : Personne Politiquement Exposée"
+      ]
+    }
+  ]
+}
